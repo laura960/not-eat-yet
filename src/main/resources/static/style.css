@@ -1,0 +1,178 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    font-family: sans-serif;
+    background:  #FFA41B;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+/*-----Header-----*/
+header {
+    background-color: #FFA41B;
+    position: sticky;
+    top: 0;
+}
+nav{
+    min-height: 8vh;
+    margin: auto;
+    width: 90%;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav div {
+    width:180px;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav li {
+    list-style-type: none;
+}
+nav a{
+    color: #f5f2ee;
+    text-decoration: none;
+}
+nav li{
+    font-size: 16px;
+    font-weight:bolder;
+}
+
+nav img{
+    /*margin-left: 13%;*/
+    width: 75%;
+    padding: 10px;
+}
+
+.registrati{
+    padding: 5px 10px;
+    background: #005082;
+    border-radius:10px;
+}
+
+.login{
+    padding: 5px 10px;
+    background: #00a8cc;
+    border-radius:10px;
+}
+
+.button:hover{
+    padding: 5px 10px;
+    background: #ff3e0b;
+    /*Background Button 
+    #363634 DARK GREY
+    #ff3e0b RED   */
+    border-radius:10px;
+}
+input[type=text] {
+    width: 265px;
+    box-sizing: border-box;
+    border: 2px solid #FFA41B;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #FFA41B;
+    background-image: url('http://www.myiconfinder.com/uploads/iconsets/24-24-99f1e738415e2d1a59fb1acc365a2331.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 100%;
+}
+
+
+/*-----Main-----*/
+.centro{
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+.ristoranti-img{
+  background: #f5f2ee;
+  border-radius:300px;
+}
+
+.bottone-categoria{
+  padding: none;
+  background: #f5f2ee;
+  border-radius:15px;
+  display: flex;
+  justify-content: center;
+}
+.ristoranti{
+  min-height: 8vh;
+  margin: auto;
+  width: 90%;
+}
+.ristoranti ul {
+  display: flex;
+  justify-content: space-between;
+}
+.ristoranti ul li{
+  list-style-type: none;
+}
+.ristoranti ul li img{
+  width: 75%;
+}
+
+dl{
+    text-align: center;
+    padding: 5px;
+}
+
+dd {
+    list-style-type: none;
+}
+dl a{
+    color: #363634;
+    text-decoration: none;
+}
+dd{
+    font-size: 20px;
+    font-weight:bolder;
+    text-shadow: #f5f2ee 0px 1px ;
+}
+dd:hover{
+    text-decoration: underline;
+}
+/*-----fine main-----*/
+
+/*-----Footer-----*/
+footer{
+    margin-top: auto;
+    background: #363634;
+    color: #f5f2ee;
+    height: 100px;
+    position: relative;
+}
+footer .footer-bottom{
+    width: 100%;
+    font-size: 13px;
+    height: 50px;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    padding-top: 20px;
+
+}
+
+footer .footer-content{
+
+}
+/*-----fine foter-----*/
