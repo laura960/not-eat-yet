@@ -31,12 +31,19 @@ public class Ristorante {
 	@Column(name = "ncivico")
 	private int nCivico;
 	
+	private String categoria;
+	
 	@OneToMany
 	@JoinColumn(name="id_piatti")
 	private List<Piatto> piatti;
 	
+
+	public Ristorante() {
+		super();
+	}
+
 	public Ristorante(int id, String nome, String ragioneSociale, String pIva, String regione, String via, int nCivico,
-			List<Piatto> piatti) {
+			String categoria, List<Piatto> piatti) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -45,18 +52,7 @@ public class Ristorante {
 		this.regione = regione;
 		this.via = via;
 		this.nCivico = nCivico;
-		this.piatti = piatti;
-	}
-
-	public Ristorante() {
-		super();
-	}
-
-	public List<Piatto> getPiatti() {
-		return piatti;
-	}
-
-	public void setPiatti(List<Piatto> piatti) {
+		this.categoria = categoria;
 		this.piatti = piatti;
 	}
 
@@ -115,6 +111,23 @@ public class Ristorante {
 	public void setnCivico(int nCivico) {
 		this.nCivico = nCivico;
 	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	public List<Piatto> getPiatti() {
+		return piatti;
+	}
+
+	public void setPiatti(List<Piatto> piatti) {
+		this.piatti = piatti;
+	}
+	
 	
 	
 }
