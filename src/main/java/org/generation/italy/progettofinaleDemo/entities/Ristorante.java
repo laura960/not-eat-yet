@@ -34,7 +34,7 @@ public class Ristorante {
 	private String categoria;
 	
 	@OneToMany
-	@JoinColumn(name="id_piatti")
+	@JoinColumn(name="id_ristorante")
 	private List<Piatto> piatti;
 	
 

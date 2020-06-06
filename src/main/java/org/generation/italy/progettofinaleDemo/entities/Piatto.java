@@ -16,13 +16,16 @@ public class Piatto {
 	private String nome;
 	private double prezzo;
 	private String ingredienti;
+	private String categoria;
 	
-	public Piatto(int id, String nome, double prezzo, String ingredienti) {
+
+	public Piatto(int id, String nome, double prezzo, String ingredienti, String categoria) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.prezzo = prezzo;
 		this.ingredienti = ingredienti;
+		this.categoria = categoria;
 	}
 
 	public Piatto() {
@@ -59,6 +62,14 @@ public class Piatto {
 
 	public void setIngredienti(String ingredienti) {
 		this.ingredienti = ingredienti;
+	}
+	
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 	
 }

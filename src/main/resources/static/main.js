@@ -48,7 +48,7 @@ $(document).ready(function(){
             for(let i = 0; i < res.length; i++){
                 if(res[i].categoria === 'etnico'){
                     $(`
-                    <a href="#"><dd>${res[i].nome}</dd></a>
+                    		<a href="#"><dd>${res[i].nome}</dd></a>
                     `).appendTo('#lista-etnico')
                 }
             }
@@ -56,5 +56,26 @@ $(document).ready(function(){
     }
 	
 	getEtnico()
+	
+	function getRistorante(id){
+		$.get(`ristoranti/${id}`, function(res){
+			$(`<p>Nome: ${res.nome}<p>
+				<p>Ragione sociale: ${res.ragioneSociale}<p>
+				<p>Partita IVA: ${res.piva}<p>
+				<p>Regione: ${res.regione}<p>
+				<p>Indirizzo: ${res.via}, ${res.nCivico}<p>
+				<p>Menù: [LISTA PIATTI]<p>
+              `).appendTo('#dettaglio-ristorante')
+		})
+	}
+	
+	function getPiatto(id){
+		$.get(`piatti/${id}`, function(res){
+			$(`<p>Nome: ${res.nome}<p>
+				<p>Prezzo: ${res.prezzo} &eur;<p>
+				<p>Ingredienti: ${res.ingredienti}<p>
+              `).appendTo('#dettaglio-piatto')
+		})
+	}
 	
 })
