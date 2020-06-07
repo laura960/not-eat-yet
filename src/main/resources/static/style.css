@@ -58,15 +58,23 @@ nav img{
 }
 
 .registrati{
-    padding: 5px 10px;
     background: #005082;
-    border-radius:10px;
 }
 
 .login{
-    padding: 5px 10px;
     background: #00a8cc;
+
+}
+.button{
+    padding: 5px 10px;
     border-radius:10px;
+    color: #f5f2ee;
+    font-weight: bolder;
+    font-size: 15px;
+    border: none;
+    border-bottom: 2px solid #363634;
+    transition: .5s;
+    
 }
 
 .button:hover{
@@ -139,6 +147,7 @@ ul div div a{
     border-radius:15px;
     display: flex;
     justify-content: center;
+    border-bottom: 2px solid #363634;
     /*FIXME*/
   }
 
