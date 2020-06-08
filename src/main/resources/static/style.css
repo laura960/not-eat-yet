@@ -18,12 +18,13 @@ body{
 
 }
 /*-----Header-----*/
-header {
+.top-header{
     background-color: #FFA41B;
     position: sticky;
     top: 0;
 }
-nav{
+
+.top-nav{
     min-height: 8vh;
     margin: auto;
     width: 90%;
@@ -31,27 +32,20 @@ nav{
     justify-content: space-around;
     display: flex;
     justify-content: space-between;
+    list-style-type: none;
+    color: #f5f2ee;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight:bolder;
 }
 
-nav div {
+.top-reg-log {
     width:180px;
     display: flex;
     justify-content: space-between;
 }
 
-nav li {
-    list-style-type: none;
-}
-nav a{
-    color: #f5f2ee;
-    text-decoration: none;
-}
-nav li{
-    font-size: 16px;
-    font-weight:bolder;
-}
-
-nav img{
+.img-logo{
     /*margin-left: 13%;*/
     width: 350px;
     padding: 10px;
@@ -124,7 +118,7 @@ nav img{
   border-radius:300px;
 }
 
-ul div div a{
+.logo-img-cat {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -169,24 +163,22 @@ ul div div a{
 }
 
 /*Lists Ristoranti*/
-dl{
+.ristoranti dl{
     text-align: center;
     padding: 5px;
 }
 
-dd {
-    list-style-type: none;
-}
-dl a{
+.ristoranti dl a{
     color: #363634;
     text-decoration: none;
 }
-dd{
+.ristoranti dd{
+    list-style-type: none;
     font-size: 20px;
     font-weight:bolder;
     text-shadow: #f5f2ee 0px 1px ;
 }
-dd:hover{
+.ristoranti dd:hover{
     text-decoration: underline;
 }
 
