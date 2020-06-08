@@ -37,8 +37,8 @@ $(document).ready(function(){
 	                    		 ${getPiatti(res[i].id)}
                             </ul>
                             </div>
-                            <div class="modal-line"></div>
-                            <a class= "modal-close" href="#" rel="modal:close">Close</a>
+                           <!-- <div class="modal-line"></div>
+                            <a class= "modal-close" href="#" rel="modal:close">Close</a> -->
                           </div>
 
 	                    `).appendTo(`#lista-${res[i].categoria}`)
