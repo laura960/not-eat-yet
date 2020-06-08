@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="ristoranti")
 public class Ristorante {
@@ -34,7 +36,7 @@ public class Ristorante {
 	private String categoria;
 	
 	@OneToMany
-	@JoinColumn(name="id_ristorante")
+	@JsonIgnoreProperties("ristorante")
 	private List<Piatto> piatti;
 	
 

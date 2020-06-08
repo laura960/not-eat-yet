@@ -4,7 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="piatti")
@@ -18,14 +22,21 @@ public class Piatto {
 	private String ingredienti;
 	private String categoria;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_ristorante")
+	@JsonIgnoreProperties("piatti")
+	private Ristorante ristorante;
 
-	public Piatto(int id, String nome, double prezzo, String ingredienti, String categoria) {
+	
+
+	public Piatto(int id, String nome, double prezzo, String ingredienti, String categoria, Ristorante ristorante) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.prezzo = prezzo;
 		this.ingredienti = ingredienti;
 		this.categoria = categoria;
+		this.ristorante = ristorante;
 	}
 
 	public Piatto() {
@@ -71,5 +82,15 @@ public class Piatto {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
+
+	public Ristorante getRistorante() {
+		return ristorante;
+	}
+
+	public void setRistorante(Ristorante ristorante) {
+		this.ristorante = ristorante;
+	}
+	
+	
 	
 }
