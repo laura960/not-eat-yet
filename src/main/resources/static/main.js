@@ -72,6 +72,7 @@ $(document).ready(function(){
 	function getRistorante(id){
 		$.get(`ristoranti/${id}`, function(res){
 			$(`<p>Nome: ${res.nome}<p>
+				<p>Categoria: ${res.categoria}<p>
 				<p>Ragione sociale: ${res.ragioneSociale}<p>
 				<p>Partita IVA: ${res.piva}<p>
 				<p>Regione: ${res.regione}<p>
@@ -84,6 +85,7 @@ $(document).ready(function(){
 	function getPiatto(id){
 		$.get(`piatti/${id}`, function(res){
 			$(`<p>Nome: ${res.nome}<p>
+				<p>Categoria: ${res.categoria}<p>
 				<p>Prezzo: ${res.prezzo} &eur;<p>
 				<p>Ingredienti: ${res.ingredienti}<p>
               `).appendTo('#dettaglio-piatto')
