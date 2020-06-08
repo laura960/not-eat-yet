@@ -106,6 +106,14 @@ nav img{
 
 
 /*-----Main-----*/
+
+.aggiungi-ristorante{
+	margin: auto;
+	display: flex;
+  	justify-content: center;
+}
+
+
 .centro{
   padding: 30px;
   display: flex;

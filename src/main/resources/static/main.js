@@ -24,12 +24,12 @@ $(document).ready(function(){
                                 <h2>${res[i].nome}</h2>
                             </div>
                             <div class="modale-main">
-                            <button class='dettaglio-ristorante' id-ristorante='res[i].id'>Dettagli</button>
-	                    	<button class='modifica-ristorante' id-ristorante='res[i].id'>Modifica</button>
-	                    	<button class='elimina-ristorante' id-ristorante='res[i].id'>Elimina</button>
-	                    	<button class='aggiungi-piatto' id-ristorante='res[i].id'>Aggiungi piatto</button>
+                            <button class='dettaglio-ristorante' id-ristorante='${res[i].id}'>Dettagli</button>
+	                    	<button class='modifica-ristorante' id-ristorante='${res[i].id}''>Modifica</button>
+	                    	<button class='elimina-ristorante' id-ristorante='${res[i].id}'>Elimina</button>
+	                    	<button class='aggiungi-piatto' id-ristorante='${res[i].id}'>Aggiungi piatto</button>
                             <br>
-                            <div class='add-piatto' id-ristorante='res[i].id'></div>
+                            <div class='add-piatto' id-ristorante='${res[i].id}'></div>
                     		<br>
                             <div class='vista-dettaglio-ristorante'></div>
                             <h3>Menù</h3>
@@ -50,20 +50,20 @@ $(document).ready(function(){
 	
 	function getRistorante(id){
 		$.get(`ristoranti/${id}`, function(res){
-			$(`<p>Nome: ${res.nome}<p>
-				<p>Categoria: ${res.categoria}<p>
-				<p>Ragione sociale: ${res.ragioneSociale}<p>
-				<p>Partita IVA: ${res.piva}<p>
-				<p>Regione: ${res.regione}<p>
-				<p>Indirizzo: ${res.via}, ${res.nCivico}<p>
+			$(`
+				<p><strong>Nome</strong>: ${res.nome}<p>
+				<p><strong>Categoria</strong>: ${res.categoria}<p>
+				<p><strong>Ragione sociale</strong>: ${res.ragioneSociale}<p>
+				<p><strong>Partita IVA</strong>: ${res.pIva}<p>
+				<p><strong>Regione</strong>: ${res.regione}<p>
+				<p><strong>Indirizzo</strong>: ${res.via}, ${res.nCivico}<p>
+				<br><br>
               `).appendTo('.vista-dettaglio-ristorante')
 		})
 	}
 	
 	$('body').on('click', '.dettaglio-ristorante', function(){
-		console.log('dettaglio ristorante')
 		let idRistorante = $(this).attr('id-ristorante')
-		
 		getRistorante(idRistorante)
 		
 	})
@@ -92,7 +92,8 @@ $(document).ready(function(){
 		for(let i = 0; i < listaPiatti.length; i ++){
 			if(listaPiatti[i].id == idPiatto){
 				$(`
-				<ul>Dettagli:
+				<ul>
+					<strong>Dettagli:</strong>
 					<li>Categoria: ${listaPiatti[i].categoria}</li>
 					<li>Ingredienti: ${listaPiatti[i].ingredienti}</li>
 					<li>Prezzo: ${listaPiatti[i].prezzo} &euro;</li>
@@ -109,7 +110,18 @@ $(document).ready(function(){
 	$('body').on('click', '.modifica-piatto', function(){
 		console.log("sono nell'aggiungi")
 		
-		// Vai nella pagina input aggiungi piatto
+		const idRistorante = $(this).attr('id-ristorante')
+		
+		$(`<br>
+				<p><strong>Modifica Piatto:</strong></p>
+				<br>
+				<input type='text' class='nome-piatto' placeholder='Nome...'>
+				<input type='text' class='categoria-piatto' placeholder='Categoria...'>
+				<input type='text' class='ingredienti-piatto' placeholder='Ingredienti...'>
+				<input type='number' class='prezzo-piatto' step=0.01 min=0.01 placeholder='Prezzo...'>
+				<input type='hidden' class='id-ristorante' value='${idRistorante}'>
+				<button id='salva-piatto'>Modifica</button>
+		`).appendTo('.add-piatto')
 		
 	})
 	
@@ -135,7 +147,9 @@ $(document).ready(function(){
 	$('body').on('click', '.aggiungi-piatto', function(){
 		const idRistorante = $(this).attr('id-ristorante')
 		
-		$(`
+		$(`<br>
+				<p><strong>Aggiungi Piatto:</strong></p>
+				<br>
 				<input type='text' class='nome-piatto' placeholder='Nome...'>
 				<input type='text' class='categoria-piatto' placeholder='Categoria...'>
 				<input type='text' class='ingredienti-piatto' placeholder='Ingredienti...'>
@@ -145,6 +159,8 @@ $(document).ready(function(){
 		`).appendTo('.add-piatto')
 		
 	})
+	
+	
 	
 	$('body').on('click', '#salva-piatto', function(){
 	console.log('funziona')
@@ -161,6 +177,41 @@ $(document).ready(function(){
 		listaPiatti.push(p)
 		
 		getPiatti(p.idRistorante).appendTo('#menu')
+		
+	})
+	
+	
+	$('body').on('click', '.aggiungi-ristorante', function(){
+		$(`
+				<br><br>
+				<input type='text' class='nome-ristorante' placeholder='Nome...'>
+				<input type='text' class='categoria-ristorante' placeholder='Categoria...'>
+				<input type='text' class='piva' placeholder='Partita IVA...'>
+				<input type='text' class='ragione-sociale'  placeholder='Ragione Sociale...'>
+				<input type='text' class='regione'  placeholder='Regione...'>
+				<input type='text' class='via'  placeholder='Via...'>
+				<input type='number' class='numero-civico'  placeholder='Numero Civico...'>
+				<button id='salva-piatto'>Aggiungi</button>
+		
+		`).appendTo('.render-aggiungi-ristorante')
+		
+	})
+	
+	$('body').on('click', '.modifica-ristorante', function(){
+		$(`
+				<br>
+				<p><strong>Modifica Ristorante:</strong></p>
+				<br>
+				<input type='text' class='nome-ristorante' placeholder='Nome...'>
+				<input type='text' class='categoria-ristorante' placeholder='Categoria...'>
+				<input type='text' class='piva' placeholder='Partita IVA...'>
+				<input type='text' class='ragione-sociale'  placeholder='Ragione Sociale...'>
+				<input type='text' class='regione'  placeholder='Regione...'>
+				<input type='text' class='via'  placeholder='Via...'>
+				<input type='number' class='numero-civico'  placeholder='Numero Civico...'>
+				<button id='salva-piatto'>Modifica</button>
+		
+		`).appendTo('.add-piatto')
 		
 	})
 	
