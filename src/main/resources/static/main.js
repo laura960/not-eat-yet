@@ -1,65 +1,78 @@
 $(document).ready(function(){
     
     
-    function getPizzerie() {
-        $.get('ristoranti', function(res){
-            for(let i = 0; i < res.length; i++){
-                if(res[i].categoria === 'pizzeria'){
-                    $(`
-                    <a href="#"><dd>${res[i].nome}</dd></a>
-                    `).appendTo('#lista-pizzerie')
-                }
-            }
-        })
-    }
+	function getRistoranti(){
+		 $.get('ristoranti', function(res){
+	            for(let i = 0; i < res.length; i++){
+	                    $(`
+	                    <a href="#"><dd>${res[i].nome}</dd></a>
+	                    `).appendTo(`#lista-${res[i].categoria}`)
+	            }
+	        })
+	}
 	
-	getPizzerie()
+	getRistoranti()
 	
-	function getSushi() {
-        $.get('ristoranti', function(res){
-            for(let i = 0; i < res.length; i++){
-                if(res[i].categoria === 'sushi'){
-                    $(`
-                    <a href="#"><dd>${res[i].nome}</dd></a>
-                    `).appendTo('#lista-sushi')
-                }
-            }
-        })
-    }
-	
-	getSushi()
-	
-	function getKebab() {
-        $.get('ristoranti', function(res){
-            for(let i = 0; i < res.length; i++){
-                if(res[i].categoria === 'kebab'){
-                    $(`
-                    <a href="#"><dd>${res[i].nome}</dd></a>
-                    `).appendTo('#lista-kebab')
-                }
-            }
-        })
-    }
-	
-	getKebab()
-	
-	function getEtnico() {
-        $.get('ristoranti', function(res){
-            for(let i = 0; i < res.length; i++){
-                if(res[i].categoria === 'etnico'){
-                    $(`
-                    		<a href="#"><dd>${res[i].nome}</dd></a>
-                    `).appendTo('#lista-etnico')
-                }
-            }
-        })
-    }
-	
-	getEtnico()
+//    function getPizzerie() {
+//        $.get('ristoranti', function(res){
+//            for(let i = 0; i < res.length; i++){
+//                if(res[i].categoria === 'pizzeria'){
+//                    $(`
+//                    <a href="#"><dd>${res[i].nome}</dd></a>
+//                    `).appendTo('#lista-pizzeria')
+//                }
+//            }
+//        })
+//    }
+//	
+//	getPizzerie()
+//	
+//	function getSushi() {
+//        $.get('ristoranti', function(res){
+//            for(let i = 0; i < res.length; i++){
+//                if(res[i].categoria === 'sushi'){
+//                    $(`
+//                    <a href="#"><dd>${res[i].nome}</dd></a>
+//                    `).appendTo('#lista-sushi')
+//                }
+//            }
+//        })
+//    }
+//	
+//	getSushi()
+//	
+//	function getKebab() {
+//        $.get('ristoranti', function(res){
+//            for(let i = 0; i < res.length; i++){
+//                if(res[i].categoria === 'kebab'){
+//                    $(`
+//                    <a href="#"><dd>${res[i].nome}</dd></a>
+//                    `).appendTo('#lista-kebab')
+//                }
+//            }
+//        })
+//    }
+//	
+//	getKebab()
+//	
+//	function getEtnico() {
+//        $.get('ristoranti', function(res){
+//            for(let i = 0; i < res.length; i++){
+//                if(res[i].categoria === 'etnico'){
+//                    $(`
+//                    		<a href="#"><dd>${res[i].nome}</dd></a>
+//                    `).appendTo('#lista-etnico')
+//                }
+//            }
+//        })
+//    }
+//	
+//	getEtnico()
 	
 	function getRistorante(id){
 		$.get(`ristoranti/${id}`, function(res){
 			$(`<p>Nome: ${res.nome}<p>
+				<p>Categoria: ${res.categoria}<p>
 				<p>Ragione sociale: ${res.ragioneSociale}<p>
 				<p>Partita IVA: ${res.piva}<p>
 				<p>Regione: ${res.regione}<p>
@@ -72,6 +85,7 @@ $(document).ready(function(){
 	function getPiatto(id){
 		$.get(`piatti/${id}`, function(res){
 			$(`<p>Nome: ${res.nome}<p>
+				<p>Categoria: ${res.categoria}<p>
 				<p>Prezzo: ${res.prezzo} &eur;<p>
 				<p>Ingredienti: ${res.ingredienti}<p>
               `).appendTo('#dettaglio-piatto')
