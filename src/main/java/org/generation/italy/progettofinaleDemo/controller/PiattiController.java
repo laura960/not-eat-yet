@@ -42,9 +42,10 @@ public class PiattiController {
 	
 	
 	@PostMapping
-	public void add(@RequestBody Piatto piatto) {
+	public String add(@RequestBody Piatto piatto) {
 		if(piatto.getId() == 0)
 			db.save(piatto);
+		return "{ \"message\": \"Ok\" }";
 	}
 	
 	@DeleteMapping("/{id}")
@@ -53,8 +54,9 @@ public class PiattiController {
 	}
 	
 	@PutMapping
-	public void update(@RequestBody Piatto piatto){
+	public String update(@RequestBody Piatto piatto){
 		if(db.findById(piatto.getId()).isPresent())
 			db.save(piatto);
+		return "{ \"message\": \"Ok\" }";
 	}
 }

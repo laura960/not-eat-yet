@@ -134,9 +134,16 @@ $(document).ready(function(){
 	
 	
 	$('body').on('click', '.modifica-piatto', function(){
-		console.log("sono nell'aggiungi")
 		
+		const idPiatto = $(this).attr('id-piatto')
 		const idRistorante = $(this).attr('id-ristorante')
+		
+		$.get(`piatti/${idPiatto}`, function(res){
+			$('.nome-piatto').val(res.nome)
+			$('.categoria-piatto').val(res.categoria)
+			$('.ingredienti-piatto').val(res.ingredienti)
+			$('.prezzo-piatto').val(res.prezzo)
+		})
 		
 		$(`<br>
 				<p><strong>Modifica Piatto:</strong></p>
@@ -146,12 +153,46 @@ $(document).ready(function(){
 				<input type='text' class='ingredienti-piatto' placeholder='Ingredienti...'>
 				<input type='number' class='prezzo-piatto' step=0.01 min=0.01 placeholder='Prezzo...'>
 				<input type='hidden' class='id-ristorante' value='${idRistorante}'>
-				<button id='salva-piatto'>Modifica</button>
-		`).appendTo('.add-piatto')
+				<input type='hidden' class='id-piatto' value='${idPiatto}'>
+				<button id='salva-modifica-piatto'>Modifica</button>
+		`).appendTo('.render-aggiungi-piatto')
 		
 	})
 	
+	$('body').on('click', '#salva-modifica-piatto', function(){
+		
+		const p = {
+				id: $('.id-piatto').val(),
+                nome: $('.nome-piatto').val(),
+                categoria: $('.categoria-piatto').val(),
+                ingredienti: $('.ingredienti-piatto').val(),
+                prezzo: $('.prezzo-piatto').val(),
+                ristorante: {
+                	"id": $('.id-ristorante').val()
+                }
+		}
+		
+		editPiatto(p)
+	})
 	
+	function editPiatto(p){
+		console.log(JSON.stringify(p))
+		
+		$.ajax({
+			url:`piatti`,
+			type: 'PUT',
+			data: JSON.stringify(p),
+			contentType: 'application/json',
+			dataType: 'json',
+			success: function(res){
+				console.log('in success')
+				$('#render-menu').html('')
+				getPiatti(p.ristorante.id)
+			}
+		})
+		
+	}
+			
 	$('body').on('click', '.elimina-piatto', function(){
 		const idPiatto = $(this).attr('id-piatto')
 		const idRistorante = $(this).attr('id-ristorante')
@@ -167,6 +208,9 @@ $(document).ready(function(){
 			type: 'DELETE',
 			success: function(){
 				htmlRow.remove()
+			},
+			error: function(){
+				alert("Qualcosa è andato storto");
 			}
 			
 		})
@@ -203,8 +247,6 @@ $(document).ready(function(){
          }
 		
 		 addPiatto(p)
-//		 $('#render-menu').html('')
-//         getPiatti(p.ristorante.id)
 		 
 		 $('.nome-piatto').val('')
          $('.categoria-piatto').val('')
@@ -215,7 +257,6 @@ $(document).ready(function(){
 	
 	function addPiatto(p){
 		
-		
 		$.ajax({
 			url: '/piatti',
             type: 'POST',
@@ -223,17 +264,12 @@ $(document).ready(function(){
             contentType: 'application/json',
             dataType: 'json',
             success: function(data) {
-            	console.log('in success')
-            	//$('#render-menu').html('')
-            	//getPiatti(p.ristorante.id)
-            },
-            complete: function(){
-            	
-            	console.log('complete')
             	$('#render-menu').html('')
             	getPiatti(p.ristorante.id)
-            	
-              }
+            },
+			error: function(){
+				alert("Inserimento non andato a buon fine");
+			}
 		})
 	}
 	
