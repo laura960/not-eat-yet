@@ -12,6 +12,8 @@ $(document).ready(function(){
 
 	let ristoranteId = -1
 	let dettaglioOn = false
+	let modificaPiattoOn = false
+	let aggiungiPiattoOn = false
 	
 	function getRistoranti(){
 		 $.get('ristoranti', function(res){
@@ -21,8 +23,6 @@ $(document).ready(function(){
 		                    <button class="menu" data-id='${res[i].id}'>${res[i].nome}</button>
 		                    </a></dd>
 	                    `).appendTo(`#lista-${res[i].categoria}`)
-	                    
-	                    
 	            }
 	        })
 	}
@@ -135,6 +135,7 @@ $(document).ready(function(){
 	
 	$('body').on('click', '.modifica-piatto', function(){
 		
+		$('.render-aggiungi-piatto').html('')
 		const idPiatto = $(this).attr('id-piatto')
 		const idRistorante = $(this).attr('id-ristorante')
 		
@@ -188,10 +189,12 @@ $(document).ready(function(){
 				console.log('in success')
 				$('#render-menu').html('')
 				getPiatti(p.ristorante.id)
+				$('.render-aggiungi-piatto').html('')
 			}
 		})
 		
 	}
+	
 			
 	$('body').on('click', '.elimina-piatto', function(){
 		const idPiatto = $(this).attr('id-piatto')
@@ -218,7 +221,7 @@ $(document).ready(function(){
 	
 	$('body').on('click', '.aggiungi-piatto', function(){
 		const idRistorante = $(this).attr('id-ristorante')
-		
+		$('.render-aggiungi-piatto').html('')
 		$(`<br>
 				<p><strong>Aggiungi Piatto:</strong></p>
 				<br>
@@ -266,6 +269,7 @@ $(document).ready(function(){
             success: function(data) {
             	$('#render-menu').html('')
             	getPiatti(p.ristorante.id)
+            	$('.render-aggiungi-piatto').html('')
             },
 			error: function(){
 				alert("Inserimento non andato a buon fine");
