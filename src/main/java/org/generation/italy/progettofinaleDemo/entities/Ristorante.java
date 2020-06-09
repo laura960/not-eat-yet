@@ -2,6 +2,7 @@ package org.generation.italy.progettofinaleDemo.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,9 +37,8 @@ public class Ristorante {
 	
 	private String categoria;
 	
-	// (mappedBy = "ristorante")
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "ristorante")
 	@JsonIgnoreProperties("ristorante")
 	private List<Piatto> piatti;
 	

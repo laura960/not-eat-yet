@@ -12,47 +12,63 @@ $(document).ready(function(){
 
 	let ristoranteId = -1
 	let dettaglioOn = false
-	let modificaPiattoOn = false
-	let aggiungiPiattoOn = false
+	let dettaglioPiattoOn = false
 	
-	function getRistoranti(){
-		 $.get('ristoranti', function(res){
-	            for(let i = 0; i < res.length; i++){
-	                    $(`
-		                    <dd> <a href="#${res[i].nome}">
-		                    <button class="menu" data-id='${res[i].id}'>${res[i].nome}</button>
-		                    </a></dd>
-	                    `).appendTo(`#lista-${res[i].categoria}`)
-	            }
-	        })
-	}
-	
-	getRistoranti()
+	// MODALE
 	
 	$('body').on('click', '.menu', function(){
 		const id = $(this).attr('data-id')
 		ristoranteId = id
 		
+		$('#titolo-modale').text($(this).attr('nome-ristorante'))		
+		  
 		$('#bottoni-modale').html('')
 		caricaBottoni(id)
 		
 		$('#render-menu').html('')
 		getPiatti(id)
 		
+		$('#myDiv').html('')
+		
 		$('#modaleRistorante').css('display', 'block')
 				
 	})
 	
+	
 	function caricaBottoni(id){
 		$(`
-				 <button class='dettaglio-ristorante btn-dmea' id-ristorante='${id}'>Dettagli</button>
-		         <button class='modifica-ristorante btn-dmea' id-ristorante='${id}'>Modifica</button>
-		         <button class='elimina-ristorante btn-dmea' id-ristorante='${id}'>Elimina</button>
-		         <button class='aggiungi-piatto btn-dmea' id-ristorante='${id}'>Aggiungi piatto</button>
+				 <button class='dettaglio-ristorante btn-dmea' id-ristorante='${id}'>Dettagli Ristorante</button>
+		         <button class='modifica-ristorante btn-dmea' id-ristorante='${id}'>Modifica Ristorante</button>
+		         <button class='elimina-ristorante btn-dmea' id-ristorante='${id}'>Elimina Ristorante</button>
+		         <button class='aggiungi-piatto btn-dmea' id-ristorante='${id}'>Aggiungi Piatto</button>
 		         `
 				).appendTo('#bottoni-modale')
 	}
 	
+	
+	$('#close-modale').on('click', function(){
+		$('#modaleRistorante').css('display', 'none')
+		$('.render-dettaglio-ristorante').html('')
+		ristoranteId = -1
+	})
+	
+	
+	// RISTORANTI
+
+	function getRistoranti(){
+		 $.get('ristoranti', function(res){
+	            for(let i = 0; i < res.length; i++){
+	                    $(`
+		                    <dd> <a href="#${res[i].nome}">
+		                    <button class="menu" data-id='${res[i].id}' nome-ristorante='${res[i].nome}'>${res[i].nome}</button>
+		                    </a></dd>
+	                    `).appendTo(`#lista-${res[i].categoria}`)
+	                    
+	            }
+	        })
+	}
+	
+	getRistoranti()
 	
 	function getRistorante(id){
 		$.get(`ristoranti/${id}`, function(res){
@@ -70,14 +86,6 @@ $(document).ready(function(){
               .appendTo('.render-dettaglio-ristorante')
 		})
 	}
-	
-	
-	$('#close-modale').on('click', function(){
-		$('#modaleRistorante').css('display', 'none')
-		$('.render-dettaglio-ristorante').html('')
-		ristoranteId = -1
-	})
-	
 
 	
 	$('body').on('click', '.dettaglio-ristorante', function(){
@@ -94,9 +102,179 @@ $(document).ready(function(){
 			}
 		
 		})
+		
+		
+	// Aggiungi Ristorante
+		
+	$('body').on('click', '.aggiungi-ristorante', function(){
+		
+		$(`
+				<br><br>
+				<select class='categoria-ristorante'>
+					<option value='pizzeria'>Pizzeria</option>
+					<option value='sushi'>Sushi</option>
+					<option value='etnico'>Etnico</option>
+					<option value='kebab'>Kebab</option>
+				</select>
+				<input type='text' class='nome-ristorante' placeholder='Nome...'>
+				<input type='text' class='piva' placeholder='Partita IVA...'>
+				<input type='text' class='ragione-sociale'  placeholder='Ragione Sociale...'>
+				<input type='text' class='regione'  placeholder='Regione...'>
+				<input type='text' class='citta'  placeholder='Città...'>
+				<input type='text' class='via'  placeholder='Via...'>
+				<input type='number' class='numero-civico'  placeholder='Numero Civico...'>
+				<button id='salva-ristorante'>Aggiungi</button>
+		
+		`).appendTo('.render-aggiungi-ristorante')
+		
+	})
 	
 	
-
+	$('body').on('click', '#salva-ristorante', function(){
+		
+		 const r = {
+               nome: $('.nome-ristorante').val(),
+               categoria: $('.categoria-ristorante').val(),
+               pIva: $('.piva').val(),
+               ragioneSociale: $('.ragione-sociale').val(),
+               regione: $('.regione').val(),
+               citta: $('.citta').val(),
+               via: $('.via').val(),
+               nCivico: $('.numero-civico').val()
+               
+        }
+		
+		 addRistorante(r)
+		 
+		 $('.nome-ristorante').val('')
+         $('.categoria-ristorante').val('')
+         $('.piva').val('')
+         $('.ragione-sociale').val('')
+         $('.regione').val('')
+         $('.citta').val('')
+         $('.via').val('')
+         $('.numero-civico').val('')
+		
+	})
+	
+	function addRistorante(r){
+		
+		$.ajax({
+			url: '/ristoranti',
+           type: 'POST',
+           data: JSON.stringify(r),
+           contentType: 'application/json',
+           dataType: 'json',
+           success: function(data) {
+        	   location.reload()
+           },
+			error: function(){
+				alert("Inserimento non andato a buon fine");
+			}
+		})
+	}
+		
+	
+	// Modifica Ristorante
+	
+	$('body').on('click', '.modifica-ristorante', function(){
+		
+		const idRistorante = $(this).attr('id-ristorante')
+		
+		$.get(`ristoranti/${idRistorante}`, function(res){
+			$('.nome-ristorante').val(res.nome)
+			$('.categoria-ristorante').val(res.categoria)
+			$('.piva').val(res.pIva)
+			$('.ragione-sociale').val(res.ragioneSociale)
+			$('.regione').val(res.regione)
+			$('.citta').val(res.citta)
+			$('.via').val(res.via)
+			$('.numero-civico').val(res.nCivico)
+		})
+		
+		$(`
+				<br>
+				<p><strong>Modifica Ristorante:</strong></p>
+				<br>
+				<select class='categoria-ristorante'>
+					<option value='pizzeria'>Pizzeria</option>
+					<option value='sushi'>Sushi</option>
+					<option value='etnico'>Etnico</option>
+					<option value='kebab'>Kebab</option>
+				</select>
+				<input type='text' class='nome-ristorante' placeholder='Nome...'>
+				<input type='text' class='piva' placeholder='Partita IVA...'>
+				<input type='text' class='ragione-sociale'  placeholder='Ragione Sociale...'>
+				<input type='text' class='regione'  placeholder='Regione...'>
+				<input type='text' class='citta'  placeholder='Città...'>
+				<input type='text' class='via'  placeholder='Via...'>
+				<input type='number' class='numero-civico'  placeholder='Numero Civico...'>
+				<input type='hidden' class='id-rist' value='${idRistorante}'>
+				<button id='salva-modifica-ristorante'>Modifica</button>
+		
+		`).appendTo('.render-modifica-ristorante')
+		
+	})
+	
+	$('body').on('click', '#salva-modifica-ristorante', function(){
+		
+		 const r = {
+				 
+				   id: $('.id-rist').val(),
+	               nome: $('.nome-ristorante').val(),
+	               categoria: $('.categoria-ristorante').val(),
+	               pIva: $('.piva').val(),
+	               ragioneSociale: $('.ragione-sociale').val(),
+	               regione: $('.regione').val(),
+	               citta: $('.citta').val(),
+	               via: $('.via').val(),
+	               nCivico: $('.numero-civico').val()
+	               
+	        }
+		
+		editRistorante(r)
+	})
+	
+	function editRistorante(r){
+		
+		$.ajax({
+			url:`ristoranti`,
+			type: 'PUT',
+			data: JSON.stringify(r),
+			contentType: 'application/json',
+			dataType: 'json',
+			success: function(res){
+				location.reload()
+			}
+		})
+		
+	}
+		
+	
+	// Elimina Ristorante
+	
+	$('body').on('click', '.elimina-ristorante', function(){
+		const idRistorante = $(this).attr('id-ristorante')
+		
+		deleteRistorante(idRistorante)
+		
+	})
+		
+	function deleteRistorante(idRistorante){
+		$.ajax({
+			url: `ristoranti/${idRistorante}`,
+			type: 'DELETE',
+			success: function(){
+				location.reload()
+			},
+			error: function(){
+				alert("Qualcosa è andato storto")
+			}
+		})
+	}
+	
+	// PIATTI
+		
 	function getPiatti(idRistorante){
 		
 		$.get(`piatti?idRistorante=${idRistorante}`, function(res){
@@ -106,30 +284,42 @@ $(document).ready(function(){
 					<button class='dettaglio-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>Dettaglio</button>
 					<button class='modifica-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>Modifica</button>
 					<button class='elimina-piatto' id-piatto=${res[i].id } id-ristorante=${idRistorante}>Elimina</button>
-				</li>`).appendTo('#render-menu')
+				</li>
+				`).appendTo('#render-menu')
 			}
 		})
 		
 	}
 
+	function getPiatto(id){
+		$.get(`piatti/${id}`, function(res){
+			$(`	<br>
+				<h3>Dettagli Piatto</h3>
+				<p><strong>Nome</strong>: ${res.nome}<p>
+				<p><strong>Categoria</strong>: ${res.categoria}<p>
+				<p><strong>Ingredienti</strong>: ${res.ingredienti}<p>
+				<p><strong>Prezzo</strong>: ${res.prezzo} &euro;<p>
+				<br><br>
+              `)
+              .appendTo('.render-dettaglio-piatto')
+		})
+	}
+
 	
 	$('body').on('click', '.dettaglio-piatto', function(){
 		const idPiatto = $(this).attr('id-piatto')
-		for(let i = 0; i < listaPiatti.length; i ++){
-			if(listaPiatti[i].id == idPiatto){
-				$(`
-				<ul>
-					<strong>Dettagli:</strong>
-					<li>Categoria: ${listaPiatti[i].categoria}</li>
-					<li>Ingredienti: ${listaPiatti[i].ingredienti}</li>
-					<li>Prezzo: ${listaPiatti[i].prezzo} &euro;</li>
-				</ul>
-				`).appendTo(`.riga-piatto${idPiatto}`)
-				
-				break
-			}
-			
+		
+		if(!dettaglioPiattoOn){
+			let idPiatto = $(this).attr('id-piatto')
+			const id = $(this).attr('data-id')
+			// piattoId = id
+			getPiatto(idPiatto)
+			dettaglioPiattoOn = true
+		} else {
+			$('.render-dettaglio-piatto').html('')
+			dettaglioPiattoOn = false
 		}
+		
 	})
 	
 	
@@ -278,39 +468,8 @@ $(document).ready(function(){
 	}
 	
 	
-	$('body').on('click', '.aggiungi-ristorante', function(){
-		$(`
-				<br><br>
-				<input type='text' class='nome-ristorante' placeholder='Nome...'>
-				<input type='text' class='categoria-ristorante' placeholder='Categoria...'>
-				<input type='text' class='piva' placeholder='Partita IVA...'>
-				<input type='text' class='ragione-sociale'  placeholder='Ragione Sociale...'>
-				<input type='text' class='regione'  placeholder='Regione...'>
-				<input type='text' class='via'  placeholder='Via...'>
-				<input type='number' class='numero-civico'  placeholder='Numero Civico...'>
-				<button id='salva-piatto'>Aggiungi</button>
-		
-		`).appendTo('.render-aggiungi-ristorante')
-		
-	})
 	
-	$('body').on('click', '.modifica-ristorante', function(){
-		$(`
-				<br>
-				<p><strong>Modifica Ristorante:</strong></p>
-				<br>
-				<input type='text' class='nome-ristorante' placeholder='Nome...'>
-				<input type='text' class='categoria-ristorante' placeholder='Categoria...'>
-				<input type='text' class='piva' placeholder='Partita IVA...'>
-				<input type='text' class='ragione-sociale'  placeholder='Ragione Sociale...'>
-				<input type='text' class='regione'  placeholder='Regione...'>
-				<input type='text' class='via'  placeholder='Via...'>
-				<input type='number' class='numero-civico'  placeholder='Numero Civico...'>
-				<button id='salva-piatto'>Modifica</button>
-		
-		`).appendTo('.add-piatto')
-		
-	})
+	
 
 //	function getPiatto(id){
 //		$.get(`piatti/${id}`, function(res){

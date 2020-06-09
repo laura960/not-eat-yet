@@ -33,9 +33,10 @@ public class RistoranteController {
 	}
 	
 	@PostMapping
-	public void add(@RequestBody Ristorante ristorante) {
+	public String add(@RequestBody Ristorante ristorante) {
 		if(ristorante.getId() == 0)
 			db.save(ristorante);
+		return "{ \"message\": \"Ok\" }";
 	}
 	
 	@DeleteMapping("/{id}")
@@ -44,9 +45,10 @@ public class RistoranteController {
 	}
 	
 	@PutMapping
-	public void update(@RequestBody Ristorante ristorante){
+	public String update(@RequestBody Ristorante ristorante){
 		if(db.findById(ristorante.getId()).isPresent())
 			db.save(ristorante);
+		return "{ \"message\": \"Ok\" }";
 	}
 	
 }

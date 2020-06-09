@@ -1,5 +1,6 @@
 package org.generation.italy.progettofinaleDemo.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,8 @@ public class Piatto {
 	private double prezzo;
 	private String ingredienti;
 	private String categoria;
+	
+	// (cascade = CascadeType.ALL)
 	
 	@ManyToOne
 	@JoinColumn(name = "id_ristorante")
