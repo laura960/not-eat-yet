@@ -80,10 +80,49 @@
                         </a>
                     </div>
                 <!--<li><a href="#" class='bottone-categoria'><img src="https://i.ibb.co/qrzFXxJ/Categoria-Sushi.png" alt="Categoria-Sushi" border="0"></a></li>-->
-                    <!--<dl id='lista-sushi'>
+                        <dl id='lista-sushi'>
                         <a href="#"><dd>Sushi1</dd></a>
                         <a href="#"><dd>Sushi2</dd></a>
-                        <a href="#"><dd>Sushi3</dd></a>-->
+                        <!--<a href="#"><dd>Sushi3</dd></a>-->
+
+                        <!--  Modal V02 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal-->
+
+                             <!-- Trigger/Open The Modal -->
+
+                            <button class="list-button" id="sushi3">Sushi3</button>
+
+                                <!-- The Modal -->
+                            <div id="myModal" class="modal">
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <span class="close">&times;</span>
+                                        <h2>Pizzeria1</h2>
+                                    </div>
+                                    <div>
+                                        <button onclick="myFunction()" class='dettaglio-ristorante btn-dmea'>Dettagli</button>
+                                        <button onclick="myFunction()" class='modifica-ristorante btn-dmea' id-ristorante='${res[i].id}''>Modifica</button>
+                                        <button onclick="myFunction()" class='elimina-ristorante btn-dmea' id-ristorante='${res[i].id}'>Elimina</button>
+                                        <button onclick="myFunction()" class='aggiungi-piatto btn-dmea' id-ristorante='${res[i].id}'>Aggiungi piatto</button>
+                                    </div>
+                                    <div id="myDIV">
+                                        <div  class="dettaglio-ristorante">
+                                            Dettaglio ristorante.
+                                        </div>
+                                        <div class="modifica-ristorante">
+                                            Modifica ristorante.
+                                        </div>
+                                        <div class="elimina-ristorante">
+                                            Elimina ristorante.
+                                        </div>
+                                        <div class="aggiungi-piatto">
+                                            Aggiungi piatto.
+                                        </div>
+                                    </div>
+                                    <p>Some text in the Modal..</p>
+                                </div>
+                            </div>
+                        <!--fine  modal V02-->
                     </dl>
                 </div>
                 <div>

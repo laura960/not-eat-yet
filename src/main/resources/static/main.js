@@ -214,23 +214,7 @@ $(document).ready(function(){
 		`).appendTo('.add-piatto')
 		
 	})
-	
-	
-//	function addFunction() {
-//    let x = document.getElementById("addRisto");
-//    let text = document.getElementById("textIn")
-//    if (x.innerHTML === "Add") {
-//      x.innerHTML = "Save";
-//      text.innerHTML= `<input type="text" placeholder="Add restaurant" />`;
-//
-//    } else {
-//      x.innerHTML = "Add";
-//      text.innerHTML="";
-//    }
-//  }
-	
 
-	
 //	function getPiatto(id){
 //		$.get(`piatti/${id}`, function(res){
 //			$(`<p>Nome: ${res.nome}<p>
@@ -240,6 +224,51 @@ $(document).ready(function(){
 //              `).appendTo('#dettaglio-piatto')
 //		})
 //	}
-	
-	
+
+
+/*Modal V02 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal*/
+// Get the modal
+const modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+const btn = document.getElementById("sushi3");
+
+// Get the <span> element that closes the modal
+const span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+/*fine modal 02*/
+
+
+
 })
+/* Toggle - Hide - Show */
+function myFunction() {
+	const x = document.getElementById("myDIV");
+	const a = x.className;
+
+
+	if (x.style.display === "none") {
+
+			x.style.display = "block";
+		
+	} else {
+		x.style.display = "none";
+	}
+}
+/* fine toggle - hide - show */
