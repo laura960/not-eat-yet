@@ -155,20 +155,22 @@ $(document).ready(function(){
 	$('body').on('click', '.elimina-piatto', function(){
 		const idPiatto = $(this).attr('id-piatto')
 		const idRistorante = $(this).attr('id-ristorante')
-		for(let i = 0; i < listaPiatti.length; i ++){
-			if(listaPiatti[i].id == idPiatto){
-				listaPiatti.splice(i, 1);
-				
-				$(this).parent().html('')
-				break
-			}
-				
-		}
-		console.log(getPiatti(idRistorante))
-		let ris = getPiatti(idRistorante)
-		ris.appendTo('.menu')
+		
+		deletePiatto(idPiatto, $(this).parent())
+		
 		
 	})
+	
+	function deletePiatto(idPiatto, htmlRow){
+		$.ajax({
+			url: `piatti/${idPiatto}`,
+			type: 'DELETE',
+			success: function(){
+				htmlRow.remove()
+			}
+			
+		})
+	}
 	
 	$('body').on('click', '.aggiungi-piatto', function(){
 		const idRistorante = $(this).attr('id-ristorante')
@@ -201,6 +203,8 @@ $(document).ready(function(){
          }
 		
 		 addPiatto(p)
+//		 $('#render-menu').html('')
+//         getPiatti(p.ristorante.id)
 		 
 		 $('.nome-piatto').val('')
          $('.categoria-piatto').val('')
@@ -213,16 +217,23 @@ $(document).ready(function(){
 		
 		
 		$.ajax({
+			url: '/piatti',
             type: 'POST',
-            url: '/piatti',
             data: JSON.stringify(p),
-            contentType: "application/json",
+            contentType: 'application/json',
             dataType: 'json',
-            success: function() {
+            success: function(data) {
             	console.log('in success')
+            	//$('#render-menu').html('')
+            	//getPiatti(p.ristorante.id)
+            },
+            complete: function(){
+            	
+            	console.log('complete')
             	$('#render-menu').html('')
             	getPiatti(p.ristorante.id)
-            }
+            	
+              }
 		})
 	}
 	
