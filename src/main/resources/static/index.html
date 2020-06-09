@@ -34,8 +34,6 @@
     </div>
     <main>
     
-  <!--<p><div id="textIn"></div><button onclick="addFunction()"><div id="addRisto">Add</div></button></p>  -->  
-    
         <!--IMG "I NOSTRI RISTORANTI"-->
         <div class="centro">
             <a href="#">
@@ -53,23 +51,9 @@
                            Pizzeria
                         </a>
                     </div>
-                <!--<li><a href="#" class='bottone-categoria'><img src="https://i.ibb.co/jkQmgBx/Categoria-Pizzerie.png" alt="Categoria-Pizzerie" border="0"></a></li>-->
 
-                <!-- <a href="#"><dd>Pizzeria1</dd></a> -->
 					<dl id='lista-pizzeria'> 
-                       <!-- <dd><a href="#pizzeria1" rel="modal:open">Pizzeria1</a></dd>
-
-                        <div id="pizzeria1" class="modal">
-                            <div class="modal-header">
-                                <h2>Pizzeria1</h2>
-                            </div>
-                            <div class="modale-main">
-                                <p>Thanks for clicking. That felt good.</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas numquam aperiam, porro labore rem officiis iste adipisci quia recusandae suscipit veniam itaque temporibus voluptatibus ea maiores non eum qui assumenda.</p>
-                            </div>
-                            <div class="modal-line"></div>
-                            <a class= "modal-close" href="#" rel="modal:close">Close</a>
-                          </div>  --> 
+                      
                     </dl>
                 </div>
                 <div>
@@ -79,51 +63,8 @@
                            Sushi
                         </a>
                     </div>
-                <!--<li><a href="#" class='bottone-categoria'><img src="https://i.ibb.co/qrzFXxJ/Categoria-Sushi.png" alt="Categoria-Sushi" border="0"></a></li>-->
                         <dl id='lista-sushi'>
-                        <a href="#"><dd>Sushi1</dd></a>
-                        <a href="#"><dd>Sushi2</dd></a>
-                        <!--<a href="#"><dd>Sushi3</dd></a>-->
-
-                        <!--  Modal V02 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal-->
-
-                             <!-- Trigger/Open The Modal -->
-
-                            <button class="list-button" id="sushi3">Sushi3</button>
-
-                                <!-- The Modal -->
-                            <div id="myModal" class="modal">
-                                <!-- Modal content -->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <span class="close">&times;</span>
-                                        <h2>Pizzeria1</h2>
-                                    </div>
-                                    <div>
-                                        <button onclick="myFunction()" class='dettaglio-ristorante btn-dmea'>Dettagli</button>
-                                        <button onclick="myFunction()" class='modifica-ristorante btn-dmea' id-ristorante='${res[i].id}''>Modifica</button>
-                                        <button onclick="myFunction()" class='elimina-ristorante btn-dmea' id-ristorante='${res[i].id}'>Elimina</button>
-                                        <button onclick="myFunction()" class='aggiungi-piatto btn-dmea' id-ristorante='${res[i].id}'>Aggiungi piatto</button>
-                                    </div>
-                                    <div id="myDIV">
-                                        <div  class="dettaglio-ristorante">
-                                            Dettaglio ristorante.
-                                        </div>
-                                        <div class="modifica-ristorante">
-                                            Modifica ristorante.
-                                        </div>
-                                        <div class="elimina-ristorante">
-                                            Elimina ristorante.
-                                        </div>
-                                        <div class="aggiungi-piatto">
-                                            Aggiungi piatto.
-                                        </div>
-                                    </div>
-                                    <p>Some text in the Modal..</p>
-                                </div>
-                            </div>
-                        <!--fine  modal V02-->
-                    </dl>
+                    	</dl>
                 </div>
                 <div>
                 <div class='bottone-categoria'>
@@ -132,11 +73,7 @@
                            Etnico
                         </a>
                     </div>
-                <!--<li><a href="#" class='bottone-categoria'><img src="https://i.ibb.co/RjwX0V7/Categoria-Etnico.png" alt="Categoria-Etnico" border="0"></a></li>-->
                     <dl id='lista-etnico'>
-                        <!-- <a href="#"><dd>Etnico1</dd></a>
-                        <a href="#"><dd>Etnico2</dd></a>
-                        <a href="#"><dd>Etnico3</dd></a> -->
                     </dl>
                 </div>
                 <div>
@@ -146,11 +83,46 @@
                            Kebab
                         </a>
                     </div>
-                <!--<li><a href="#" class='bottone-categoria'><img src="https://i.ibb.co/DDzQwtk/Categoria-Kebab.png" alt="Categoria-Kebab" border="0"></a></li>-->
                     <dl id='lista-kebab'>
-                       <!-- <a href="#"><dd>Kebab1</dd></a>
-                        <a href="#"><dd>Kebab2</dd></a>
-                        <a href="#"><dd>Kebab3</dd></a> --> 
+                        
+                           <!--  Modal V02 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal-->
+
+                             <!-- Trigger/Open The Modal -->
+
+                         <!--   <button class="list-button" id="sushi3">Kebab</button> -->
+
+                                <!-- The Modal -->
+                            <div id="modaleRistorante" class="modal">
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <span class="close" id='close-modale'>&times;</span>
+                                        <h2>Pizzeria1</h2>
+                                    </div>
+                                    <div id='bottoni-modale'>
+                                   </div>
+                                    <div id="myDIV">
+                                        <div  class="render-dettaglio-ristorante">
+                                        </div>
+                                        <div class="modifica-ristorante">
+                                            Modifica ristorante.
+                                        </div>
+                                        <div class="elimina-ristorante">
+                                            Elimina ristorante.
+                                        </div>
+                                        <div class="render-aggiungi-piatto">
+                                        </div>
+                                    </div>
+                                    <div>
+                                    <h3>Menù</h3>
+                                    <ul id='render-menu'>
+                                    </ul>
+                                    </div>
+                                    <br><br>
+                                </div>
+                            </div>
+                        <!--fine  modal V02-->
+                        
                     </dl>
                 </div>
             </ul>

@@ -28,6 +28,7 @@ public class Ristorante {
 	@Column(name = "piva")
 	private String pIva;
 	private String regione;
+	private String citta;
 	private String via;
 	
 	@Column(name = "ncivico")
@@ -35,28 +36,37 @@ public class Ristorante {
 	
 	private String categoria;
 	
+	// (mappedBy = "ristorante")
+	
 	@OneToMany
 	@JsonIgnoreProperties("ristorante")
 	private List<Piatto> piatti;
+	
+
 	
 
 	public Ristorante() {
 		super();
 	}
 
-	public Ristorante(int id, String nome, String ragioneSociale, String pIva, String regione, String via, int nCivico,
-			String categoria, List<Piatto> piatti) {
+	
+
+	public Ristorante(int id, String nome, String ragioneSociale, String pIva, String regione, String citta, String via,
+			int nCivico, String categoria, List<Piatto> piatti) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.ragioneSociale = ragioneSociale;
 		this.pIva = pIva;
 		this.regione = regione;
+		this.citta = citta;
 		this.via = via;
 		this.nCivico = nCivico;
 		this.categoria = categoria;
 		this.piatti = piatti;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -130,6 +140,12 @@ public class Ristorante {
 		this.piatti = piatti;
 	}
 	
-	
+	public String getCitta() {
+		return citta;
+	}
+
+	public void setCitta(String citta) {
+		this.citta = citta;
+	}
 	
 }

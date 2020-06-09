@@ -1,89 +1,115 @@
 $(document).ready(function(){
 	
-	const listaPiatti = [
-		{"id": 1, "categoria": "primo", "ingredienti": "Pasta, Pomodoro", "nome": "Pasta al sugo","prezzo": 5.99, "idRistorante": 2},	
-		{"id": 2, "categoria": "secondo", "ingredienti": "Pasta, Pomodoro", "nome": "Bistecca","prezzo": 10.99, "idRistorante": 1},	
-		{"id": 3, "categoria": "dolce", "ingredienti": "Cioccolato, Zucchero", "nome": "Sacher","prezzo": 4.99, "idRistorante": 2},
-		{"id": 4, "categoria": "dolce", "ingredienti": "Panna, Zucchero", "nome": "Meringata","prezzo": 3.99, "idRistorante": 1},
-		{"id": 5, "categoria": "primo", "ingredienti": "Ragù, Besciamella", "nome": "Lasagne","prezzo": 4.99, "idRistorante": 3},
-		{"id": 6, "categoria": "primo", "ingredienti": "Farina, Acqua, Sale", "nome": "Ravioli","prezzo": 5.99, "idRistorante": 5},
-		{"id": 7, "categoria": "dolce", "ingredienti": "Savoiardi, Caffè", "nome": "Tiramisù","prezzo": 3.99, "idRistorante": 4},
-		{"id": 8, "categoria": "secondo", "ingredienti": "Uova, Sale", "nome": "Frittata","prezzo": 4.99, "idRistorante": 3}]
+//	const listaPiatti = [
+//		{"id": 1, "categoria": "primo", "ingredienti": "Pasta, Pomodoro", "nome": "Pasta al sugo","prezzo": 5.99, "idRistorante": 2},	
+//		{"id": 2, "categoria": "secondo", "ingredienti": "Pasta, Pomodoro", "nome": "Bistecca","prezzo": 10.99, "idRistorante": 1},	
+//		{"id": 3, "categoria": "dolce", "ingredienti": "Cioccolato, Zucchero", "nome": "Sacher","prezzo": 4.99, "idRistorante": 2},
+//		{"id": 4, "categoria": "dolce", "ingredienti": "Panna, Zucchero", "nome": "Meringata","prezzo": 3.99, "idRistorante": 1},
+//		{"id": 5, "categoria": "primo", "ingredienti": "Ragù, Besciamella", "nome": "Lasagne","prezzo": 4.99, "idRistorante": 3},
+//		{"id": 6, "categoria": "primo", "ingredienti": "Farina, Acqua, Sale", "nome": "Ravioli","prezzo": 5.99, "idRistorante": 5},
+//		{"id": 7, "categoria": "dolce", "ingredienti": "Savoiardi, Caffè", "nome": "Tiramisù","prezzo": 3.99, "idRistorante": 4},
+//		{"id": 8, "categoria": "secondo", "ingredienti": "Uova, Sale", "nome": "Frittata","prezzo": 4.99, "idRistorante": 3}]
 
+	let ristoranteId = -1
+	let dettaglioOn = false
+	
 	function getRistoranti(){
 		 $.get('ristoranti', function(res){
 	            for(let i = 0; i < res.length; i++){
 	                    $(`
-	                    <dd> <a href="#${res[i].nome}" rel="modal:open">
-	                    <button class="menu">${res[i].nome}</button>
-	                    
-	                    </a></dd>
-	                    
-                        <div id="${res[i].nome}" class="modal">
-                            <div class="modal-header">
-                                <h2>${res[i].nome}</h2>
-                            </div>
-                            <div class="modale-main">
-                            <button class='dettaglio-ristorante' id-ristorante='${res[i].id}'>Dettagli</button>
-	                    	<button class='modifica-ristorante' id-ristorante='${res[i].id}''>Modifica</button>
-	                    	<button class='elimina-ristorante' id-ristorante='${res[i].id}'>Elimina</button>
-	                    	<button class='aggiungi-piatto' id-ristorante='${res[i].id}'>Aggiungi piatto</button>
-                            <br>
-                            <div class='add-piatto' id-ristorante='${res[i].id}'></div>
-                    		<br>
-                            <div class='vista-dettaglio-ristorante'></div>
-                            <h3>Menù</h3>
-                            <ul class='menu'>
-	                    		 ${getPiatti(res[i].id)}
-                            </ul>
-                            </div>
-                           <!-- <div class="modal-line"></div>
-                            <a class= "modal-close" href="#" rel="modal:close">Close</a> -->
-                          </div>
-
+		                    <dd> <a href="#${res[i].nome}">
+		                    <button class="menu" data-id='${res[i].id}'>${res[i].nome}</button>
+		                    </a></dd>
 	                    `).appendTo(`#lista-${res[i].categoria}`)
+	                    
+	                    
 	            }
 	        })
 	}
 	
 	getRistoranti()
 	
+	$('body').on('click', '.menu', function(){
+		const id = $(this).attr('data-id')
+		ristoranteId = id
+		
+		$('#bottoni-modale').html('')
+		caricaBottoni(id)
+		
+		$('#render-menu').html('')
+		getPiatti(id)
+		
+		$('#modaleRistorante').css('display', 'block')
+				
+	})
+	
+	function caricaBottoni(id){
+		$(`
+				 <button class='dettaglio-ristorante btn-dmea' id-ristorante='${id}'>Dettagli</button>
+		         <button class='modifica-ristorante btn-dmea' id-ristorante='${id}'>Modifica</button>
+		         <button class='elimina-ristorante btn-dmea' id-ristorante='${id}'>Elimina</button>
+		         <button class='aggiungi-piatto btn-dmea' id-ristorante='${id}'>Aggiungi piatto</button>
+		         `
+				).appendTo('#bottoni-modale')
+	}
+	
+	
 	function getRistorante(id){
 		$.get(`ristoranti/${id}`, function(res){
-			$(`
+			$(`	<br>
+				<h3>Dettagli Ristorante</h3>
 				<p><strong>Nome</strong>: ${res.nome}<p>
 				<p><strong>Categoria</strong>: ${res.categoria}<p>
 				<p><strong>Ragione sociale</strong>: ${res.ragioneSociale}<p>
 				<p><strong>Partita IVA</strong>: ${res.pIva}<p>
 				<p><strong>Regione</strong>: ${res.regione}<p>
+				<p><strong>Città</strong>: ${res.citta}<p>
 				<p><strong>Indirizzo</strong>: ${res.via}, ${res.nCivico}<p>
 				<br><br>
-              `).appendTo('.vista-dettaglio-ristorante')
+              `)
+              .appendTo('.render-dettaglio-ristorante')
 		})
 	}
 	
-	$('body').on('click', '.dettaglio-ristorante', function(){
-		let idRistorante = $(this).attr('id-ristorante')
-		getRistorante(idRistorante)
-		
+	
+	$('#close-modale').on('click', function(){
+		$('#modaleRistorante').css('display', 'none')
+		$('.render-dettaglio-ristorante').html('')
+		ristoranteId = -1
 	})
 	
+
 	
-	function getPiatti(idRistorante){
-		let ris = ""
-		
-		for(let i = 0; i < listaPiatti.length; i ++){
-			if(listaPiatti[i].idRistorante === idRistorante){
-				ris += `<li class ='riga-piatto${listaPiatti[i].id}'>
-							${listaPiatti[i].nome}
-							<button class='dettaglio-piatto' id-piatto=${listaPiatti[i].id} id-ristorante=${idRistorante}>Dettaglio</button>
-							<button class='modifica-piatto' id-piatto=${listaPiatti[i].id} id-ristorante=${idRistorante}>Modifica</button>
-							<button class='elimina-piatto' id-piatto=${listaPiatti[i].id } id-ristorante=${idRistorante}>Elimina</button>
-						</li>`
+	$('body').on('click', '.dettaglio-ristorante', function(){
+	
+			if(!dettaglioOn){
+				let idRistorante = $(this).attr('id-ristorante')
+				const id = $(this).attr('data-id')
+				ristoranteId = id
+				getRistorante(idRistorante)
+				dettaglioOn = true
+			} else {
+				$('.render-dettaglio-ristorante').html('')
+				dettaglioOn = false
 			}
-		}
 		
-		return ris
+		})
+	
+	
+
+	function getPiatti(idRistorante){
+		
+		$.get(`piatti?idRistorante=${idRistorante}`, function(res){
+			for(let i = 0; i < res.length; i++){
+			$(`<li class ='riga-piatto${res[i].id}'>
+					${res[i].nome}
+					<button class='dettaglio-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>Dettaglio</button>
+					<button class='modifica-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>Modifica</button>
+					<button class='elimina-piatto' id-piatto=${res[i].id } id-ristorante=${idRistorante}>Elimina</button>
+				</li>`).appendTo('#render-menu')
+			}
+		})
+		
 	}
 
 	
@@ -156,29 +182,49 @@ $(document).ready(function(){
 				<input type='number' class='prezzo-piatto' step=0.01 min=0.01 placeholder='Prezzo...'>
 				<input type='hidden' class='id-ristorante' value='${idRistorante}'>
 				<button id='salva-piatto'>Aggiungi</button>
-		`).appendTo('.add-piatto')
+		`).appendTo('.render-aggiungi-piatto')
 		
 	})
 	
 	
 	
 	$('body').on('click', '#salva-piatto', function(){
-	console.log('funziona')
 		
 		 const p = {
-			id: (listaPiatti.length + 1),
                 nome: $('.nome-piatto').val(),
                 categoria: $('.categoria-piatto').val(),
                 ingredienti: $('.ingredienti-piatto').val(),
                 prezzo: $('.prezzo-piatto').val(),
-                idRistorante: $('.id-ristorante').val(),
-                        }
+                ristorante: {
+                	"id": $('.id-ristorante').val()
+                }
+         }
 		
-		listaPiatti.push(p)
-		
-		getPiatti(p.idRistorante).appendTo('#menu')
+		 addPiatto(p)
+		 
+		 $('.nome-piatto').val('')
+         $('.categoria-piatto').val('')
+         $('.ingredienti-piatto').val('')
+         $('.prezzo-piatto').val('')
 		
 	})
+	
+	function addPiatto(p){
+		
+		
+		$.ajax({
+            type: 'POST',
+            url: '/piatti',
+            data: JSON.stringify(p),
+            contentType: "application/json",
+            dataType: 'json',
+            success: function() {
+            	console.log('in success')
+            	$('#render-menu').html('')
+            	getPiatti(p.ristorante.id)
+            }
+		})
+	}
 	
 	
 	$('body').on('click', '.aggiungi-ristorante', function(){
@@ -226,37 +272,39 @@ $(document).ready(function(){
 //	}
 
 
-/*Modal V02 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal*/
-// Get the modal
-const modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-const btn = document.getElementById("sushi3");
-
-// Get the <span> element that closes the modal
-const span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-/*fine modal 02*/
+///*Modal V02 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal*/
+//// Get the modal
+//const modal = document.getElementById("myModal");
+//
+//// Get the button that opens the modal
+//const btn = document.getElementById("sushi3");
+//
+//// Get the <span> element that closes the modal
+//const span = document.getElementsByClassName("close")[0];
+//
+//// When the user clicks the button, open the modal 
+//btn.onclick = function() {
+//  modal.style.display = "block";
+//}
+//
+//// When the user clicks on <span> (x), close the modal
+//span.onclick = function() {
+//  modal.style.display = "none";
+//}
+//
+//// When the user clicks anywhere outside of the modal, close it
+//window.onclick = function(event) {
+//  if (event.target == modal) {
+//    modal.style.display = "none";
+//  }
+//}
+///*fine modal 02*/
 
 
 
 })
+
+
 /* Toggle - Hide - Show */
 function myFunction() {
 	const x = document.getElementById("myDIV");
