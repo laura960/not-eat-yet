@@ -14,7 +14,7 @@ $(document).ready(function(){
 	let dettaglioOn = false
 	let dettaglioPiattoOn = false
 	
-	// MODALE
+	// MODALE RISTORANTI
 	
 	$('body').on('click', '.menu', function(){
 		const id = $(this).attr('data-id')
@@ -41,6 +41,7 @@ $(document).ready(function(){
 		         <button class='modifica-ristorante btn-dmea' id-ristorante='${id}'>Modifica Ristorante</button>
 		         <button class='elimina-ristorante btn-dmea' id-ristorante='${id}'>Elimina Ristorante</button>
 		         <button class='aggiungi-piatto btn-dmea' id-ristorante='${id}'>Aggiungi Piatto</button>
+				 <button class='modale-recensioni btn-dmea' id-ristorante='${id}'>Recensioni</button>
 		         `
 				).appendTo('#bottoni-modale')
 	}
@@ -52,6 +53,107 @@ $(document).ready(function(){
 		ristoranteId = -1
 	})
 	
+	
+	// MODALE RECENSIONI
+	
+	$('body').on('click', '.modale-recensioni', function(){
+		const id = $(this).attr('id-ristorante')
+		
+		$('#titolo-modale-recensioni').text('Recensioni')		
+		
+		$('#aggiungi-recensione').html('')	
+		caricaInput(id)
+		
+		$('#render-recensioni').html('')
+		getRecensioni(id)
+		
+		
+		$('#modale-recensioni').css('display', 'block')
+				
+	})
+	
+	function caricaInput(id){
+		$(`
+			<input id='titolo-recensione' type='text' placeholder='Titolo...'>
+			<br><br>
+			<textarea id="testo-recensione" rows="4" cols="50"></textarea>
+			<br><br>
+			<input type="radio" id="voto1" name="rating" value="1" checked='checked'>
+			<label for="voto1">1 - </label>
+			<input type="radio" id="voto2" name="rating" value="2">
+			<label for="voto2">2 - </label>
+			<input type="radio" id="voto3" name="rating" value="3">
+			<label for="voto3">3 - </label>
+			<input type="radio" id="voto4" name="rating" value="4">
+			<label for="voto4">4 - </label>
+			<input type="radio" id="voto5" name="rating" value="5">
+			<label for="voto5">5</label>
+			<br><br>
+			<button id='add-recensione' id-ristorante='${id}'>Aggiungi</button>
+		`).appendTo('#aggiungi-recensione')
+	}
+	
+	
+	$('.close').on('click', function(){
+		$('#modale-recensioni').css('display', 'none')
+		// $('.render-dettaglio-ristorante').html('')
+		ristoranteId = -1
+	})
+	
+	// RECENSIONI
+	
+		
+	function getRecensioni(idRistorante){
+		$.get(`recensioni?idRistorante=${idRistorante}`, function(res){
+			for(let i = 0; i < res.length; i++){
+				$(`
+					<h4><strong>${res[i].titolo}</strong></h4>
+					<br><br>
+					<p>Voto: ${res[i].rating}</p>
+					<p>${res[i].comment}</p>
+				`).appendTo('#render-recensioni')
+			}
+		})
+	}
+	
+	$('body').on('click', '#add-recensione', function(){
+		const idRistorante = $(this).attr('id-ristorante')
+		
+		const r = {
+			titolo: $('#titolo-recensione').val(),
+			comment: $('#testo-recensione').val(),
+			rating: $("input[name='rating']:checked").val(),
+			ristorante: {
+				"id": idRistorante 
+			}
+		}
+		
+		aggiungiRecensione(r)
+		
+		$('#titolo-recensione').val('')
+		$('#testo-recensione').val('')
+		$("input[name='rating']:checked").val('')
+		
+	})
+	
+	function aggiungiRecensione(r){
+		
+		$.ajax({
+			url: '/recensioni',
+            type: 'POST',
+            data: JSON.stringify(r),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function(data) {
+            	$('#render-recensioni').html('')
+            	getRecensioni(r.ristorante.id)
+            },
+			error: function(){
+				alert("Inserimento non andato a buon fine");
+			}
+		})
+		
+	}
 	
 	// RISTORANTI
 

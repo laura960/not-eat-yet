@@ -42,17 +42,16 @@ public class Ristorante {
 	@JsonIgnoreProperties("ristorante")
 	private List<Piatto> piatti;
 	
-
-	
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "ristorante")
+	@JsonIgnoreProperties("ristorante")
+	private List<Recensione> recensioni;
 
 	public Ristorante() {
 		super();
 	}
 
-	
-
 	public Ristorante(int id, String nome, String ragioneSociale, String pIva, String regione, String citta, String via,
-			int nCivico, String categoria, List<Piatto> piatti) {
+			int nCivico, String categoria, List<Piatto> piatti, List<Recensione> recensioni) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -64,8 +63,8 @@ public class Ristorante {
 		this.nCivico = nCivico;
 		this.categoria = categoria;
 		this.piatti = piatti;
+		this.recensioni = recensioni;
 	}
-
 
 
 	public int getId() {
@@ -147,5 +146,20 @@ public class Ristorante {
 	public void setCitta(String citta) {
 		this.citta = citta;
 	}
+
+
+
+	public List<Recensione> getRecensioni() {
+		return recensioni;
+	}
+
+
+
+	public void setRecensioni(List<Recensione> recensioni) {
+		this.recensioni = recensioni;
+	}
+	
+	
+	
 	
 }
