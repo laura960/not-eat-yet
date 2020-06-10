@@ -77,7 +77,7 @@ $(document).ready(function(){
 		$(`
 			<input id='titolo-recensione' type='text' placeholder='Titolo...'>
 			<br><br>
-			<textarea id="testo-recensione" rows="4" cols="50"></textarea>
+			<textarea id="testo-recensione" rows="4" cols="50" placeholder='Scrivi una recensione...'></textarea>
 			<br><br>
 			<input type="radio" id="voto1" name="rating" value="1" checked='checked'>
 			<label for="voto1">1 - </label>
@@ -90,7 +90,7 @@ $(document).ready(function(){
 			<input type="radio" id="voto5" name="rating" value="5">
 			<label for="voto5">5</label>
 			<br><br>
-			<button id='add-recensione' id-ristorante='${id}'>Aggiungi</button>
+			<button id='add-recensione' id-ristorante='${id}'>Pubblica</button>
 		`).appendTo('#aggiungi-recensione')
 	}
 	
@@ -101,19 +101,31 @@ $(document).ready(function(){
 		ristoranteId = -1
 	})
 	
-	// RECENSIONI
 	
+	// CRUD RECENSIONI
 		
 	function getRecensioni(idRistorante){
 		$.get(`recensioni?idRistorante=${idRistorante}`, function(res){
-			for(let i = 0; i < res.length; i++){
+			
+			if(res.length == 0){
 				$(`
-					<h4><strong>${res[i].titolo}</strong></h4>
-					<br><br>
-					<p>Voto: ${res[i].rating}</p>
-					<p>${res[i].comment}</p>
-				`).appendTo('#render-recensioni')
+					<p>Nessuna recensione disponibile</p>
+					`).appendTo('#render-recensioni')
+			} else {
+				for(let i = 0; i < res.length; i++){
+					$(`
+						<div>
+						<li>
+						<h4><strong>${res[i].titolo}</strong></h4>
+						<p>Voto: ${res[i].rating}</p>
+						<p>${res[i].comment}</p>
+						</li>
+						</div>
+						<br>
+					`).appendTo('#render-recensioni')
+				}
 			}
+			
 		})
 	}
 	
@@ -156,8 +168,11 @@ $(document).ready(function(){
 		
 	}
 	
-	// RISTORANTI
+	
+	// CRUD RISTORANTI
 
+	// Get Ristoranti
+	
 	function getRistoranti(){
 		 $.get('ristoranti', function(res){
 	            for(let i = 0; i < res.length; i++){
@@ -190,6 +205,8 @@ $(document).ready(function(){
 		})
 	}
 
+	
+	// Dettaglio Ristorante
 	
 	$('body').on('click', '.dettaglio-ristorante', function(){
 	
@@ -384,19 +401,28 @@ $(document).ready(function(){
 		})
 	}
 	
-	// PIATTI
+	
+	// CRUD PIATTI
 		
 	function getPiatti(idRistorante){
 		
 		$.get(`piatti?idRistorante=${idRistorante}`, function(res){
-			for(let i = 0; i < res.length; i++){
-			$(`<li class ='riga-piatto${res[i].id}'>
-					${res[i].nome}
-					<button class='dettaglio-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>Dettaglio</button>
-					<button class='modifica-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>Modifica</button>
-					<button class='elimina-piatto' id-piatto=${res[i].id } id-ristorante=${idRistorante}>Elimina</button>
-				</li>
-				`).appendTo('#render-menu')
+			
+			if(res.length == 0){
+				$(`
+					<p>Nessun piatto disponibile</p>
+					`).appendTo('#render-menu')
+			} else {
+			
+				for(let i = 0; i < res.length; i++){
+				$(`<li class ='riga-piatto${res[i].id}'>
+						${res[i].nome}
+						<button class='dettaglio-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>Dettaglio</button>
+						<button class='modifica-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>Modifica</button>
+						<button class='elimina-piatto' id-piatto=${res[i].id } id-ristorante=${idRistorante}>Elimina</button>
+					</li>
+					`).appendTo('#render-menu')
+				}
 			}
 		})
 		
@@ -417,6 +443,8 @@ $(document).ready(function(){
 	}
 
 	
+	// Dettagli Piatto
+	
 	$('body').on('click', '.dettaglio-piatto', function(){
 		const idPiatto = $(this).attr('id-piatto')
 		
@@ -433,6 +461,8 @@ $(document).ready(function(){
 		
 	})
 	
+	
+	// Modifica Piatto
 	
 	$('body').on('click', '.modifica-piatto', function(){
 		
@@ -496,6 +526,8 @@ $(document).ready(function(){
 		
 	}
 	
+	
+	// Elimina Piatto
 			
 	$('body').on('click', '.elimina-piatto', function(){
 		const idPiatto = $(this).attr('id-piatto')
@@ -519,6 +551,9 @@ $(document).ready(function(){
 			
 		})
 	}
+	
+	
+	// Aggiungi Piatto
 	
 	$('body').on('click', '.aggiungi-piatto', function(){
 		const idRistorante = $(this).attr('id-ristorante')
@@ -578,19 +613,6 @@ $(document).ready(function(){
 		})
 	}
 	
-	
-	
-	
-
-//	function getPiatto(id){
-//		$.get(`piatti/${id}`, function(res){
-//			$(`<p>Nome: ${res.nome}<p>
-//				<p>Categoria: ${res.categoria}<p>
-//				<p>Prezzo: ${res.prezzo} &eur;<p>
-//				<p>Ingredienti: ${res.ingredienti}<p>
-//              `).appendTo('#dettaglio-piatto')
-//		})
-//	}
 
 
 ///*Modal V02 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal*/
