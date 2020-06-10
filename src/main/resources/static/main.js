@@ -60,7 +60,7 @@ $(document).ready(function(){
 	            for(let i = 0; i < res.length; i++){
 	                    $(`
 		                    <dd> <a href="#${res[i].nome}">
-		                    <button class="menu" data-id='${res[i].id}' nome-ristorante='${res[i].nome}'>${res[i].nome}</button>
+		                    <button class="menu list-button" data-id='${res[i].id}' nome-ristorante='${res[i].nome}'>${res[i].nome}</button>
 		                    </a></dd>
 	                    `).appendTo(`#lista-${res[i].categoria}`)
 	                    
@@ -128,7 +128,6 @@ $(document).ready(function(){
 		`).appendTo('.render-aggiungi-ristorante')
 		
 	})
-	
 	
 	$('body').on('click', '#salva-ristorante', function(){
 		
