@@ -13,6 +13,7 @@ $(document).ready(function(){
 	let ristoranteId = -1
 	let dettaglioOn = false
 	let dettaglioPiattoOn = false
+	let aggiungiRistoranteOn = false
 	
 	// MODALE RISTORANTI
 	
@@ -209,25 +210,34 @@ $(document).ready(function(){
 	// Aggiungi Ristorante
 		
 	$('body').on('click', '.aggiungi-ristorante', function(){
-		
-		$(`
-				<br><br>
-				<select class='categoria-ristorante'>
-					<option value='pizzeria'>Pizzeria</option>
-					<option value='sushi'>Sushi</option>
-					<option value='etnico'>Etnico</option>
-					<option value='kebab'>Kebab</option>
-				</select>
-				<input type='text' class='nome-ristorante' placeholder='Nome...'>
-				<input type='text' class='piva' placeholder='Partita IVA...'>
-				<input type='text' class='ragione-sociale'  placeholder='Ragione Sociale...'>
-				<input type='text' class='regione'  placeholder='Regione...'>
-				<input type='text' class='citta'  placeholder='Città...'>
-				<input type='text' class='via'  placeholder='Via...'>
-				<input type='number' class='numero-civico'  placeholder='Numero Civico...'>
-				<button id='salva-ristorante'>Aggiungi</button>
-		
-		`).appendTo('.render-aggiungi-ristorante')
+		if(!aggiungiRistoranteOn){
+			$(`
+					<br><br>
+					<select class='categoria-ristorante'>
+						<option value='pizzeria'>Pizzeria</option>
+						<option value='sushi'>Sushi</option>
+						<option value='etnico'>Etnico</option>
+						<option value='kebab'>Kebab</option>
+					</select>
+					<input type='text' class='nome-ristorante' placeholder='Nome...'>
+					<input type='text' class='piva' placeholder='Partita IVA...'>
+					<input type='text' class='ragione-sociale'  placeholder='Ragione Sociale...'>
+					<input type='text' class='regione'  placeholder='Regione...'>
+					<input type='text' class='citta'  placeholder='Città...'>
+					<input type='text' class='via'  placeholder='Via...'>
+					<input type='number' class='numero-civico'  placeholder='Numero Civico...'>
+					<button id='salva-ristorante'>Aggiungi</button>
+			
+			`).appendTo('.render-aggiungi-ristorante')
+			
+			aggiungiRistoranteOn = true
+			
+		} else {
+			
+			$('.render-aggiungi-ristorante').html('')
+			aggiungiRistoranteOn = false
+			
+		}
 		
 	})
 	
