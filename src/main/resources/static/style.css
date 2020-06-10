@@ -17,6 +17,7 @@ body{
     flex-direction: column;
 
 }
+
 /*-----Header-----*/
 .top-header{
     background-color: #FFA41B;
@@ -44,6 +45,12 @@ body{
     display: flex;
     justify-content: space-between;
 }
+.render-aggiungi-ristorante{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
 
 .img-logo{
     /*margin-left: 13%;*/
@@ -53,16 +60,17 @@ body{
 
 .registrati{
     background: #005082;
+    color: #f5f2ee;
 }
 
 .login{
     background: #00a8cc;
+    color: #f5f2ee;
 
 }
 .button{
     padding: 5px 10px;
     border-radius:10px;
-    color: #f5f2ee;
     font-weight: bolder;
     font-size: 15px;
     border: none;
@@ -162,6 +170,17 @@ body{
     height: 60px;
 }
 
+/*Carica Lista Piatti */
+#render-menu{
+    margin-left: 40px;
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+/*fine carica lista piatti*/
 /*Lists Ristoranti*/
 .ristoranti dl{
     text-align: center;
@@ -186,13 +205,13 @@ body{
     background: none;
     border: none;
     list-style-type: none;
-    font-size: 23px;
+    font-size: 18px;
     font-weight:bolder;
     color: #363634;
     text-shadow: #f5f2ee 0px 1px ;
 }
 .list-button:hover{
-    font-size: 30px;
+    font-size: 25px;
 }
 
 /* Modal 
