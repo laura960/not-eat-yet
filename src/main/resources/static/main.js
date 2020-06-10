@@ -46,7 +46,7 @@ $(document).ready(function(){
 	}
 	
 	
-	$('#close-modale').on('click', function(){
+	$('#close-modal').on('click', function(){
 		$('#modaleRistorante').css('display', 'none')
 		$('.render-dettaglio-ristorante').html('')
 		ristoranteId = -1
@@ -515,10 +515,11 @@ $(document).ready(function(){
 		var modal = document.getElementById("modaleLogin");
 
 		// Get the button that opens the modal
-		var btn = document.getElementById("modale-login");
+		var btn = document.getElementById("modal-login");
 
 		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];
+		//var span = document.getElementsByClassName("close")[0];
+		var span = document.getElementById("close-modal-login");
 
 		// When the user clicks the button, open the modal 
 		btn.onclick = function() {
