@@ -21,11 +21,16 @@ $(document).ready(function(){
 		const id = $(this).attr('data-id')
 		ristoranteId = id
 		
+		dettaglioOn = false
+		dettaglioPiattoOn = false
+		
 		$('#titolo-modale').text($(this).attr('nome-ristorante'))		
 		  
 		$('.render-aggiungi-piatto').html('')
 		
 		$('.render-modifica-ristorante').html('')
+		
+		$('.render-dettaglio-piatto').html('')
 		
 		$('#bottoni-modale').html('')
 		caricaBottoni(id)
