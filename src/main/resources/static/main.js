@@ -23,6 +23,10 @@ $(document).ready(function(){
 		
 		$('#titolo-modale').text($(this).attr('nome-ristorante'))		
 		  
+		$('.render-aggiungi-piatto').html('')
+		
+		$('.render-modifica-ristorante').html('')
+		
 		$('#bottoni-modale').html('')
 		caricaBottoni(id)
 		
