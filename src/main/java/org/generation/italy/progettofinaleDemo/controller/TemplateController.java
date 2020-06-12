@@ -13,4 +13,10 @@ public class TemplateController {
 		return "login";
 	}
 	
+//	@GetMapping("/recensioni")
+//	public String getRecensioni() {
+//		return "recensioni";
+//	}
+	
+	
 }

@@ -37,8 +37,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		// utilizzare l'app anche come sistema rest per applicazioni "esterne"
 				.authorizeRequests().antMatchers("/", "/index.html", "/css/**", "/js/**", "/signup.html", "/signup", "/login", "/fail.html", "/forbidden.html", "/assets/**").permitAll() 
 				// tutti possono accedere a questi percorsi
-				.and()
-				.authorizeRequests().antMatchers(HttpMethod.GET,"/piatti", "/piatti/*", "/ristoranti/*", "/ristoranti", "/recensioni", "/recensioni/*").permitAll()
+				.antMatchers(HttpMethod.GET,"/piatti", "/piatti/*", "/ristoranti/*", "/ristoranti", "/recensioni", "/recensioni/*").permitAll()
 				.antMatchers("/altro.html").hasAnyRole(Roles.ADMIN, Roles.USER)
 				.antMatchers("/account.html").hasAnyRole(Roles.ADMIN, Roles.USER)
 				.antMatchers("/accountmanager/**").hasAnyRole(Roles.ADMIN) // solo gli admin accedono a /management/**
