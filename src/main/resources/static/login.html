@@ -17,14 +17,17 @@
 					class="avatar">
 			</div>
 			<div class="container">
-				<label for="uname"><b>Username</b></label> <input type="text"
-					placeholder="Enter Username" name="uname" required> <label
-					for="psw"><b>Password</b></label> <input type="password"
-					placeholder="Enter Password" name="psw" required>
+			<form action="/login" method="post">
+				<label for="username"><b>Username</b></label> 
+				<input type="text" placeholder="Enter Username" name="username" required>
+				<br>
+				<label for="password"><b>Password</b></label> <input type="password" placeholder="Enter Password" name="password" required>
+                <br>
+                <input type="checkbox" checked="checked" name="remember-me" id="remember-me"> 
+				<label for="remember-me">Remember me</label>
+				<br>
 				<button type="submit" class="login button">Login</button>
-				<!--<label>
-                 <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>-->
+                </form>
 			</div>
 			<br>
 		</div>

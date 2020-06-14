@@ -37,12 +37,19 @@ public class AuthService implements UserDetailsService {
 		throw new UsernameNotFoundException("Nessun utente col username: " + username);
 	}
 
-	public void signup(String email, String username, String password) {
+	public void signup(String email, String username, String password, String ruolo) {
 		Utente newUtente = new Utente();
 		newUtente.setEmail(email);
 		newUtente.setUsername(username);
 		newUtente.setPassword(passwordEncoder.encode(password));
-		newUtente.setRuolo(Roles.USER);
+		if(ruolo.equals("user")) {
+			newUtente.setRuolo(Roles.USER);
+		} else if (ruolo.equals("ristorante")) {
+			newUtente.setRuolo(Roles.USER);
+		} else if (ruolo.equals("admin")) {
+			newUtente.setRuolo(Roles.ADMIN);
+		}
+		
 		try {			
 			dao.save(newUtente);
 		} catch (Exception e) {

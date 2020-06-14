@@ -17,16 +17,27 @@
 					class="avatar">
 			</div>
 			<div class="container">
-				<label for="uname"><b>Username</b></label> <input type="text"
-					placeholder="Enter Username" name="uname" required> <label
-					for="psw"><b>Password</b></label> <input type="password"
-					placeholder="Enter Password" name="psw" required>
-				<button type="submit" class="login button">Sign in</button>
+				<form action="/signup" method="post">
+					<label for="ruolo"><b>Chi sei?</b></label> 
+					<select name="ruolo">
+						<option value="user">User</option>
+						<option value="ristorante">Ristorante</option>
+						<option value="admin">Admin</option>
+					</select> 
+					<br> 
+					<label for="email"><b>Mail</b></label> 
+					<input type="text" placeholder="Mail" name="email" required> 
+					<label for="username"><b>Username</b></label> 
+						<input type="text" placeholder="Enter Username" name="username" required>
+					<label for="password"><b>Password</b></label> 
+					<input type="password" placeholder="Enter Password" name="password" required>
+					<button type="submit" class="login button">Sign in</button>
+				</form>
 			</div>
 			<br>
 		</div>
 	</div>
 	<!--fine modal login-->
-	
+
 </body>
 </html>

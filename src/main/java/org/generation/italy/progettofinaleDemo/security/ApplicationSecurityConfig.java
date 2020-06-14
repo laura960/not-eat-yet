@@ -34,11 +34,18 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable() // Andate a vedere cos'è il csrf, in poche parole, la disabilito se mi serve
 		// utilizzare l'app anche come sistema rest per applicazioni "esterne"
 				.authorizeRequests()
-				.antMatchers("/", "index.html", "/css/**", "/js/**", "/signup.html", "/signup", "/login").permitAll() 
+				.antMatchers("/", "index.html", "/css/**", "/js/**", "/signup.html", "/signup", "/login", "/forbidden.html").permitAll() 
+				.antMatchers(HttpMethod.POST, "/signup.html").permitAll()
 				.antMatchers(HttpMethod.GET,"/piatti", "/piatti/*", "/ristoranti/*", "/ristoranti", "/recensioni", "/recensioni/*").permitAll()
 				.antMatchers("/elencoristoranti.html", "/elencopizzeria.html", "/elencosushi.html","/elencokebab.html","/elencoetnico.html").permitAll()
+				.antMatchers(HttpMethod.POST,"/aggiungi_recensione.html").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE, Roles.USER)
+				.antMatchers(HttpMethod.POST, "/aggiungi_piatto.html").hasAnyRole(Roles.ADMIN)
+				.antMatchers(HttpMethod.DELETE, "elimina_piatto.html").hasAnyRole(Roles.ADMIN)
+				.antMatchers(HttpMethod.PUT, "modifica_piatto.html").hasAnyRole(Roles.ADMIN)
+				.antMatchers(HttpMethod.POST, "/aggiungi_ristorante.html").hasAnyRole(Roles.ADMIN)
+				.antMatchers(HttpMethod.PUT, "modifica_ristorante.html").hasAnyRole(Roles.ADMIN)
 				
-				.antMatchers("/aggiungi_ristorante.html").hasAnyRole(Roles.ADMIN)
+				
 				.antMatchers("/account.html").hasAnyRole(Roles.ADMIN, Roles.USER)
 				.antMatchers("/accountmanager/**").hasAnyRole(Roles.ADMIN) // solo gli admin accedono a /management/**
 				.anyRequest().authenticated() // tutte le (altre) richieste richiedono authenticazione
@@ -46,19 +53,28 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 				.exceptionHandling()
 				.accessDeniedPage("/forbidden.html")
 				.and()
-				// SpringSecurity di base ci fornisce una pagina di default, ma andiamo a
-				// cambiarla con una nostra
+				
 				.formLogin()
 				.loginPage("/login.html") // indirizzo a cui arriveranno le richieste login
 				.loginProcessingUrl("/login")
-				.permitAll() // Giustamente tutti devono riuscire ad accedere
-				.defaultSuccessUrl("/index.html", true) // se riesce ad accedere lo rimando ad index.html
+				.permitAll()
+				.defaultSuccessUrl("/index.html", true)
 				.failureUrl("/fail.html")
+				.passwordParameter("password")
+				.usernameParameter("username")
+				.and()
+				.rememberMe()
+				.rememberMeParameter("remember-me")
+				
 				.and()
 				// configuriamo anche la pagina per il logout
 				.logout().logoutUrl("/logout")
 				.logoutSuccessUrl("/loggedout.html")// indirizzo per fare logout
-				.clearAuthentication(true).logoutSuccessUrl("/index.html")
+				.clearAuthentication(true)
+				.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID")
+				
+				.logoutSuccessUrl("/")
 				;
 				
 	}

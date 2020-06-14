@@ -15,8 +15,8 @@ public class SignupController {
 	private AuthService authService;
 
 	@PostMapping
-	public String signup(@RequestParam String email, @RequestParam String username, @RequestParam String password) {
-		authService.signup(email, username, password);
+	public String signup(@RequestParam String email, @RequestParam String username, @RequestParam String password, @RequestParam String ruolo) {
+		authService.signup(email, username, password, ruolo);
 		return "OK";
 	}
 }
