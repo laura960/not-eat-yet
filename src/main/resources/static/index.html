@@ -1,201 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NotEatYet</title>
-    <script src="jquery-3.5.1.min.js"></script>
-    <script src="main.js"></script>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NotEatYet</title>
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script src="/js/main2.js"></script>
+<link rel="stylesheet" href="/css/style.css">
 
-    <!-- jQuery Modal -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<!-- jQuery Modal -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
 </head>
 <body>
-    <header class="top-header">
-        <nav class="top-nav">
+	<header class="top-header">
+		<nav class="top-nav">
 
-            <!--SEARCH-->
-            <li class="search"><input class="search" type="text" placeholder="Search..." /></li>
-            
-            <!--LOGO-->
-            <li class="logo"><a href="#"><img  class="img-logo" src="https://i.ibb.co/RDLFZ4c/prova06.png" alt=""></a></li>
-            
-            <!--REGISTRA LOGIN-->
-            <div class="top-reg-log">
-                <li><input id="modal-registrati" class="registrati button" type="button" value="Registrati"></li>
-                <li><input id="modal-login" class="login button" type="button" value="Login"></li>
-            </div>
-        </nav>
-    </header>
-    <!--   <button class="list-button" id="sushi3">Kebab</button> -->
+			<!--SEARCH-->
+			<li class="search"><input class="search" type="text"
+				placeholder="Search..." /></li>
 
-                                <!-- Modal login -->
-                                <div id="modaleLogin" class="modal">
-                                    <!-- Modal content -->
-                                    <div class="modal-content-login">
-                                        <div class="imgcontainer">
-                                            <span class="close-login" id='close-modal-login'>&times;</span>
-                                            <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">
-                                          </div>
-                                        <!---->
+			<!--LOGO-->
+			<li class="logo"><a href="#"><img class="img-logo"
+					src="https://i.ibb.co/RDLFZ4c/prova06.png" alt=""></a></li>
 
-                                        <div class="container">
-                                            <label for="uname"><b>Username</b></label>
-                                            <input type="text" placeholder="Enter Username" name="uname" required>
-                                      
-                                            <label for="psw"><b>Password</b></label>
-                                            <input type="password" placeholder="Enter Password" name="psw" required>
-                                              
-                                            <button type="submit" class="login button">Login</button>
-                                            <!--<label>
-                                              <input type="checkbox" checked="checked" name="remember"> Remember me
-                                            </label>-->
-                                          </div>
-
-                                        <!---->
-                                        <br>
-                                    </div>
-                                </div>
-                            <!--fine modal login-->
-
+			<!--REGISTRA LOGIN-->
+			<div class="top-reg-log">
+				<li><input id="modal-registrati" class="registrati button"
+					type="button" value="Registrati"></li>
+				<li><input id="modal-login" class="login button" type="button"
+					value="Login"></li>
+			</div>
+		</nav>
+	</header>
 
 	<button class='button aggiungi-ristorante'>Aggiungi Ristorante</button>
-    <div class='render-aggiungi-ristorante'>
-        
-    </div>
-    <main>
-    
-        <!--IMG "I NOSTRI RISTORANTI"-->
-        <div class="centro">
-            <a href="#">
-                <img class='ristoranti-img'src="https://i.ibb.co/m9Jpp2K/i-Nostri-Ristoranti.png" alt="i-Nostri-Ristoranti" border="0">
-            </a>
-        </div>
+	
+	<main>
 
-        <!--RISTORANTI PER CATEGORIA-->
-        <div class="ristoranti">
-            <ul>
-                <div>
-                <div class='bottone-categoria'>
-                        <a href="#" class="logo-img-cat">
-                           <img src="https://cdn.discordapp.com/attachments/718005745534238751/718448931008413736/Pizza.png" alt="Categoria-Pizzerie" border="0">
-                           Pizzeria
-                        </a>
-                    </div>
+		<!--IMG "I NOSTRI RISTORANTI"-->
+		<div class="centro">
+			<a href="/elencoristoranti.html"> <img class='ristoranti-img'
+				src="https://i.ibb.co/m9Jpp2K/i-Nostri-Ristoranti.png"
+				alt="i-Nostri-Ristoranti" border="0">
+			</a>
+		</div>
 
-					<dl id='lista-pizzeria'> 
-                      
-                    </dl>
-                </div>
-                <div>
-                <div class='bottone-categoria'>
-                        <a href="#" class="logo-img-cat">
-                           <img src="https://cdn.discordapp.com/attachments/718005745534238751/718490108264710245/Sushi.png" alt="Categoria-Pizzerie" border="0">
-                           Sushi
-                        </a>
-                    </div>
-                        <dl id='lista-sushi'>
-                    	</dl>
-                </div>
-                <div>
-                <div class='bottone-categoria'>
-                        <a href="#" class="logo-img-cat">
-                           <img src="https://cdn.discordapp.com/attachments/718005745534238751/718490111196528690/Etnico.png" alt="Categoria-Pizzerie" border="0">
-                           Etnico
-                        </a>
-                    </div>
-                    <dl id='lista-etnico'>
-                    </dl>
-                </div>
-                <div>
-                <div class='bottone-categoria'>
-                        <a href="#" class="logo-img-cat">
-                           <img src="https://cdn.discordapp.com/attachments/718005745534238751/718490112559939694/Kebab.png" alt="Categoria-Pizzerie" border="0">
-                           Kebab
-                        </a>
-                    </div>
-                    <dl id='lista-kebab'>
-                        
-                           <!--  Modal V02 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal-->
+		<!--RISTORANTI PER CATEGORIA-->
+		<div class="ristoranti">
+			<ul>
+				<div>
+					<div class='bottone-categoria'>
+						<a href="/elencopizzeria.html" class="logo-img-cat">
+							<img
+							src="https://cdn.discordapp.com/attachments/718005745534238751/718448931008413736/Pizza.png"
+							alt="Categoria-Pizzerie" border="0"> Pizzeria
+						</a>
+					</div>
+				<!--  	<dl id='lista-pizzeria'>
+					</dl> -->
+				</div>
+				<div>
+					<div class='bottone-categoria'>
+						<a href="/elencosushi.html" class="logo-img-cat"> <img
+							src="https://cdn.discordapp.com/attachments/718005745534238751/718490108264710245/Sushi.png"
+							alt="Categoria-Pizzerie" border="0"> Sushi
+						</a>
+					</div>
+					<!--  	<dl id='lista-sushi'>
+					</dl> -->
+				</div>
+				<div>
+					<div class='bottone-categoria'>
+						<a href="/elencoetnico.html" class="logo-img-cat"> <img
+							src="https://cdn.discordapp.com/attachments/718005745534238751/718490111196528690/Etnico.png"
+							alt="Categoria-Pizzerie" border="0"> Etnico
+						</a>
+					</div>
+				<!--  	<dl id='lista-etnico'>
+					</dl> -->
+				</div>
+				<div>
+					<div class='bottone-categoria'>
+						<a href="/elencokebab.html" class="logo-img-cat"> <img
+							src="https://cdn.discordapp.com/attachments/718005745534238751/718490112559939694/Kebab.png"
+							alt="Categoria-Pizzerie" border="0"> Kebab
+						</a>
+					</div>
+					<!--  	<dl id='lista-kebab'>
+					[MODALE]
+					</dl> -->
 
-                             <!-- Trigger/Open The Modal -->
+						
+						
+					
+				</div>
+			</ul>
+		</div>
+	</main>
 
-                         <!--   <button class="list-button" id="sushi3">Kebab</button> -->
 
-                                <!-- The Modal -->
-                            <div id="modaleRistorante" class="modal">
-                                <!-- Modal content -->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <span class="close" id='close-modal'>&times;</span>
-                                        <h2 id='titolo-modale'></h2>
-                                    </div>
-                                    <div id='bottoni-modale'>
-                                   </div>
-                                    <div id="myDIV">
-                                        <div  class="render-dettaglio-ristorante">
-                                        </div>
-                                        <div class="render-modifica-ristorante">
-                                        </div>
-                                        <div class="elimina-ristorante">
-                                        </div>
-                                        <div class="render-aggiungi-piatto">
-                                        </div>
-                                    </div>
-                                    <div>
-                                    <h3 style='margin-top: 20px;'>Menù</h3>
-                                    <ul class='allineamentosx' id='render-menu'>
-                                    </ul>
-                                    <div class='render-dettaglio-piatto'></div>
-                                    </div>
-                                    <br><br>
-                                </div>
-                            </div>
-                        <!--fine  modal V02-->
-                        
-                        <!-- The Modal -->
-                            <div id="modale-recensioni" class="modal">
-                                <!-- Modal content -->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <span class="close" id='close-modale'>&times;</span>
-                                        <h2 id='titolo-modale-recensioni'></h2>
-                                    </div>
-                                    <div id='bottoni-modale-recensioni'>
-                                    </div>
-                                    <div style="margin-top: 20px" id="aggiungi-recensione">
-                                    </div>
-                                    <div>
-	                                    <h3 class='allineamentosx'>Recensioni:</h3>
-	                                    <br>
-	                                    <ul class='allineamentosx' id='render-recensioni'>
-	                                    </ul>
-                                    </div>
-                                    <br><br>
-                                </div>
-                            </div>
-                        <!--fine  modal V02-->
-                    </dl>
-                </div>
-            </ul>
-        </div>
-    </main>
-    
+	<!--FIXME-->
+	<footer>
+		<div class="clas footer-content">
+			<div class="footer-section about"></div>
+			<div class="footer-section links"></div>
+			<div class="footer-section contact"></div>
 
-    <!--FIXME-->
-    <footer>
-        <div class="clas footer-content">
-            <div class="footer-section about"></div>
-            <div class="footer-section links"></div>
-            <div class="footer-section contact"></div>            
-
-        </div>
-        <div class="footer-bottom"> 
-        © 2020 All Rights Reserved NotEatYet.com
-    </div>
-    </footer>
-    <!--fine fixme-->
+		</div>
+		<div class="footer-bottom">© 2020 All Rights Reserved
+			NotEatYet.com</div>
+	</footer>
+	<!--fine fixme-->
 </body>
 </html>
