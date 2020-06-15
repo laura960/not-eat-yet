@@ -150,7 +150,13 @@ $(document).ready(function(){
 			}
 		}
 		
-		aggiungiRecensione(r)
+		
+//		if([SE LOGGATO]){
+//			aggiungiRecensione(r)
+//		} else {
+//			window.open('http://google.com');   
+//		}
+		
 		
 		$('#titolo-recensione').val('')
 		$('#testo-recensione').val('')
