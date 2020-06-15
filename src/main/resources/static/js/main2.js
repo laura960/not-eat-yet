@@ -63,7 +63,9 @@ $(document).ready(function(){
 		$(`
 				 <button class='dettaglio-ristorante btn-dmea' id-ristorante='${id}'>Dettagli Ristorante</button>
 		         <button class='modifica-ristorante btn-dmea' id-ristorante='${id}'>Modifica Ristorante</button>
-		         <button class='elimina-ristorante btn-dmea' id-ristorante='${id}'>Elimina Ristorante</button>
+		         <button class='elimina-ristorante btn-dmea' id-ristorante='${id}'>
+		         	<a href="elimina_ristorante.html?id=${id}">Elimina Ristorante</a>
+		         </button>
 		         <button class='aggiungi-piatto btn-dmea' id-ristorante='${id}'>
 				 <a href='aggiungi_piatto.html?id=${id}'>	
 					Aggiungi Piatto
@@ -125,7 +127,7 @@ $(document).ready(function(){
 						</li>
 						</div>
 						<br>
-					`).appendTo('#render-recensioni')
+					`).prependTo('#render-recensioni')
 				}
 			}
 			
@@ -311,7 +313,7 @@ $(document).ready(function(){
 	
 	// Elimina Ristorante
 	
-	$('body').on('click', '.elimina-ristorante', function(){
+	$('body').on('click', '.elimina-ristorante2', function(){
 		const idRistorante = $(this).attr('id-ristorante')
 		
 		deleteRistorante(idRistorante)
@@ -349,7 +351,11 @@ $(document).ready(function(){
 						${res[i].nome}
 						<button class='dettaglio-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>Dettaglio</button>
 						<button class='modifica-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>Modifica</button>
-						<button class='elimina-piatto' id-piatto=${res[i].id } id-ristorante=${idRistorante}>Elimina</button>
+						<button class='elimina-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>
+						<a href='elimina_piatto.html?idRistorante=${idRistorante}&idPiatto=${res[i].id}'>
+							Elimina
+						</a>
+						</button>
 					</li>
 					`).appendTo('#render-menu')
 				}
@@ -394,7 +400,7 @@ $(document).ready(function(){
 	
 	// Elimina Piatto
 			
-	$('body').on('click', '.elimina-piatto', function(){
+	$('body').on('click', '.elimina-piatto3', function(){
 		const idPiatto = $(this).attr('id-piatto')
 		const idRistorante = $(this).attr('id-ristorante')
 		

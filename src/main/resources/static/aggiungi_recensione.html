@@ -11,7 +11,32 @@
     <!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 </head>
-	<body>		
+	<body>
+	<header class="top-header">
+		<nav class="top-nav">
+
+			<!--SEARCH-->
+			<li class="search"><input class="search" type="text"
+				placeholder="Search..." /></li>
+
+			<!--LOGO-->
+			<li class="logo"><a href="/index.html"><img class="img-logo"
+					src="https://i.ibb.co/RDLFZ4c/prova06.png" alt=""></a></li>
+
+			<!--REGISTRA LOGIN-->
+			<div class="top-reg-log">
+				<li><input id="modal-registrati" class="registrati button"
+					type="button" value="Registrati"></li>
+				<li><input id="modal-login" class="login button" type="button"
+					value="Login"></li>
+				<li>
+				<form method="get" action="/logout">
+				<button class="login button" type="submit">Logout
+				</form>	
+				</li>
+			</div>
+		</nav>
+	</header>		
 		    <input id='titolo-recensione' type='text' placeholder='Titolo...'>
 			<br><br>
 			<textarea id="testo-recensione" rows="4" cols="50" placeholder='Scrivi una recensione...'></textarea>
@@ -29,6 +54,17 @@
 			<br><br>
 			
 			<button id='add-recensione' id-ristorante='${idRistorante}'>Pubblica</button>
-			
+		<!--FIXME-->
+	<footer>
+		<div class="clas footer-content">
+			<div class="footer-section about"></div>
+			<div class="footer-section links"></div>
+			<div class="footer-section contact"></div>
+
+		</div>
+		<div class="footer-bottom">© 2020 All Rights Reserved
+			NotEatYet.com</div>
+	</footer>
+	<!--fine fixme-->	
 	</body>
 </html>
