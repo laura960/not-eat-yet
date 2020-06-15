@@ -13,93 +13,108 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
 </head>
-<body>
-	<header class="top-header">
-		<nav class="top-nav">
+	<body>
+		<header class="top-header">
+			<nav class="top-nav">
 
-			<!--SEARCH-->
-			<li class="search"><input class="search" type="text"
-				placeholder="Search..." /></li>
+				<!--SEARCH-->
+				<li class="search"><input class="search" type="text"
+					placeholder="Search..." /></li>
 
-			<!--LOGO-->
-			<li class="logo"><a href="/"><img class="img-logo"
-					src="https://i.ibb.co/RDLFZ4c/prova06.png" alt=""></a></li>
+				<!--LOGO-->
+				<li class="logo"><a href="/"><img class="img-logo"
+						src="https://i.ibb.co/RDLFZ4c/prova06.png" alt=""></a></li>
 
-			<!--REGISTRA LOGIN-->
-			<div class="top-reg-log">
-				<li><input id="modal-registrati" class="registrati button"
-					type="button" value="Registrati"></li>
-				<li><input id="modal-login" class="login button" type="button"
-					value="Login"></li>
-			</div>
-		</nav>
-	</header>
-
-	<button class='button aggiungi-ristorante'>Aggiungi Ristorante</button>
-
-	<br>
-
-	<div class='bottone-categoria'>
-		<a href="#" class="logo-img-cat"> <img
-			src="https://cdn.discordapp.com/attachments/718005745534238751/718448931008413736/Pizza.png"
-			alt="Categoria-Pizzerie" border="0"> Pizzeria
-		</a>
-	</div>
-
-	<dl id='lista-pizzeria'>
+				<!--REGISTRA LOGIN-->
+				<div class="top-reg-log">
+					<li><input id="modal-registrati" class="registrati button"
+						type="button" value="Registrati"></li>
+					<li><input id="modal-login" class="login button" type="button"
+						value="Login"></li>
+				</div>
+			</nav>
+		</header>
+		<div class="marginLR">
+			<button class='button aggiungi-ristorante'>Aggiungi Ristorante</button>
+			<br>
 		
-	<!-- The Modal -->
-						<div id="modaleRistorante" class="modal">
-							<!-- Modal content -->
-							<div class="modal-content">
-								<div class="modal-header">
-									<span class="close" id='close-modal'>&times;</span>
-									<h2 id='titolo-modale'></h2>
-								</div>
-								<div id='bottoni-modale'></div>
-								<div id="myDIV">
-									<div class="render-dettaglio-ristorante"></div>
-									<div class="render-modifica-ristorante"></div>
-									<div class="elimina-ristorante"></div>
-									<div class="render-aggiungi-piatto"></div>
-								</div>
-								<div>
-									<h3 style='margin-top: 20px;'>Menù</h3>
-									<ul class='allineamentosx' id='render-menu'>
-									</ul>
-									<div class='render-dettaglio-piatto'></div>
-								</div>
-								<br>
-								<br>
-							</div>
+			<div class='bottone-categoria margin15pxB'>
+				<a href="#" class="logo-img-cat"> 
+					<img src="https://cdn.discordapp.com/attachments/718005745534238751/718448931008413736/Pizza.png"
+					alt="Categoria-Pizzerie" border="0"> Pizzeria
+				</a>
+			</div>
+
+			<dl id='lista-pizzeria'>
+		
+				<!-- The Modal -->
+				<div id="modaleRistorante" class="modal">
+					<!-- Modal content -->
+					<div class="modal-content">
+						<div class="modal-header">
+							<span class="close" id='close-modal'>&times;</span>
+							<h2 id='titolo-modale'></h2>
 						</div>
-						<!--fine  modal V02-->
-						
-						<!-- The Modal -->
-						<div id="modale-recensioni" class="modal">
-							<!-- Modal content -->
-							<div class="modal-content">
-								<div class="modal-header">
-									<span class="close" id='close-modale'>&times;</span>
-									<h2 id='titolo-modale-recensioni'></h2>
-								</div>
-								<div id='bottoni-modale-recensioni'></div>
-								<div style="margin-top: 20px" id="aggiungi-recensione"></div>
-								<div>
-									<h3 class='allineamentosx'>Recensioni:</h3>
-									<br>
-									<ul class='allineamentosx' id='render-recensioni'>
-									</ul>
-								</div>
-								<br>
-								<br>
-							</div>
+						<div id='bottoni-modale'></div>
+						<div id="myDIV">
+							<div class="render-dettaglio-ristorante"></div>
+							<div class="render-modifica-ristorante"></div>
+							<div class="elimina-ristorante"></div>
+							<div class="render-aggiungi-piatto"></div>
 						</div>
-						<!--fine  modal V02-->
-	
-	</dl>
-<div>
-		<a href='/index.html'>Torna alla Home</a>
-	</div>
-</body>
+						<div>
+							<h3 style='margin-top: 20px;'>Menù</h3>
+							<ul class='allineamentosx' id='render-menu'>
+							</ul>
+							<div class='render-dettaglio-piatto'></div>
+						</div>
+						<br>
+						<br>
+					</div>
+				</div>
+				<!--fine  modal V02-->
+				
+				<!-- The Modal -->
+				<div id="modale-recensioni" class="modal">
+					<!-- Modal content -->
+					<div class="modal-content">
+						<div class="modal-header">
+							<span class="close" id='close-modale'>&times;</span>
+							<h2 id='titolo-modale-recensioni'></h2>
+						</div>
+						<div id='bottoni-modale-recensioni'></div>
+						<div style="margin-top: 20px" id="aggiungi-recensione"></div>
+						<div>
+							<h3 class='allineamentosx'>Recensioni:</h3>
+							<br>
+							<ul class='allineamentosx' id='render-recensioni'>
+							</ul>
+						</div>
+						<br>
+						<br>
+					</div>
+				</div>
+				<!--fine  modal V02-->
+
+			</dl>
+
+		</div> 
+		
+		
+		<!--FIXME-->
+		<footer>
+			<div class="torna-home marginLR">
+				<a href='/index.html'>&#9664; Torna alla Home</a>
+			</div>
+			<div class="clas footer-content">
+				<div class="footer-section about"></div>
+				<div class="footer-section links"></div>
+				<div class="footer-section contact"></div>
+		
+			</div>
+			<div class="footer-bottom">© 2020 All Rights Reserved
+				NotEatYet.com</div>
+		</footer>
+			<!--fine fixme-->
+	</body>
 </html>
