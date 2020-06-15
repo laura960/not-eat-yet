@@ -1,5 +1,7 @@
 package org.generation.italy.progettofinaleDemo.entities;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,14 +21,22 @@ public class Recensione {
 	@JoinColumn(name = "id_ristorante")
 	@JsonIgnoreProperties("recensioni")
 	private Ristorante ristorante;
+	
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "recensione")
+	@JsonIgnoreProperties("recensione")
+	private List<Risposta> risposte;
 
-	public Recensione(int id, String titolo, String comment, int rating, Ristorante ristorante) {
+
+	
+	public Recensione(int id, String titolo, String comment, int rating, Ristorante ristorante,
+			List<Risposta> risposte) {
 		super();
 		this.id = id;
 		this.titolo = titolo;
 		this.comment = comment;
 		this.rating = rating;
 		this.ristorante = ristorante;
+		this.risposte = risposte;
 	}
 
 	public Recensione() {
@@ -71,6 +81,14 @@ public class Recensione {
 
 	public void setRistorante(Ristorante ristorante) {
 		this.ristorante = ristorante;
+	}
+
+	public List<Risposta> getRisposte() {
+		return risposte;
+	}
+
+	public void setRisposte(List<Risposta> risposte) {
+		this.risposte = risposte;
 	}
 	
 	

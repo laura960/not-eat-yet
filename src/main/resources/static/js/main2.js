@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	
+	let modificaRispostaOn = false
+	let aggiungiRispostaOn = false
 	let dettaglioOn = false
 	let dettaglioPiattoOn = false
 	const listaCategorie = ['antipasto', 'primo', 'secondo', 'fritti', 'pizza', 'kebab', 'sushi', 'contorno', 'dolce', 'bevande']
@@ -100,6 +102,7 @@ $(document).ready(function(){
 		$('#render-recensioni').html('')
 		getRecensioni(idRistorante)
 		
+		
 		$('#modale-recensioni').css('display', 'block')
 	}
 	
@@ -110,6 +113,10 @@ $(document).ready(function(){
 	
 	// RECENSIONI
 	
+	
+	
+	// Get recensioni
+	
 	function getRecensioni(idRistorante){
 		$.get(`recensioni?idRistorante=${idRistorante}`, function(res){
 			
@@ -119,6 +126,7 @@ $(document).ready(function(){
 					`).appendTo('#render-recensioni')
 			} else {
 				for(let i = 0; i < res.length; i++){
+					
 					$(`
 						<div>
 						<li>
@@ -126,9 +134,15 @@ $(document).ready(function(){
 						<p>Voto: ${res[i].rating}</p>
 						<p>${res[i].comment}</p>
 						</li>
+						<br>
+						<button class='render-form-risposta' id-recensione='${res[i].id}'>Rispondi</button>
+						<br><br>
+						<div class='risposta-recensione-${res[i].id}'></div>
 						</div>
 						<br>
 					`).prependTo('#render-recensioni')
+					
+					 getRisposte(res[i].id)
 				}
 			}
 			
@@ -172,6 +186,166 @@ $(document).ready(function(){
 			}
 		})
 		
+	}
+	
+// Risposta
+	
+	$('body').on('click', '.render-form-risposta', function(){
+		const idRecensione = $(this).attr('id-recensione')
+		
+	if(!aggiungiRispostaOn){
+		
+		$(`
+				<textarea id="risposta-recensione" rows="4" cols="50" placeholder='Scrivi una risposta...'></textarea>
+				<button id='add-risposta' id-recensione='${idRecensione}'>Pubblica</button>
+		`).prependTo(`.risposta-recensione-${idRecensione}`)
+		
+		aggiungiRispostaOn = true
+		
+	} else {
+		$(`.risposta-recensione-${idRecensione}`).html('')
+		aggiungiRispostaOn = false
+		
+		getRisposte(idRecensione)
+		
+	}
+		
+		
+	})
+	
+	$('body').on('click', '#add-risposta', function(){
+		const idRecensione = $(this).attr('id-recensione')
+		
+		const r = {
+			comment: $('#risposta-recensione').val(),
+			recensione: {
+				"id": idRecensione
+			}
+		}
+		
+		
+		postRisposta(r)
+		
+	})
+	
+	function postRisposta(r){
+		
+		$.ajax({
+			url: '/risposte',
+            type: 'POST',
+            data: JSON.stringify(r),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function(data) {
+            	
+            	$(`.risposta-recensione-${r.recensione.id}`).html('')
+            	getRisposte(r.recensione.id)
+        		
+            },
+			error: function(){
+				alert("Non hai il permesso di utilizzare questo comando, accedi con le credenziali corrette")
+			}
+		})
+	}
+	
+	function getRisposte(idRecensione){
+		
+		$.get(`risposte?idRecensione=${idRecensione}`, function(res){
+			for(let i = 0; i < res.length; i++){
+				$(`
+					<div>
+					<p>${res[i].comment}</p>
+					<button class='modifica-risposta' id-risposta='${res[i].id}' id-recensione='${idRecensione}'>Modifica</button>
+					<button class='elimina-risposta' id-risposta='${res[i].id}'>Elimina</button>
+					</div>
+				`).appendTo(`.risposta-recensione-${idRecensione}`)
+			}
+		})
+		
+	}
+	
+	
+	$('body').on('click', '.modifica-risposta', function(){
+		const idRisposta = $(this).attr('id-risposta')
+		const idRecensione = $(this).attr('id-recensione')
+	
+	if(!modificaRispostaOn){
+		
+		$.get(`risposte/${idRisposta}`, function(res){
+			$('#modifica-risposta-recensione').val(res.comment)
+		})
+		
+		
+		$(`
+			<textarea id="modifica-risposta-recensione" rows="4" cols="50" placeholder='Scrivi una risposta...'></textarea>
+			<button id='salva-modifica-risposta' id-risposta='${idRisposta}' id-recensione='${idRecensione}'>Salva</button>
+		`).appendTo(`.risposta-recensione-${idRecensione}`)
+		
+		modificaRispostaOn = true
+		
+	} else {
+		$(`.risposta-recensione-${idRecensione}`).html('')
+		modificaRispostaOn = false
+		
+		getRisposte(idRecensione)
+		
+	}
+		
+	})
+	
+	
+	$('body').on('click', '#salva-modifica-risposta', function(){
+		
+		const idRisposta = $(this).attr('id-risposta')
+		const idRecensione = $(this).attr('id-recensione')
+		
+		const r = {
+			id: idRisposta,
+			comment: $('#modifica-risposta-recensione').val(),
+			recensione: {
+				"id": idRecensione
+			}
+		}
+		
+		editRisposta(r)
+	})
+	
+	function editRisposta(r){
+		
+		$.ajax({
+			url:`risposte`,
+			type: 'PUT',
+			data: JSON.stringify(r),
+			contentType: 'application/json',
+			dataType: 'json',
+			success: function(res){
+				
+				$(`.risposta-recensione-${r.recensione.id}`).html('')
+				getRisposte(r.recensione.id)
+				
+			}
+		})
+	}
+	
+	
+	$('body').on('click', '.elimina-risposta', function(){
+		const idRisposta = $(this).attr('id-risposta')
+		
+		deleteRisposta(idRisposta, $(this).parent())
+		
+	})
+		
+	function deleteRisposta(idRisposta, htmlRow){
+		$.ajax({
+			url: `risposte/${idRisposta}`,
+			type: 'DELETE',
+			success: function(){
+				htmlRow.remove()
+			},
+			error: function(){
+				alert("Non hai il permesso di utilizzare questo comando, accedi con le credenziali corrette")
+			}
+		})
 	}
 	
 	
