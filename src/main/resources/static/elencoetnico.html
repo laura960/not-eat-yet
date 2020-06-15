@@ -15,7 +15,7 @@
 </head>
 <body>
 
-	<header class="top-header">
+<header class="top-header">
 		<nav class="top-nav">
 
 			<!--SEARCH-->
@@ -23,7 +23,7 @@
 				placeholder="Search..." /></li>
 
 			<!--LOGO-->
-			<li class="logo"><a href="/"><img class="img-logo"
+			<li class="logo"><a href="/index.html"><img class="img-logo"
 					src="https://i.ibb.co/RDLFZ4c/prova06.png" alt=""></a></li>
 
 			<!--REGISTRA LOGIN-->
@@ -32,6 +32,11 @@
 					type="button" value="Registrati"></li>
 				<li><input id="modal-login" class="login button" type="button"
 					value="Login"></li>
+				<li>
+				<form method="get" action="/logout">
+				<button class="login button" type="submit">Logout
+				</form>	
+				</li>
 			</div>
 		</nav>
 	</header>
@@ -103,5 +108,18 @@
 	<div>
 		<a href='/index.html'>Torna alla Home</a>
 	</div>
+	<!--FIXME-->
+	<footer>
+		<div class="clas footer-content">
+			<div class="footer-section about"></div>
+			<div class="footer-section links"></div>
+			<div class="footer-section contact"></div>
+
+		</div>
+		<div class="footer-bottom">© 2020 All Rights Reserved
+			NotEatYet.com</div>
+	</footer>
+	<!--fine fixme-->
+	
 </body>
 </html>

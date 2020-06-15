@@ -30,20 +30,22 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 				.authorizeRequests()
-				.antMatchers("/", "index.html", "/css/**", "/js/**", "/signup.html", "/signup", "/login", "/forbidden.html", "/fail.html", "/loggedout.html").permitAll() 
+				.antMatchers("/", "/index.html", "/css/**", "/js/**", "/signup.html", "/signup", "/login", "/forbidden.html", "/fail.html", "/loggedout.html").permitAll() 
 				.antMatchers(HttpMethod.POST, "/signup.html").permitAll()
 				.antMatchers(HttpMethod.GET,"/piatti", "/piatti/*", "/ristoranti/*", "/ristoranti", "/recensioni", "/recensioni/*").permitAll()
 				.antMatchers("/elencoristoranti.html", "/elencopizzeria.html", "/elencosushi.html","/elencokebab.html","/elencoetnico.html").permitAll()
-				.antMatchers("/aggiungi_recensione.html").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE, Roles.USER)
-				.antMatchers(HttpMethod.POST,"/recensioni").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE, Roles.USER)
-				.antMatchers("/aggiungi_piatto.html", "/elimina_piatto.html", "/modifica_piatto.html").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
+				.antMatchers("/aggiungi_recensione.html").hasAnyRole(Roles.ADMIN, Roles.USER)
+				.antMatchers(HttpMethod.POST,"/recensioni").hasAnyRole(Roles.ADMIN, Roles.USER)
+				.antMatchers("/aggiungi_piatto.html", "/modifica_piatto.html").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers(HttpMethod.POST, "/piatti").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
+				.antMatchers("/elimina_piatto.html").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers(HttpMethod.DELETE, "/piatti/*").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers(HttpMethod.PUT, "/piatti/*").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers("/aggiungi_ristorante.html").hasAnyRole(Roles.ADMIN)
 				.antMatchers(HttpMethod.POST, "/ristoranti").hasAnyRole(Roles.ADMIN)
 				.antMatchers("/modifica_ristorante.html").hasAnyRole(Roles.ADMIN)
 				.antMatchers(HttpMethod.PUT, "/ristoranti/*").hasAnyRole(Roles.ADMIN)
+				.antMatchers("/elimina_ristorante.html").hasAnyRole(Roles.ADMIN)
 				.antMatchers(HttpMethod.DELETE, "/ristoranti/*").hasAnyRole(Roles.ADMIN)
 				
 				
@@ -73,7 +75,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 				.clearAuthentication(true)
 				.invalidateHttpSession(true)
 				.deleteCookies("JSESSIONID")
-				.logoutSuccessUrl("/")
+				.logoutSuccessUrl("/loggedout.html")
 				;
 				
 	}
