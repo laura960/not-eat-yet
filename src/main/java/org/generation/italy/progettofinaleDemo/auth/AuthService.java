@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-// Un Service è simile ad una Repository, ma non ha accesso diretto ai dati. 
-// Implementiamo UserDetailsService, l'interfaccia di SprignSecurity 
-// che utilizza come oggetto per andare a controllare gli utenti attraverso l'username
 public class AuthService implements UserDetailsService {
 
 	private UtenteRepository dao;
@@ -42,11 +39,11 @@ public class AuthService implements UserDetailsService {
 		newUtente.setEmail(email);
 		newUtente.setUsername(username);
 		newUtente.setPassword(passwordEncoder.encode(password));
-		if(ruolo.equals("user")) {
+		if(ruolo.equalsIgnoreCase("user")) {
 			newUtente.setRuolo(Roles.USER);
-		} else if (ruolo.equals("ristorante")) {
-			newUtente.setRuolo(Roles.USER);
-		} else if (ruolo.equals("admin")) {
+		} else if (ruolo.equalsIgnoreCase("ristorante")) {
+			newUtente.setRuolo(Roles.RISTORANTE);
+		} else if (ruolo.equalsIgnoreCase("admin")) {
 			newUtente.setRuolo(Roles.ADMIN);
 		}
 		
