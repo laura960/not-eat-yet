@@ -2,6 +2,7 @@ $(document).ready(function(){
 	
 	let dettaglioOn = false
 	let dettaglioPiattoOn = false
+	const listaCategorie = ['antipasto', 'primo', 'secondo', 'fritti', 'pizza', 'kebab', 'sushi', 'contorno', 'dolce', 'bevande']
 	
 	// GET PARAMETRI URL
 	
@@ -345,7 +346,17 @@ $(document).ready(function(){
 					<p>Nessun piatto disponibile</p>
 					`).appendTo('#render-menu')
 			} else {
-			
+				
+				for(let j = 0; j < listaCategorie.length; j++){
+					
+					for(let i = 0; i < res.length; i++){
+						if(res[i].categoria == listaCategorie[j]){
+							$(`#render-menu-${res[i].categoria}`).html('')
+							$(`<p style='text-transform: capitalize'><strong><i>${listaCategorie[j]}</i></strong></p>`).appendTo(`#render-menu-${res[i].categoria}`)
+						}
+					}
+				}
+				
 				for(let i = 0; i < res.length; i++){
 				$(`<li class ='riga-piatto${res[i].id}'>
 						${res[i].nome}
@@ -357,9 +368,11 @@ $(document).ready(function(){
 						</a>
 						</button>
 					</li>
-					`).appendTo('#render-menu')
+					`).appendTo(`#render-menu-${res[i].categoria}`)
 				}
 			}
+			
+			
 		})
 		
 	}

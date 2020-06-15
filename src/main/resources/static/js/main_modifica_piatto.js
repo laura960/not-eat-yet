@@ -32,7 +32,18 @@ $(document).ready(function(){
 				<p><strong>Modifica Piatto:</strong></p>
 				<br>
 				<input type='text' class='nome-piatto' placeholder='Nome...'>
-				<input type='text' class='categoria-piatto' placeholder='Categoria...'>
+				<select  class='categoria-piatto'>
+					<option value='antipasto'>Antipasto</option>
+					<option value='primo'>Primo</option>
+					<option value='secondo'>Secondo</option>
+					<option value='fritti'>Fritti</option>
+					<option value='pizza'>Pizza</option>
+					<option value='kebab'>Kebab</option>
+					<option value='sushi'>Sushi</option>
+					<option value='contorno'>Contorno</option>
+					<option value='dolce'>Dolce</option>
+					<option value='bevande'>Bevande</option>
+				</select>
 				<input type='text' class='ingredienti-piatto' placeholder='Ingredienti...'>
 				<input type='number' class='prezzo-piatto' step=0.01 min=0.01 placeholder='Prezzo...'>
 				<input type='hidden' class='id-ristorante' value='${idRistorante}'>
