@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,13 +11,14 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
 </head>
-	<body>
-		<header class="top-header">
-			<nav class="top-nav">
+<body>
 
-				<!--SEARCH-->
-				<li class="search"><input class="search" type="text"
-					placeholder="Search..." /></li>
+	<header class="top-header">
+		<nav class="top-nav">
+
+			<!--SEARCH-->
+			<li class="search"><input class="search" type="text"
+				placeholder="Search..." /></li>
 
 			<!--LOGO-->
 			<li class="logo"><a href="/index.html"><img class="img-logo"
@@ -37,63 +36,93 @@
 				</form>	
 				</li>
 			</div>
+		</nav>
+	</header>
+	<div class="marginLR">
 
-			<dl id='lista-pizzeria'>
-		
-				<!-- The Modal -->
-				<div id="modaleRistorante" class="modal">
-					<!-- Modal content -->
-					<div class="modal-content">
-						<div class="modal-header">
-							<span class="close" id='close-modal'>&times;</span>
-							<h2 id='titolo-modale'></h2>
-						</div>
-						<div id='bottoni-modale'></div>
-						<div id="myDIV">
-							<div class="render-dettaglio-ristorante"></div>
-							<div class="render-modifica-ristorante"></div>
-							<div class="elimina-ristorante"></div>
-							<div class="render-aggiungi-piatto"></div>
-						</div>
-						<div>
-							<h3 style='margin-top: 20px;'>Menù</h3>
-							<ul class='allineamentosx' id='render-menu'>
-							</ul>
-							<div class='render-dettaglio-piatto'></div>
-						</div>
-						<br>
-						<br>
-					</div>
-				</div>
-				<!--fine  modal V02-->
-				
-				<!-- The Modal -->
-				<div id="modale-recensioni" class="modal">
-					<!-- Modal content -->
-					<div class="modal-content">
-						<div class="modal-header">
-							<span class="close" id='close-modale'>&times;</span>
-							<h2 id='titolo-modale-recensioni'></h2>
-						</div>
-						<div id='bottoni-modale-recensioni'></div>
-						<div style="margin-top: 20px" id="aggiungi-recensione"></div>
-						<div>
-							<h3 class='allineamentosx'>Recensioni:</h3>
-							<br>
-							<ul class='allineamentosx' id='render-recensioni'>
-							</ul>
-						</div>
-						<br>
-						<br>
-					</div>
-				</div>
-				<!--fine  modal V02-->
+	<button class='button aggiungi-ristorante'>Aggiungi Ristorante</button>
 
-			</dl>
+	<br>
 
-		</div> 
+	<div class='bottone-categoria'>
+		<a href="#" class="logo-img-cat"> <img
+			src="https://cdn.discordapp.com/attachments/718005745534238751/718448931008413736/Pizza.png"
+			alt="Categoria-Pizzerie" border="0"> Pizzeria
+		</a>
+	</div>
+
+	<dl id='lista-pizzeria'>
 		
-		
+	<!-- The Modal -->
+						<div id="modaleRistorante" class="modal">
+							<!-- Modal content -->
+							<div class="modal-content">
+								<div class="modal-header">
+									<span class="close" id='close-modal'>&times;</span>
+									<h2 id='titolo-modale'></h2>
+								</div>
+								<div id='bottoni-modale'></div>
+								<div id="myDIV">
+									<div class="render-dettaglio-ristorante"></div>
+									<div class="render-modifica-ristorante"></div>
+									<div class="elimina-ristorante"></div>
+									<div class="render-aggiungi-piatto"></div>
+								</div>
+								<div>
+									<h3 style='margin-top: 20px;'>Menù</h3>
+									<ul class='allineamentosx' id='render-menu-antipasto'>
+									</ul>
+									<ul class='allineamentosx' id='render-menu-primo'>
+									</ul>
+									<ul class='allineamentosx' id='render-menu-secondo'>
+									</ul>
+									<ul class='allineamentosx' id='render-menu-fritti'>
+									</ul>
+									<ul class='allineamentosx' id='render-menu-pizza'>
+									</ul>
+									<ul class='allineamentosx' id='render-menu-kebab'>
+									</ul>
+									<ul class='allineamentosx' id='render-menu-sushi'>
+									</ul>
+									<ul class='allineamentosx' id='render-menu-contorno'>
+									</ul>
+									<ul class='allineamentosx' id='render-menu-dolce'>
+									</ul>
+									<ul class='allineamentosx' id='render-menu-bevande'>
+									</ul>
+									<div class='render-dettaglio-piatto'></div>
+								</div>
+								<br>
+								<br>
+							</div>
+						</div>
+						<!--fine  modal V02-->
+						
+						<!-- The Modal -->
+						<div id="modale-recensioni" class="modal">
+							<!-- Modal content -->
+							<div class="modal-content">
+								<div class="modal-header">
+									<span class="close" id='close-modale'>&times;</span>
+									<h2 id='titolo-modale-recensioni'></h2>
+								</div>
+								<div id='bottoni-modale-recensioni'></div>
+								<div style="margin-top: 20px" id="aggiungi-recensione"></div>
+								<div>
+									<h3 class='allineamentosx'>Recensioni:</h3>
+									<br>
+									<ul class='allineamentosx' id='render-recensioni'>
+									</ul>
+								</div>
+								<br>
+								<br>
+							</div>
+						</div>
+						<!--fine  modal V02-->
+	</dl>
+</div>
+	
+
 		<!--FIXME-->
 		<footer>
 			<div class="torna-home marginLR">
