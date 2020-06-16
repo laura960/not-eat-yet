@@ -33,47 +33,49 @@ public class SignupController {
 				"\n" + 
 				"</head>\n" + 
 				"<body>\n" + 
-				"	<header class=\"top-header\">\n" + 
-				"		<nav class=\"top-nav\">\n" + 
-				"\n" + 
-				"			<!--SEARCH-->\n" + 
-				"			<li class=\"search\"><input class=\"search\" type=\"text\"\n" + 
-				"				placeholder=\"Search...\" /></li>\n" + 
-				"\n" + 
-				"			<!--LOGO-->\n" + 
-				"			<li class=\"logo\"><a href=\"/index.html\"><img class=\"img-logo\"\n" + 
-				"					src=\"https://i.ibb.co/RDLFZ4c/prova06.png\" alt=\"\"></a></li>\n" + 
-				"\n" + 
-				"			<!--REGISTRA LOGIN-->\n" + 
-				"			<div class=\"top-reg-log\">\n" + 
-				"				<li><input id=\"modal-registrati\" class=\"registrati button\"\n" + 
-				"					type=\"button\" value=\"Registrati\"></li>\n" + 
-				"				<li><input id=\"modal-login\" class=\"login button\" type=\"button\"\n" + 
-				"					value=\"Login\"></li>\n" + 
-				"				<li>\n" + 
-				"				<form method=\"get\" action=\"/logout\">\n" + 
-				"				<button class=\"login button\" type=\"submit\">Logout\n" + 
-				"				</form>	\n" + 
-				"				</li>\n" + 
-				"			</div>\n" + 
-				"		</nav>\n" + 
-				"	</header>"
-				+ "<h3>Accesso eseguito</h3>"
-				+ "<h4>Benvenuto in Not Eat Yet</h4>"
-				+ "<a href='/index.html'>Torna alla Home</a>"
-				+ "<!--FIXME-->\n" + 
-				"	<footer>\n" + 
-				"		<div class=\"clas footer-content\">\n" + 
-				"			<div class=\"footer-section about\"></div>\n" + 
-				"			<div class=\"footer-section links\"></div>\n" + 
-				"			<div class=\"footer-section contact\"></div>\n" + 
-				"\n" + 
-				"		</div>\n" + 
-				"		<div class=\"footer-bottom\">© 2020 All Rights Reserved\n" + 
-				"			NotEatYet.com</div>\n" + 
-				"	</footer>\n" + 
-				"	<!--fine fixme-->\n" + 
-				"</body>\n" + 
+				"	<header class=\"top-header\">\r\n" + 
+				"		<nav class=\"top-nav\">\r\n" + 
+				"\r\n" + 
+				"			<li><input id=\"modal-registrati\" class=\"registrati button\"\r\n" + 
+				"					type=\"button\" value=\"Registrati\"></li>\r\n" + 
+				"\r\n" + 
+				"			<!--LOGO-->\r\n" + 
+				"			<li class=\"logo\"><a href=\"/index.html\"><img class=\"img-logo\"\r\n" + 
+				"					src=\"https://i.ibb.co/RDLFZ4c/prova06.png\" alt=\"\"></a></li>\r\n" + 
+				"\r\n" + 
+				"			<!--REGISTRA LOGIN-->\r\n" + 
+				"			<div class=\"top-reg-log\">\r\n" + 
+				"				<li><input id=\"modal-login\" class=\"login button\" type=\"button\"\r\n" + 
+				"					value=\"Login\"></li>\r\n" + 
+				"				<li>\r\n" + 
+				"				<form method=\"get\" action=\"/logout\">\r\n" + 
+				"				<button class=\"login button\" type=\"submit\">Logout\r\n" + 
+				"				</form>	\r\n" + 
+				"				</li>\r\n" + 
+				"			</div>\r\n" + 
+				"		</nav>\r\n" + 
+				"	</header>" +
+				"<div class='marginLR'>"
+				+ "<h3>Accesso eseguito</h3><br>"
+				+ "<h4>Benvenuto in Not Eat Yet</h4><br>"
+				+ "<a href='/index.html'>Vai alla Home</a>"
+				+ "</div>"
+				+ "<!--FIXME-->\r\n" + 
+				"		<footer>\r\n" + 
+				"			<div class=\"torna-home marginLR\">\r\n" + 
+				"				<a href='/index.html'>&#9664; Torna alla Home</a>\r\n" + 
+				"			</div>\r\n" + 
+				"			<div class=\"clas footer-content\">\r\n" + 
+				"				<div class=\"footer-section about\"></div>\r\n" + 
+				"				<div class=\"footer-section links\"></div>\r\n" + 
+				"				<div class=\"footer-section contact\"></div>\r\n" + 
+				"		\r\n" + 
+				"			</div>\r\n" + 
+				"			<div class=\"footer-bottom\">© 2020 All Rights Reserved\r\n" + 
+				"				NotEatYet.com</div>\r\n" + 
+				"		</footer>\r\n" + 
+				"			<!--fine fixme-->\r\n" + 
+				"	</body>\r\n" + 
 				"</html>";
 	}
 }

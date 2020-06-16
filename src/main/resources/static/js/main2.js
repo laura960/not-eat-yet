@@ -329,7 +329,11 @@ $(document).ready(function(){
 				$(`.risposta-recensione-${r.recensione.id}`).html('')
 				getRisposte(r.recensione.id)
 				
+			},
+			error: function(){
+			alert("Non hai il permesso di utilizzare questo comando, accedi con le credenziali corrette")
 			}
+		
 		})
 	}
 	
