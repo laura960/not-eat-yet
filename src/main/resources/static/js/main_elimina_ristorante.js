@@ -23,7 +23,8 @@ $(document).ready(function(){
 	function getRistorante(id){
 		$.get(`ristoranti/${id}`, function(res){
 			$(`	<br>
-				<h3>Dettagli Ristorante</h3>
+				<h3>Ristorante selezionato:</h3>
+				<br>
 				<p><strong>Nome</strong>: ${res.nome}<p>
 				<p><strong>Categoria</strong>: ${res.categoria}<p>
 				<p><strong>Ragione sociale</strong>: ${res.ragioneSociale}<p>
@@ -42,8 +43,8 @@ $(document).ready(function(){
 	
 	function getBottoni(){
 		$(`
-				<button class='elimina-ristorante2'>Sì</button>
-				<button><a href='/'>No, torna alla Home</a></button>
+				<button class='elimina-ristorante2 button'>Sì</button>
+				<button class='button'><a style='text-decoration:none; color: black;' href='/'>No, torna alla Home</a></button>
 				
 		`).appendTo('.sei-sicuro')
 	}

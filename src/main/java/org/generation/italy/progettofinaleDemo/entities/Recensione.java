@@ -17,6 +17,9 @@ public class Recensione {
 	private String comment;
 	private int rating;
 	
+	@Column(name = "nomeutente")
+	private String nomeUtente;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_ristorante")
 	@JsonIgnoreProperties("recensioni")
@@ -26,17 +29,24 @@ public class Recensione {
 	@JsonIgnoreProperties("recensione")
 	private List<Risposta> risposte;
 
-
-	
-	public Recensione(int id, String titolo, String comment, int rating, Ristorante ristorante,
+	public Recensione(int id, String titolo, String comment, int rating, String nomeUtente, Ristorante ristorante,
 			List<Risposta> risposte) {
 		super();
 		this.id = id;
 		this.titolo = titolo;
 		this.comment = comment;
 		this.rating = rating;
+		this.nomeUtente = nomeUtente;
 		this.ristorante = ristorante;
 		this.risposte = risposte;
+	}
+
+	public String getNomeUtente() {
+		return nomeUtente;
+	}
+
+	public void setNomeUtente(String nomeUtente) {
+		this.nomeUtente = nomeUtente;
 	}
 
 	public Recensione() {
@@ -90,11 +100,4 @@ public class Recensione {
 	public void setRisposte(List<Risposta> risposte) {
 		this.risposte = risposte;
 	}
-	
-	
-	
-	
-	
-	
-	
 }

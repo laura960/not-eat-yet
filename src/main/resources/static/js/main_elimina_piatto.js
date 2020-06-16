@@ -25,7 +25,8 @@ $(document).ready(function(){
 	function getPiatto(id){
 		$.get(`piatti/${id}`, function(res){
 			$(`	<br>
-				<h3>Dettagli Piatto</h3>
+				<h3>Piatto selezionato:</h3>
+				<br>
 				<p><strong>Nome</strong>: ${res.nome}<p>
 				<p><strong>Categoria</strong>: ${res.categoria}<p>
 				<p><strong>Ingredienti</strong>: ${res.ingredienti}<p>
@@ -45,8 +46,8 @@ $(document).ready(function(){
 	
 	function getBottoni(){
 		$(`
-				<button class='elimina-piatto2'>Sì</button>
-				<button><a href='/'>No, torna alla Home</a></button>
+				<button class='elimina-piatto2 button'>Sì</button>
+				<button class='button'><a style='text-decoration:none; color: black;' href='/'>No, torna alla Home</a></button>
 				
 		`).appendTo('.sei-sicuro')
 	}

@@ -89,6 +89,9 @@ $(document).ready(function(){
 	$('body').on('click', '.modale-recensioni', function(){
 		const idRistorante = $(this).attr('id-ristorante')
 		
+		modificaRispostaOn = false
+		aggiungiRispostaOn = false
+		
 		getModaleRecensioni(idRistorante)
 				
 	})
@@ -131,6 +134,7 @@ $(document).ready(function(){
 						<div>
 						<li>
 						<h4><strong>${res[i].titolo}</strong></h4>
+						<p>Autore: ${res[i].nomeUtente}</p>
 						<p>Voto: ${res[i].rating}</p>
 						<p>${res[i].comment}</p>
 						</li>
@@ -156,6 +160,7 @@ $(document).ready(function(){
 			titolo: $('#titolo-recensione').val(),
 			comment: $('#testo-recensione').val(),
 			rating: $("input[name='rating']:checked").val(),
+			nomeUtente: $('#nome-utente').val(),
 			ristorante: {
 				"id": idRistorante 
 			}
@@ -166,6 +171,7 @@ $(document).ready(function(){
 		$('#titolo-recensione').val('')
 		$('#testo-recensione').val('')
 		$("input[name='rating']:checked").val('')
+		$('#nome-utente').val('')
 		
 	})
 	
@@ -542,6 +548,7 @@ $(document).ready(function(){
 						</a>
 						</button>
 					</li>
+					<div class='render-dettaglio'>
 					`).appendTo(`#render-menu-${res[i].categoria}`)
 				}
 			}
@@ -578,7 +585,7 @@ $(document).ready(function(){
 			getPiatto(idPiatto)
 			dettaglioPiattoOn = true
 		} else {
-			$('.render-dettaglio-piatto').html('')
+			$(`.render-dettaglio-piatto`).html('')
 			dettaglioPiattoOn = false
 		}
 		
