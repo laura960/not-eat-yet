@@ -17,9 +17,8 @@
 <header class="top-header">
 		<nav class="top-nav">
 
-			<!--SEARCH-->
-			<li class="search"><input class="search" type="text"
-				placeholder="Search..." /></li>
+			<li><input id="modal-registrati" class="registrati button"
+					type="button" value="Registrati"></li>
 
 			<!--LOGO-->
 			<li class="logo"><a href="/index.html"><img class="img-logo"
@@ -27,10 +26,13 @@
 
 			<!--REGISTRA LOGIN-->
 			<div class="top-reg-log">
-				<li><input id="modal-registrati" class="registrati button"
-					type="button" value="Registrati"></li>
 				<li><input id="modal-login" class="login button" type="button"
 					value="Login"></li>
+				<li>
+				<form method="get" action="/logout">
+				<button class="login button" type="submit">Logout
+				</form>	
+				</li>
 			</div>
 		</nav>
 	</header>
