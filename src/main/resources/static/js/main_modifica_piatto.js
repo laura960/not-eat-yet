@@ -29,26 +29,32 @@ $(document).ready(function(){
 		})
 		
 		$(`<br>
-				<p><strong>Modifica Piatto:</strong></p>
-				<br>
-				<input type='text' class='nome-piatto' placeholder='Nome...'>
-				<select  class='categoria-piatto'>
-					<option value='antipasto'>Antipasto</option>
-					<option value='primo'>Primo</option>
-					<option value='secondo'>Secondo</option>
-					<option value='fritti'>Fritti</option>
-					<option value='pizza'>Pizza</option>
-					<option value='kebab'>Kebab</option>
-					<option value='sushi'>Sushi</option>
-					<option value='contorno'>Contorno</option>
-					<option value='dolce'>Dolce</option>
-					<option value='bevande'>Bevande</option>
-				</select>
-				<input type='text' class='ingredienti-piatto' placeholder='Ingredienti...'>
-				<input type='number' class='prezzo-piatto' step=0.01 min=0.01 placeholder='Prezzo...'>
-				<input type='hidden' class='id-ristorante' value='${idRistorante}'>
-				<input type='hidden' class='id-piatto' value='${idPiatto}'>
-				<button id='salva-modifica-piatto'>Modifica</button>
+				<h1 style='margin: 15px;'><strong>Modifica Piatto:</strong></h1>
+				<div class='templet-add'>
+					<p><strong>Nome:</strong></p>
+					<input type='text' class='nome-piatto' placeholder='Nome...'>
+					<p><strong>Categoria:</strong></p>
+					<select  class='categoria-piatto'>
+						<option value='antipasto'>Antipasto</option>
+						<option value='primo'>Primo</option>
+						<option value='secondo'>Secondo</option>
+						<option value='fritti'>Fritti</option>
+						<option value='pizza'>Pizza</option>
+						<option value='kebab'>Kebab</option>
+						<option value='sushi'>Sushi</option>
+						<option value='contorno'>Contorno</option>
+						<option value='dolce'>Dolce</option>
+						<option value='bevande'>Bevande</option>
+					</select>
+					<p><strong>Ingredienti:</strong></p>
+					<input type='text' class='ingredienti-piatto' placeholder='Ingredienti...'>
+					<p><strong>Prezzo:</strong></p>
+					<input type='number' class='prezzo-piatto' step=0.01 min=0.01 placeholder='Prezzo...'>
+					<input type='hidden' class='id-ristorante' value='${idRistorante}'>
+					<input type='hidden' class='id-piatto' value='${idPiatto}'>
+					<br>
+					<button id='salva-modifica-piatto'>Modifica</button>
+				</div>
 		`).appendTo('.render-modifica-piatto')
 		
 	}

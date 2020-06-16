@@ -100,7 +100,7 @@ $(document).ready(function(){
 		$('#titolo-modale-recensioni').text('Recensioni')		
 		
 		$('#bottoni-modale-recensioni')
-			.html(`<button><a href="/aggiungi_recensione.html?id=${idRistorante}">Scrivi una recensione</a></button>`)
+			.html(`<a href="/aggiungi_recensione.html?id=${idRistorante}"><button class='button bottone-recensione login'>Scrivi una recensione</button></a>`)
 		
 		$('#render-recensioni').html('')
 		getRecensioni(idRistorante)
@@ -201,9 +201,9 @@ $(document).ready(function(){
 		
 	if(!aggiungiRispostaOn){
 		
-		$(`
+		$(`	
 				<textarea id="risposta-recensione" rows="4" cols="50" placeholder='Scrivi una risposta...'></textarea>
-				<button id='add-risposta' id-recensione='${idRecensione}'>Pubblica</button>
+				<br><button id='add-risposta' id-recensione='${idRecensione}'>Pubblica</button><br><br>
 		`).prependTo(`.risposta-recensione-${idRecensione}`)
 		
 		aggiungiRispostaOn = true
@@ -282,9 +282,9 @@ $(document).ready(function(){
 		})
 		
 		
-		$(`
+		$(`<br>
 			<textarea id="modifica-risposta-recensione" rows="4" cols="50" placeholder='Scrivi una risposta...'></textarea>
-			<button id='salva-modifica-risposta' id-risposta='${idRisposta}' id-recensione='${idRecensione}'>Salva</button>
+			<br><button id='salva-modifica-risposta' id-risposta='${idRisposta}' id-recensione='${idRecensione}'>Salva</button>
 		`).appendTo(`.risposta-recensione-${idRecensione}`)
 		
 		modificaRispostaOn = true
@@ -532,13 +532,13 @@ $(document).ready(function(){
 					for(let i = 0; i < res.length; i++){
 						if(res[i].categoria == listaCategorie[j]){
 							$(`#render-menu-${res[i].categoria}`).html('')
-							$(`<p style='text-transform: capitalize'><strong><i>${listaCategorie[j]}</i></strong></p>`).appendTo(`#render-menu-${res[i].categoria}`)
+							$(`<br><p style='text-transform: capitalize'><strong><i>${listaCategorie[j]}</i></strong></p>`).appendTo(`#render-menu-${res[i].categoria}`)
 						}
 					}
 				}
 				
 				for(let i = 0; i < res.length; i++){
-				$(`<li class ='riga-piatto${res[i].id}'>
+				$(`	<li class ='riga-piatto${res[i].id}'>
 						${res[i].nome}
 						<button class='dettaglio-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>Dettaglio</button>
 						<button class='modifica-piatto' id-piatto=${res[i].id} id-ristorante=${idRistorante}>Modifica</button>
@@ -548,7 +548,6 @@ $(document).ready(function(){
 						</a>
 						</button>
 					</li>
-					<div class='render-dettaglio'>
 					`).appendTo(`#render-menu-${res[i].categoria}`)
 				}
 			}
@@ -560,8 +559,8 @@ $(document).ready(function(){
 
 	function getPiatto(id){
 		$.get(`piatti/${id}`, function(res){
-			$(`	<br>
-				<h3>Dettagli Piatto</h3>
+			$(`	<h4>Dettagli Piatto</h4>
+				<br>
 				<p><strong>Nome</strong>: ${res.nome}<p>
 				<p><strong>Categoria</strong>: ${res.categoria}<p>
 				<p><strong>Ingredienti</strong>: ${res.ingredienti}<p>

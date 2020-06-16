@@ -15,9 +15,8 @@
 	<header class="top-header">
 		<nav class="top-nav">
 
-			<!--SEARCH-->
-			<li class="search"><input class="search" type="text"
-				placeholder="Search..." /></li>
+			<li><input id="modal-registrati" class="registrati button"
+					type="button" value="Registrati"></li>
 
 			<!--LOGO-->
 			<li class="logo"><a href="/index.html"><img class="img-logo"
@@ -25,8 +24,6 @@
 
 			<!--REGISTRA LOGIN-->
 			<div class="top-reg-log">
-				<li><input id="modal-registrati" class="registrati button"
-					type="button" value="Registrati"></li>
 				<li><input id="modal-login" class="login button" type="button"
 					value="Login"></li>
 				<li>
@@ -36,20 +33,29 @@
 				</li>
 			</div>
 		</nav>
-	</header>		
+	</header>
+	<div class='marginLR'>
+	<h2>Rispondi alla recensione:</h2>
+	<br>	
 			<textarea id="risposta-recensione" rows="4" cols="50" placeholder='Scrivi una risposta...'></textarea>
+			<br>
 			<button id='add-risposta' id-ristorante='${idRistorante}'>Pubblica</button>
+	</div>
+		
 		<!--FIXME-->
-	<footer>
-		<div class="clas footer-content">
-			<div class="footer-section about"></div>
-			<div class="footer-section links"></div>
-			<div class="footer-section contact"></div>
-
-		</div>
-		<div class="footer-bottom">© 2020 All Rights Reserved
-			NotEatYet.com</div>
-	</footer>
-	<!--fine fixme-->	
+		<footer>
+			<div class="torna-home marginLR">
+				<a href='/index.html'>&#9664; Torna alla Home</a>
+			</div>
+			<div class="clas footer-content">
+				<div class="footer-section about"></div>
+				<div class="footer-section links"></div>
+				<div class="footer-section contact"></div>
+		
+			</div>
+			<div class="footer-bottom">© 2020 All Rights Reserved
+				NotEatYet.com</div>
+		</footer>
+			<!--fine fixme-->
 	</body>
 </html>

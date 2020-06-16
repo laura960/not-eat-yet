@@ -33,24 +33,33 @@ $(document).ready(function(){
 	})
 	
 	$(`
-			<br>
-			<p><strong>Modifica Ristorante:</strong></p>
-			<br>
-			<select class='categoria-ristorante'>
-				<option value='pizzeria'>Pizzeria</option>
-				<option value='sushi'>Sushi</option>
-				<option value='etnico'>Etnico</option>
-				<option value='kebab'>Kebab</option>
-			</select>
-			<input type='text' class='nome-ristorante' placeholder='Nome...'>
-			<input type='text' class='piva' placeholder='Partita IVA...'>
-			<input type='text' class='ragione-sociale'  placeholder='Ragione Sociale...'>
-			<input type='text' class='regione'  placeholder='Regione...'>
-			<input type='text' class='citta'  placeholder='Città...'>
-			<input type='text' class='via'  placeholder='Via...'>
-			<input type='number' class='numero-civico'  placeholder='Numero Civico...'>
-			<input type='hidden' class='id-rist' value='${idRistorante}'>
-			<button id='salva-modifica-ristorante'>Modifica</button>
+			<h1 style='margin: 15px;'><strong>Modifica Ristorante:</strong></h1>
+			<div class='templet-add'>
+				<p><strong>Categoria:</strong></p>
+				<select class='categoria-ristorante'>
+					<option value='pizzeria'>Pizzeria</option>
+					<option value='sushi'>Sushi</option>
+					<option value='etnico'>Etnico</option>
+					<option value='kebab'>Kebab</option>
+				</select>
+				<p><strong>Nome:</strong></p>
+				<input type='text' class='nome-ristorante' placeholder='Nome...'>
+				<p><strong>Partita Iva:</strong></p>
+				<input type='text' class='piva' placeholder='Partita IVA...'>
+				<p><strong>Ragione Sociale:</strong></p>
+				<input type='text' class='ragione-sociale'  placeholder='Ragione Sociale...'>
+				<p><strong>Regione:</strong></p>
+				<input type='text' class='regione'  placeholder='Regione...'>
+				<p><strong>Città:</strong></p>
+				<input type='text' class='citta'  placeholder='Città...'>
+				<p><strong>Via:</strong></p>
+				<input type='text' class='via'  placeholder='Via...'>
+				<p><strong>Numero Civico:</strong></p>
+				<input type='number' class='numero-civico'  placeholder='Numero Civico...'>
+				<input type='hidden' class='id-rist' value='${idRistorante}'>
+				<br>
+				<button id='salva-modifica-ristorante'>Modifica</button>
+			</div>
 	
 	`).appendTo('.render-modifica-ristorante')
 	
