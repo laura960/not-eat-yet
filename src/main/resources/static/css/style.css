@@ -214,6 +214,12 @@ body{
     font-size: 25px;
 }
 
+.marginLR{
+  margin-left: 5%;
+  margin-right: 5%;
+
+}
+
 /* Modal 
 .blocker{
     position:fixed;top:0;
@@ -540,14 +546,41 @@ fine modal*/
 
 
 /*-----fine main-----*/
+.margin15pxB{
+  margin-bottom: 15px;
+}
 
 /*-----Footer-----*/
+.torna-home{
+ margin-top: 5px;
+}
+
+.torna-home a{
+  color: #f5f2ee;
+  padding-left: 5px;
+  padding-bottom: 1px;
+  text-decoration: none;
+  font-weight:bolder;
+
+  
+}
+
+.torna-home a:hover{
+  
+  color: #363634;
+	background: #f5f2ee;
+	padding-left: 5px;
+	padding-right: 10px;
+	padding-bottom: 1px;
+	border-radius: 10px;
+}
+
 footer{
     margin-top: auto;
-    min-height: 100px;
+    min-height: 120px;
     background: #363634;
     color: #f5f2ee;
-    height: 100px;
+    height: 120px;
     position: relative;
 }
 footer .footer-bottom{
