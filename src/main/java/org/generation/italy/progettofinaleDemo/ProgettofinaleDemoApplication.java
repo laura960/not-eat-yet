@@ -2,6 +2,7 @@ package org.generation.italy.progettofinaleDemo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.StringReader;
 
 import javax.sql.DataSource;
 
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class ProgettofinaleDemoApplication implements CommandLineRunner {
@@ -19,6 +22,8 @@ public class ProgettofinaleDemoApplication implements CommandLineRunner {
 		SpringApplication.run(ProgettofinaleDemoApplication.class, args);
 	}
 
+	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
 	@Autowired
 	private DataSource datasource;
 	
@@ -31,9 +36,19 @@ public class ProgettofinaleDemoApplication implements CommandLineRunner {
 	    
 	    if(!utenteRepository.findByUsername("admin").isPresent()) {
 	    	// using spring boot injected DataSource to get the connection
+	    	String ris = "";
+	    	String line = null;
 	    	ScriptRunner scriptRunner = new ScriptRunner(datasource.getConnection());
-	    	scriptRunner.runScript(new BufferedReader(new FileReader(script)));
-	    	// utenteRepository.findByUsername("admin")
+	    	FileReader query = new FileReader(script);
+	    	BufferedReader br = new BufferedReader(query);
+	    	while((line = br.readLine()) != null) {
+	    		ris += line;
+	    	}
+	    	
+	    	String password = passwordEncoder.encode("admin");
+	    	
+	    	ris = ris.replace("psw", password);
+	    	scriptRunner.runScript(new StringReader(ris));
 	    }
 	    
 	}
