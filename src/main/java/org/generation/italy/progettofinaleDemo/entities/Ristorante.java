@@ -9,8 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.generation.italy.progettofinaleDemo.auth.Utente;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -45,13 +48,20 @@ public class Ristorante {
 	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "ristorante")
 	@JsonIgnoreProperties("ristorante")
 	private List<Recensione> recensioni;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "id_utente")
+	@JsonIgnoreProperties("ristoranti")
+	private Utente utente;
 
 	public Ristorante() {
 		super();
 	}
 
+	
 	public Ristorante(int id, String nome, String ragioneSociale, String pIva, String regione, String citta, String via,
-			int nCivico, String categoria, List<Piatto> piatti, List<Recensione> recensioni) {
+			int nCivico, String categoria, List<Piatto> piatti, List<Recensione> recensioni, Utente utente) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -64,6 +74,7 @@ public class Ristorante {
 		this.categoria = categoria;
 		this.piatti = piatti;
 		this.recensioni = recensioni;
+		this.utente = utente;
 	}
 
 
@@ -157,6 +168,16 @@ public class Ristorante {
 
 	public void setRecensioni(List<Recensione> recensioni) {
 		this.recensioni = recensioni;
+	}
+
+
+	public Utente getUtente() {
+		return utente;
+	}
+
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 	
 	

@@ -3,18 +3,24 @@ package org.generation.italy.progettofinaleDemo.auth;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import org.generation.italy.progettofinaleDemo.entities.Ristorante;
 import org.generation.italy.progettofinaleDemo.security.Roles;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
@@ -57,17 +63,36 @@ public class Utente implements UserDetails {
 	private String password;
 	private String ruolo;
 
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "utente")
+	@JsonIgnoreProperties("utente")
+	private List<Ristorante> ristoranti;
+	
+	
 	public Utente() {
 	}
 
-	public Utente(int id, String email, String username, String password, String ruolo) {
+
+	public Utente(String email, String username, String password, String ruolo, List<Ristorante> ristoranti) {
+		super();
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.ruolo = ruolo;
+		this.ristoranti = ristoranti;
+	}
+
+
+
+	public Utente(int id, String email, String username, String password, String ruolo, List<Ristorante> ristoranti) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.ruolo = ruolo;
+		this.ristoranti = ristoranti;
 	}
+
 
 	public int getId() {
 		return id;
@@ -121,6 +146,17 @@ public class Utente implements UserDetails {
 	public String getUsername() {
 		return username;
 	}
+	
+
+	public List<Ristorante> getRistoranti() {
+		return ristoranti;
+	}
+
+
+	public void setRistoranti(List<Ristorante> ristoranti) {
+		this.ristoranti = ristoranti;
+	}
+
 
 	/**
 	 * A seconda se vi interessa avere certe funzionalità, implementate i campi

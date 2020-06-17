@@ -1,0 +1,1 @@
+INSERT INTO utente(id, email, password, ruolo, username) values (1, "mailAdmin", "$2a$10$0t0aqHwW3RV1Zha5dLegu.0dMndxx/D3I.QoeJRTy3eayPzqnChOO", "ADMIN", "admin");

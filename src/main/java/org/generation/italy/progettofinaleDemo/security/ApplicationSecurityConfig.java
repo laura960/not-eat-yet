@@ -1,6 +1,7 @@
 package org.generation.italy.progettofinaleDemo.security;
 
 import org.generation.italy.progettofinaleDemo.auth.AuthService;
+import org.generation.italy.progettofinaleDemo.security.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +11,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 
 @Configuration
@@ -25,6 +30,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		this.passwordEncoder = passwordEncoder;
 		this.authService = authService;
 	}
+	
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -32,13 +38,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/", "/index.html", "/css/**", "/js/**", "/signup.html", "/signup", "/login", "/forbidden.html", "/fail.html", "/loggedout.html").permitAll() 
 				.antMatchers(HttpMethod.POST, "/signup.html").permitAll()
+				.antMatchers(HttpMethod.GET, "/secured", "/detail", "/utente").permitAll()
 				.antMatchers(HttpMethod.GET,"/piatti", "/piatti/*", "/ristoranti/*", "/ristoranti", "/recensioni", "/recensioni/*", "/risposte", "/risposte/*").permitAll()
-				.antMatchers("/elencoristoranti.html", "/elencopizzeria.html", "/elencosushi.html","/elencokebab.html","/elencoetnico.html").permitAll()
+				.antMatchers("/elencoristoranti.html", "/elencopizzeria.html", "/elencosushi.html","/elencokebab.html","/elencoetnico.html", "/elencoaltro.html").permitAll()
 				.antMatchers("/aggiungi_recensione.html").hasAnyRole(Roles.ADMIN, Roles.USER)
 				.antMatchers(HttpMethod.POST,"/recensioni").hasAnyRole(Roles.ADMIN, Roles.USER)
 				.antMatchers("/aggiungi_piatto.html", "/modifica_piatto.html").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers(HttpMethod.POST, "/piatti").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
-				.antMatchers("/elimina_piatto.html").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
+				.antMatchers("/elimina_piatto.html", "/pannello_ristorante.html").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers(HttpMethod.DELETE, "/piatti/*").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers(HttpMethod.PUT, "/piatti/*").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers(HttpMethod.POST, "/risposte").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
@@ -82,6 +89,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 				;
 				
 	}
+	
 
 	@Bean 
 	public DaoAuthenticationProvider daoAuthenticationProvider() {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,12 +24,15 @@ public class RistoranteController {
 	
 
 	@GetMapping
-	public Iterable<Ristorante> get(){
+	public Iterable<Ristorante> get(@RequestParam(defaultValue = "0") int idUtente){
+		if (idUtente > 0)
+			return db.findByUtente_Id(idUtente);
+		
 		return db.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public Optional<Ristorante> get(@PathVariable int id){
+	public Optional<Ristorante> getRistorante(@PathVariable int id){
 		return db.findById(id);
 	}
 	
