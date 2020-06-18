@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	
+	let idLogin = -1
+	
 // GET PARAMETRI URL
 	
 	var getUrlParameter = function getUrlParameter(sParam) {
@@ -17,6 +19,25 @@ $(document).ready(function(){
 	    }
 	};
 	
+	function getUtente(){
+		
+		$.ajax({
+			url: 'secured',
+            type: 'GET',
+            success: function(res) {
+            	idLogin = res.id
+				console.log('success ' + idLogin)
+            },
+			error: function(){
+				idLogin = -1
+				console.log('error')
+			}
+		})
+		
+	}
+	
+	getUtente()
+	
 	function renderModificaRistorante(){
 		
 		var idRistorante = getUrlParameter('id');
@@ -30,6 +51,7 @@ $(document).ready(function(){
 		$('.citta').val(res.citta)
 		$('.via').val(res.via)
 		$('.numero-civico').val(res.nCivico)
+		$('.id-ristoratore').val(res.utente.id)
 	})
 	
 	$(`
@@ -41,6 +63,7 @@ $(document).ready(function(){
 					<option value='sushi'>Sushi</option>
 					<option value='etnico'>Etnico</option>
 					<option value='kebab'>Kebab</option>
+					<option value='altro'>Altro</option>
 				</select>
 				<p><strong>Nome:</strong></p>
 				<input type='text' class='nome-ristorante' placeholder='Nome...'>
@@ -57,6 +80,7 @@ $(document).ready(function(){
 				<p><strong>Numero Civico:</strong></p>
 				<input type='number' class='numero-civico'  placeholder='Numero Civico...'>
 				<input type='hidden' class='id-rist' value='${idRistorante}'>
+				<input type='hidden' class='id-ristoratore'>
 				<br>
 				<button id='salva-modifica-ristorante'>Modifica</button>
 			</div>
@@ -69,21 +93,43 @@ $(document).ready(function(){
 	
 	$('body').on('click', '#salva-modifica-ristorante', function(){
 		
-		 const r = {
-				 
-				   id: $('.id-rist').val(),
-	               nome: $('.nome-ristorante').val(),
-	               categoria: $('.categoria-ristorante').val(),
-	               pIva: $('.piva').val(),
-	               ragioneSociale: $('.ragione-sociale').val(),
-	               regione: $('.regione').val(),
-	               citta: $('.citta').val(),
-	               via: $('.via').val(),
-	               nCivico: $('.numero-civico').val()
-	               
-	        }
-		
-		editRistorante(r)
+		if(idLogin == 1){
+			const r = {
+					 
+					   id: $('.id-rist').val(),
+		               nome: $('.nome-ristorante').val(),
+		               categoria: $('.categoria-ristorante').val(),
+		               pIva: $('.piva').val(),
+		               ragioneSociale: $('.ragione-sociale').val(),
+		               regione: $('.regione').val(),
+		               citta: $('.citta').val(),
+		               via: $('.via').val(),
+		               nCivico: $('.numero-civico').val(),
+		               utente: {
+		            	   "id": $('.id-ristoratore').val()
+		               }
+			 }
+			editRistorante(r)
+			
+		} else {
+			const r = {
+					 
+					   id: $('.id-rist').val(),
+		               nome: $('.nome-ristorante').val(),
+		               categoria: $('.categoria-ristorante').val(),
+		               pIva: $('.piva').val(),
+		               ragioneSociale: $('.ragione-sociale').val(),
+		               regione: $('.regione').val(),
+		               citta: $('.citta').val(),
+		               via: $('.via').val(),
+		               nCivico: $('.numero-civico').val(),
+		               utente: {
+		            	   "id": idLogin
+		               }
+			 }
+			editRistorante(r)
+		}
+		 
 	})
 	
 	function editRistorante(r){
@@ -95,8 +141,13 @@ $(document).ready(function(){
 			contentType: 'application/json',
 			dataType: 'json',
 			success: function(res){
-				const url = `/elencoristoranti.html`;    
-        		$(location).attr('href',url)
+				if(idLogin == 1){
+					const url = `/pannello_admin.html`
+	        		$(location).attr('href',url)
+				} else {
+					const url = `/pannello_ristorante.html`;     
+	        		$(location).attr('href',url)
+				}
 			}
 		})
 		

@@ -16,4 +16,5 @@ public class PasswordConfig {
 		return new BCryptPasswordEncoder();
 		// Uno delle tante criptografie esistenti
 	}
+	
 }

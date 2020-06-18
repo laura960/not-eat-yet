@@ -48,7 +48,7 @@ public class SignupController {
 				"		</nav>" + 
 				"	</header>" +
 				"<div class='marginLR'>" +
-				"<h3>Accesso eseguito</h3><br>" +
+				"<h3>Registrazione eseguita con successo</h3><br>" +
 				"<h4>Benvenuto in Not Eat Yet</h4><br>" +
 				"<a href='/index.html'>Vai alla Home</a>" +
 				"</div>" +

@@ -1,10 +1,14 @@
 $(document).ready(function(){
 	
+	let idLogin = -1
 	let modificaRispostaOn = false
 	let aggiungiRispostaOn = false
 	let dettaglioOn = false
 	let dettaglioPiattoOn = false
 	const listaCategorie = ['antipasto', 'primo', 'secondo', 'fritti', 'pizza', 'kebab', 'sushi', 'contorno', 'dolce', 'bevande']
+	
+	getUtente()
+	
 	
 	// GET PARAMETRI URL
 	
@@ -29,6 +33,13 @@ $(document).ready(function(){
 	$('body').on('click', '#modal-login', function(){
 		const url = "/login.html";    
 		$(location).attr('href',url);
+	})
+	
+	
+	// LOGOUT
+	
+	$('body').on('click', '#id-button-logout', function(){
+		idLogin = -1
 	})
 	
 	// SIGN IN
@@ -59,6 +70,7 @@ $(document).ready(function(){
 		caricaBottoni(idRistorante)
 		
 		$('#modaleRistorante').css('display', 'block')
+		
 	}
 	
 	
@@ -129,22 +141,38 @@ $(document).ready(function(){
 					`).appendTo('#render-recensioni')
 			} else {
 				for(let i = 0; i < res.length; i++){
-					
-					$(`
-						<div>
-						<li>
-						<h4><strong>${res[i].titolo}</strong></h4>
-						<p>Autore: ${res[i].nomeUtente}</p>
-						<p>Voto: ${res[i].rating}</p>
-						<p>${res[i].comment}</p>
-						</li>
-						<br>
-						<button class='render-form-risposta' id-recensione='${res[i].id}'>Rispondi</button>
-						<br><br>
-						<div class='risposta-recensione-${res[i].id}'></div>
-						</div>
-						<br>
-					`).prependTo('#render-recensioni')
+					if (idLogin == 1){
+						$(`
+								<div>
+								<li>
+								<h4><strong>${res[i].titolo}</strong></h4>
+								<p>Autore: ${res[i].nomeUtente}</p>
+								<p>Voto: ${res[i].rating}</p>
+								<p>${res[i].comment}</p>
+								</li>
+								<button class='elimina-recensione' id-recensione='${res[i].id}' style='margin-top: 5px;'>Elimina recensione</button>
+								<br><br>
+								<div class='risposta-recensione-${res[i].id}'></div>
+								</div>
+								<br>
+							`).prependTo('#render-recensioni')
+					} else {
+						$(`
+								<div>
+								<li>
+								<h4><strong>${res[i].titolo}</strong></h4>
+								<p>Autore: ${res[i].nomeUtente}</p>
+								<p>Voto: ${res[i].rating}</p>
+								<p>${res[i].comment}</p>
+								</li>
+								<br>
+								<button class='render-form-risposta' id-recensione='${res[i].id}'>Rispondi</button>
+								<br><br>
+								<div class='risposta-recensione-${res[i].id}'></div>
+								</div>
+								<br>
+							`).prependTo('#render-recensioni')
+					}
 					
 					 getRisposte(res[i].id)
 				}
@@ -153,6 +181,28 @@ $(document).ready(function(){
 		})
 	}
 	
+	$('body').on('click', '.elimina-recensione', function(){
+		
+		const idRecensione = $(this).attr('id-recensione')
+		
+		eliminaRecensione(idRecensione, $(this).parent())
+		
+		
+	})
+	
+	function eliminaRecensione(idRecensione, htmlRow){
+		$.ajax({
+			url: `recensioni/${idRecensione}`,
+			type: 'DELETE',
+			success: function(){
+				htmlRow.remove()
+			},
+			error: function(){
+				alert("Non hai il permesso di utilizzare questo comando, accedi con le credenziali corrette")
+			}
+		})
+		
+	}
 	
 	$('body').on('click', '#add-recensione', function(){
 		var idRistorante = getUrlParameter('id');
@@ -258,13 +308,23 @@ $(document).ready(function(){
 		
 		$.get(`risposte?idRecensione=${idRecensione}`, function(res){
 			for(let i = 0; i < res.length; i++){
-				$(`
-					<div>
-					<p>${res[i].comment}</p>
-					<button class='modifica-risposta' id-risposta='${res[i].id}' id-recensione='${idRecensione}'>Modifica</button>
-					<button class='elimina-risposta' id-risposta='${res[i].id}'>Elimina</button>
-					</div>
-				`).appendTo(`.risposta-recensione-${idRecensione}`)
+				if(idLogin == 1){
+					$(`
+							<div>
+							<p>${res[i].comment}</p>
+							<button class='elimina-risposta' id-risposta='${res[i].id}' style='margin-top: 5px;'>Elimina risposta</button>
+							</div>
+						`).appendTo(`.risposta-recensione-${idRecensione}`)
+				} else {
+					$(`
+							<div>
+							<p>${res[i].comment}</p>
+							<button class='modifica-risposta' id-risposta='${res[i].id}' id-recensione='${idRecensione}'>Modifica</button>
+							<button class='elimina-risposta' id-risposta='${res[i].id}'>Elimina</button>
+							</div>
+						`).appendTo(`.risposta-recensione-${idRecensione}`)
+				}
+				
 			}
 		})
 		
@@ -403,6 +463,7 @@ $(document).ready(function(){
 	
 	getRistoranti()
 	getAllRistoranti()
+	
 	function getRistorante(id){
 		$.get(`ristoranti/${id}`, function(res){
 			$(`	<br>
@@ -437,11 +498,16 @@ $(document).ready(function(){
 	$('body').on('click', '.aggiungi-ristorante', function(){
 		const url = "/aggiungi_ristorante.html";    
 		$(location).attr('href',url);
+		
+		getUtente()
+		
+		console.log("dopo get" + idLogin)
 	})
 	
 	$('body').on('click', '#salva-ristorante', function(){
+		console.log("salva " + idLogin)
 		
-		 const r = {
+		const r = {
               nome: $('.nome-ristorante').val(),
               categoria: $('.categoria-ristorante').val(),
               pIva: $('.piva').val(),
@@ -449,7 +515,10 @@ $(document).ready(function(){
               regione: $('.regione').val(),
               citta: $('.citta').val(),
               via: $('.via').val(),
-              nCivico: $('.numero-civico').val()
+              nCivico: $('.numero-civico').val(),
+              utente: {
+            	  "id": idLogin
+              }
               
        }
 		
@@ -483,6 +552,76 @@ $(document).ready(function(){
 			}
 		})
 	}
+	
+	
+	const listaUtenti = []
+	
+	// Post Ristorante Admin
+	function inutile(){
+		if(idLogin == 1){
+			$.get("/utenti", function(res){
+				
+				for(let i = 0; i < res.length; i++){
+					if(res[i].ruolo == 'RISTORANTE'){
+						$(`<option value='${res[i].id}'>${res[i].username}</option>`)
+						.appendTo('.id-ristoratore')
+						
+						var usedNames = {}
+						$("select[name='select-id-ristoratore'] > option").each(function () {
+						    if(usedNames[this.text]) {
+						        $(this).remove()
+						    } else {
+						        usedNames[this.text] = this.value
+						    }
+						})
+					}
+						
+				}
+				
+			})
+			
+		}
+	}
+	
+	
+	
+	$('body').on('click', '.aggiungi-ristorante-admin', function(){
+		const url = "/aggiungi_ristorante_admin.html"  
+		$(location).attr('href',url)
+		
+	})
+	
+	$('body').on('click', '#salva-ristorante-admin', function(){
+		
+		const r = {
+              nome: $('.nome-ristorante').val(),
+              categoria: $('.categoria-ristorante').val(),
+              pIva: $('.piva').val(),
+              ragioneSociale: $('.ragione-sociale').val(),
+              regione: $('.regione').val(),
+              citta: $('.citta').val(),
+              via: $('.via').val(),
+              nCivico: $('.numero-civico').val(),
+              utente: {
+            	  "id": $('.id-ristoratore').val()
+              }
+              
+       }
+		
+		 addRistorante(r)
+		 
+		$('.nome-ristorante').val('')
+        $('.categoria-ristorante').val('')
+        $('.piva').val('')
+        $('.ragione-sociale').val('')
+        $('.regione').val('')
+        $('.citta').val('')
+        $('.via').val('')
+        $('.numero-civico').val('')
+        $('.id-ristoratore').val('')
+		
+	})
+	
 	
 	// Modifica Ristorante
 	
@@ -676,6 +815,48 @@ $(document).ready(function(){
 	})
 	
 	
+	// PANNELLO RISTORANTE
+	
+	function getUtente(){
+		
+		$.ajax({
+			url: 'secured',
+            type: 'GET',
+            success: function(res) {
+            	idLogin = res.id
+				console.log('success ' + idLogin)
+				inutile()
+            },
+			error: function(){
+				idLogin = -1
+				console.log('error')
+			}
+		})
+		
+	}
+	
+	$('body').on('click', '.visualizza-ristoranti', function(){
+		$(`#pannello-ristorante`).html('')
+		getRistorantiUtente(idLogin)
+	})
+	
+	function getRistorantiUtente(idUtente){
+		$.get(`ristoranti?idUtente=${idUtente}`, function(res){
+			for(let i = 0; i < res.length; i++){
+				$(`
+						<dd> 
+						<button class="menu list-button" data-id='${res[i].id}' nome-ristorante='${res[i].nome}'>
+						${res[i].nome}
+						</button>
+						<p><strong>Categoria</strong>: ${res[i].categoria}</p>
+						<p><strong>Regione</strong>: ${res[i].regione}</p>
+						<p><strong>Città</strong>: ${res[i].citta}<p>
+						<br>
+						</dd>
+				`).appendTo(`#pannello-ristorante`)
+			}
+		})
+	}
 	
 	
 })
