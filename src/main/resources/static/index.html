@@ -17,28 +17,26 @@
 	<header class="top-header">
 		<nav class="top-nav">
 
-			<li><input id="modal-registrati" class="registrati button"
+			<li id='render-bottone-registrati'><input id="modal-registrati" class="registrati button"
 					type="button" value="Registrati"></li>
 
 			<!--LOGO-->
 			<li class="logo"><a href="/index.html"><img class="img-logo"
-					src="https://i.ibb.co/RDLFZ4c/prova06.png" alt=""></a></li>
+					src="/img/Logo_rev05-04.png" alt=""></a></li>
 
 			<!--REGISTRA LOGIN-->
 			<div class="top-reg-log">
-				<li><input id="modal-login" class="login button" type="button"
+				<li id='render-bottone-login'><input id="modal-login" class="login button" type="button"
 					value="Login"></li>
-				<li>
-				<form method="get" action="/logout">
-				<button class="login button" type="submit" id="id-button-logout">Logout
+				<li id='render-bottone-logout'>
+					<form method="get" action="/logout">
+					<button class="login button" type="submit" id="id-button-logout">Logout
 				</form>	
 				</li>
 			</div>
 		</nav>
 	</header>
 
-	<button class='button aggiungi-ristorante'>Aggiungi Ristorante</button>
-	
 	<main class="margin15pxB">
 
 		<!--IMG "I NOSTRI RISTORANTI"-->
@@ -113,10 +111,10 @@
 	<!--FIXME-->
 	<footer>
 		<div class="torna-home marginLR">
-				<a href='/pannello_ristorante.html'><button class='gestisci-ristorante' style='border: none; background: none; color: white;'>&#9664; Gestisci il tuo ristorante</button></a>
+				<button class='gestisci-ristorante'><a href='/pannello_ristorante.html'>&#9664; Gestisci il tuo ristorante</a></button>
 		</div>
 		<div class="torna-home marginLR">
-				<a href='/pannello_admin.html'><button class='gestisci-admin'>&#9664; Gestisci il sito</button></a>
+				<button class='gestisci-admin'><a href='/pannello_admin.html'>&#9664; Gestisci il sito</a></button>
 		</div>
 		<div class="clas footer-content">
 			<div class="footer-section about"></div>
