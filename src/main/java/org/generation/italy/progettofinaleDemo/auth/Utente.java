@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +21,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -63,8 +65,9 @@ public class Utente implements UserDetails {
 	private String password;
 	private String ruolo;
 
-	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "utente")
-	@JsonIgnoreProperties("utente")
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "utente", fetch = FetchType.LAZY)
+//	@JsonIgnoreProperties({"utente", "recensioni"})
+	@JsonIgnore
 	private List<Ristorante> ristoranti;
 	
 	

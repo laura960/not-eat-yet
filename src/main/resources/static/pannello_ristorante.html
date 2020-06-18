@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 </head>
     <body>
-    <header class="top-header" style='z-index: 1000;'>
+    <header class="top-header" style='z-index: 1;'>
         <nav class="top-nav">
  
             <li><input id="modal-registrati" class="registrati button"
@@ -36,15 +36,14 @@
     </header>
    
     <div class="marginLR">
-    <button class='button aggiungi-ristorante'>Aggiungi Ristorante</button>
- 
- 
- 
+    
+    <button class='button aggiungi-ristorante' style='margin: 0;'>Aggiungi un nuovo ristorante</button>
+	<br><br>   
+    <button class='visualizza-ristoranti button'>Visualizza i miei ristoranti</button>
     <br>
-   
-    <h2><u>Tutti i ristoranti:</u></h2>
     <br>
-    <dl id='pannello_ristorante'>
+    <div id='pannello-ristorante'></div>
+    <dl>
    
     <!-- The Modal -->
                         <div id="modaleRistorante" class="modal">
@@ -101,7 +100,6 @@
                                     <span class="close" id='close-modale'>&times;</span>
                                     <h2 id='titolo-modale-recensioni'></h2>
                                 </div>
-                                <div id='bottoni-modale-recensioni'></div>
                                 <div style="margin-top: 20px" id="aggiungi-recensione"></div>
                                 <div>
                                     <h3 class='allineamentosx'>Recensioni:</h3>

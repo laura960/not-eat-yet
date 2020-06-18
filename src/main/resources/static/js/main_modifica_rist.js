@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	
+	let idLogin = -1
+	
 // GET PARAMETRI URL
 	
 	var getUrlParameter = function getUrlParameter(sParam) {
@@ -16,6 +18,25 @@ $(document).ready(function(){
 	        }
 	    }
 	};
+	
+	function getUtente(){
+		
+		$.ajax({
+			url: 'secured',
+            type: 'GET',
+            success: function(res) {
+            	idLogin = res.id
+				console.log('success ' + idLogin)
+            },
+			error: function(){
+				idLogin = -1
+				console.log('error')
+			}
+		})
+		
+	}
+	
+	getUtente()
 	
 	function renderModificaRistorante(){
 		
@@ -41,6 +62,7 @@ $(document).ready(function(){
 					<option value='sushi'>Sushi</option>
 					<option value='etnico'>Etnico</option>
 					<option value='kebab'>Kebab</option>
+					<option value='altro'>Altro</option>
 				</select>
 				<p><strong>Nome:</strong></p>
 				<input type='text' class='nome-ristorante' placeholder='Nome...'>
@@ -79,8 +101,10 @@ $(document).ready(function(){
 	               regione: $('.regione').val(),
 	               citta: $('.citta').val(),
 	               via: $('.via').val(),
-	               nCivico: $('.numero-civico').val()
-	               
+	               nCivico: $('.numero-civico').val(),
+	               utente: {
+	            	   "id": idLogin
+	               }
 	        }
 		
 		editRistorante(r)
@@ -95,7 +119,7 @@ $(document).ready(function(){
 			contentType: 'application/json',
 			dataType: 'json',
 			success: function(res){
-				const url = `/elencoristoranti.html`;    
+				const url = `/pannello_ristorante.html`;     
         		$(location).attr('href',url)
 			}
 		})

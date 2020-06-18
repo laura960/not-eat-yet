@@ -66,14 +66,12 @@ $(document).ready(function(){
 			url: `piatti/${idPiatto}`,
 			type: 'DELETE',
 			success: function(){
-				const url = `/elencoristoranti.html`;    
+				const url = `/pannello_ristorante.html`;   
         		$(location).attr('href',url)
         		
-        		$.getScript("js/main2.js", function(){
-        			console.log('nellajax')
-        			// console.log(idRistorante)
-        			setTimeOut(getModaleRistorante(34), 2000) 
-        		})
+//        		$.getScript("js/main2.js", function(){
+//        			setTimeOut(getModaleRistorante(34), 2000) 
+//        		})
         		
 			},
 			error: function(){

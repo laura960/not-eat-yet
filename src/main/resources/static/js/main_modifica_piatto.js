@@ -87,7 +87,7 @@ $(document).ready(function(){
 			contentType: 'application/json',
 			dataType: 'json',
 			success: function(res){
-				const url = `/elencoristoranti.html`;    
+				const url = `/pannello_ristorante.html`;    
         		$(location).attr('href',url)
 			}
 		})

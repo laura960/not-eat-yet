@@ -45,6 +45,8 @@ public class ProgettofinaleDemoApplication implements CommandLineRunner {
 	    		ris += line;
 	    	}
 	    	
+	    	br.close();
+	    	
 	    	String password = passwordEncoder.encode("admin");
 	    	
 	    	ris = ris.replace("psw", password);

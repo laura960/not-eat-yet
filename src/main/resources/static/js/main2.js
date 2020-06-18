@@ -1,10 +1,14 @@
 $(document).ready(function(){
 	
+	let idLogin = -1
 	let modificaRispostaOn = false
 	let aggiungiRispostaOn = false
 	let dettaglioOn = false
 	let dettaglioPiattoOn = false
 	const listaCategorie = ['antipasto', 'primo', 'secondo', 'fritti', 'pizza', 'kebab', 'sushi', 'contorno', 'dolce', 'bevande']
+	
+	getUtente()
+	
 	
 	// GET PARAMETRI URL
 	
@@ -31,6 +35,13 @@ $(document).ready(function(){
 		$(location).attr('href',url);
 	})
 	
+	
+	// LOGOUT
+	
+	$('body').on('click', '#id-button-logout', function(){
+		idLogin = -1
+	})
+	
 	// SIGN IN
 	
 	$('body').on('click', '#modal-registrati', function(){
@@ -47,6 +58,8 @@ $(document).ready(function(){
 	
 	function getModaleRistorante(idRistorante){
 		
+		console.log('getmodale')
+		
 		dettaglioOn = false
 		dettaglioPiattoOn = false
 		
@@ -59,6 +72,7 @@ $(document).ready(function(){
 		caricaBottoni(idRistorante)
 		
 		$('#modaleRistorante').css('display', 'block')
+		
 	}
 	
 	
@@ -403,6 +417,7 @@ $(document).ready(function(){
 	
 	getRistoranti()
 	getAllRistoranti()
+	
 	function getRistorante(id){
 		$.get(`ristoranti/${id}`, function(res){
 			$(`	<br>
@@ -437,11 +452,16 @@ $(document).ready(function(){
 	$('body').on('click', '.aggiungi-ristorante', function(){
 		const url = "/aggiungi_ristorante.html";    
 		$(location).attr('href',url);
+		
+		getUtente()
+		
+		console.log("dopo get" + idLogin)
 	})
 	
 	$('body').on('click', '#salva-ristorante', function(){
+		console.log("salva " + idLogin)
 		
-		 const r = {
+		const r = {
               nome: $('.nome-ristorante').val(),
               categoria: $('.categoria-ristorante').val(),
               pIva: $('.piva').val(),
@@ -449,7 +469,10 @@ $(document).ready(function(){
               regione: $('.regione').val(),
               citta: $('.citta').val(),
               via: $('.via').val(),
-              nCivico: $('.numero-civico').val()
+              nCivico: $('.numero-civico').val(),
+              utente: {
+            	  "id": idLogin
+              }
               
        }
 		
@@ -678,38 +701,44 @@ $(document).ready(function(){
 	
 	// PANNELLO RISTORANTE
 	
-	
-	
 	function getUtente(){
 		
-//		$.ajax({
-//			url: '/secured',
-//            type: 'GET',
-//            success: function(res) {
-//            	console.log('chiamata effettuata')
-//    			for(let i = 0; i < res.length; i++){
-//    				console.log(res[i].id)
-//    			}
-//            },
-//			error: function(){
-//				alert("Chiamata non andato a buon fine");
-//			}
-//		})
+		$.ajax({
+			url: 'secured',
+            type: 'GET',
+            success: function(res) {
+            	idLogin = res.id
+				console.log('success ' + idLogin)
+            },
+			error: function(){
+				idLogin = -1
+				console.log('error')
+			}
+		})
 		
-		$.get('secured', function(res){
-			console.log('chiamata effettuata')
+	}
+	
+	$('body').on('click', '.visualizza-ristoranti', function(){
+		$(`#pannello-ristorante`).html('')
+		getRistorantiUtente(idLogin)
+	})
+	
+	function getRistorantiUtente(idUtente){
+		$.get(`ristoranti?idUtente=${idUtente}`, function(res){
 			for(let i = 0; i < res.length; i++){
-				console.log(res[i].id)
+				$(`
+						<dd> 
+						<button class="menu list-button" data-id='${res[i].id}' nome-ristorante='${res[i].nome}'>
+						${res[i].nome}
+						</button>
+						<p><strong>Categoria</strong>: ${res[i].categoria}</p>
+						<p><strong>Regione</strong>: ${res[i].regione}</p>
+						<p><strong>Città</strong>: ${res[i].citta}<p>
+						<br>
+						</dd>
+				`).appendTo(`#pannello-ristorante`)
 			}
 		})
 	}
-	
-
-	$('body').on('click', '.gestisci-ristorante', function(){
-		console.log('schiacciato login')
-		getUtente()
-	})
-	
-	
 	
 })
