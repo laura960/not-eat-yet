@@ -46,7 +46,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST,"/recensioni").hasAnyRole(Roles.ADMIN, Roles.USER)
 				.antMatchers("/aggiungi_piatto.html", "/modifica_piatto.html").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers(HttpMethod.POST, "/piatti").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
-				.antMatchers("/elimina_piatto.html", "/pannello_ristorante.html").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
+				.antMatchers("/elimina_piatto.html").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers(HttpMethod.DELETE, "/piatti/*").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers(HttpMethod.PUT, "/piatti/*").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers(HttpMethod.POST, "/risposte").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
@@ -58,6 +58,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.PUT, "/ristoranti/*").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers("/elimina_ristorante.html").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
 				.antMatchers(HttpMethod.DELETE, "/ristoranti/*").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE)
+				.antMatchers("/pannello_admin.html").hasAnyRole(Roles.ADMIN)
+				.antMatchers(HttpMethod.GET, "/utenti").hasAnyRole(Roles.ADMIN)
+				.antMatchers("/pannello_ristorante.html").hasAnyRole(Roles.RISTORANTE)
 				
 				
 //				.antMatchers("/account.html").hasAnyRole(Roles.ADMIN, Roles.USER)
