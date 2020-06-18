@@ -20,7 +20,26 @@ $(document).ready(function(){
 	
 	const idRistorante = getUrlParameter('idRistorante')
 	const idPiatto = getUrlParameter('idPiatto')
+
+	let idLogin = -1
 	
+	function getUtente(){
+		
+		$.ajax({
+			url: 'secured',
+            type: 'GET',
+            success: function(res) {
+            	idLogin = res.id
+				inutile()
+            },
+			error: function(){
+				idLogin = -1
+			}
+		})
+		
+	}
+	
+	getUtente()
 	
 	function getPiatto(id){
 		$.get(`piatti/${id}`, function(res){
@@ -66,12 +85,14 @@ $(document).ready(function(){
 			url: `piatti/${idPiatto}`,
 			type: 'DELETE',
 			success: function(){
-				const url = `/pannello_ristorante.html`;   
-        		$(location).attr('href',url)
-        		
-//        		$.getScript("js/main2.js", function(){
-//        			setTimeOut(getModaleRistorante(34), 2000) 
-//        		})
+				
+				if(idLogin == 1){
+            		const url = `/pannello_admin.html`  
+            		$(location).attr('href',url)
+            	} else {
+            		const url = `/pannello_ristorante.html`   
+            		$(location).attr('href',url)
+            	}
         		
 			},
 			error: function(){

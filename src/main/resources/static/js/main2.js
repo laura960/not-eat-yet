@@ -40,6 +40,7 @@ $(document).ready(function(){
 	
 	$('body').on('click', '#id-button-logout', function(){
 		idLogin = -1
+		utente = false
 	})
 	
 	// SIGN IN
@@ -53,13 +54,16 @@ $(document).ready(function(){
 	
 	$('body').on('click', '.menu', function(){
 		const idRistorante = $(this).attr('data-id')
-		getModaleRistorante(idRistorante)
+		let nomeRistorante = $(this).attr('nome-ristorante')
+		getModaleRistorante(idRistorante, nomeRistorante)
 	})
 	
-	function getModaleRistorante(idRistorante){
+	function getModaleRistorante(idRistorante, nomeRistorante){
 		
 		dettaglioOn = false
 		dettaglioPiattoOn = false
+		
+		$('#titolo-modale').text(nomeRistorante)
 		
 		$('#render-menu').html('')
 		getPiatti(idRistorante)
@@ -75,20 +79,22 @@ $(document).ready(function(){
 	
 	
 	function caricaBottoni(id){
-		$(`
-				 <button class='dettaglio-ristorante btn-dmea' id-ristorante='${id}'>Dettagli Ristorante</button>
-		         <button class='modifica-ristorante btn-dmea' id-ristorante='${id}'>Modifica Ristorante</button>
-		         <button class='elimina-ristorante btn-dmea' id-ristorante='${id}'>
-		         	<a href="elimina_ristorante.html?id=${id}">Elimina Ristorante</a>
-		         </button>
-		         <button class='aggiungi-piatto btn-dmea' id-ristorante='${id}'>
-				 <a href='aggiungi_piatto.html?id=${id}'>	
-					Aggiungi Piatto
-				</a>
-		         </button>
-				 <button class='modale-recensioni btn-dmea' id-ristorante='${id}'>Recensioni</button>
-		         `
-				).appendTo('#bottoni-modale')
+		
+			$(`
+					 <button class='dettaglio-ristorante btn-dmea' id-ristorante='${id}'>Dettagli Ristorante</button>
+			         <button class='modifica-ristorante btn-dmea' id-ristorante='${id}'>Modifica Ristorante</button>
+			         <button class='elimina-ristorante btn-dmea' id-ristorante='${id}'>
+			         	<a href="elimina_ristorante.html?id=${id}">Elimina Ristorante</a>
+			         </button>
+			         <button class='aggiungi-piatto btn-dmea' id-ristorante='${id}'>
+					 <a href='aggiungi_piatto.html?id=${id}'>	
+						Aggiungi Piatto
+					</a>
+			         </button>
+					 <button class='modale-recensioni btn-dmea' id-ristorante='${id}'>Recensioni</button>
+			         `
+					).appendTo('#bottoni-modale')
+		
 	}
 	
 	$('#close-modal').on('click', function(){
@@ -152,7 +158,7 @@ $(document).ready(function(){
 								</li>
 								<button class='elimina-recensione' id-recensione='${res[i].id}' style='margin-top: 5px;'>Elimina recensione</button>
 								<br><br>
-								<div class='risposta-recensione-${res[i].id}'></div>
+								<div class='risposta-recensione-${res[i].id}' style='margin-left: 25px;'></div>
 								</div>
 								<br>
 							`).prependTo('#render-recensioni')
@@ -168,7 +174,7 @@ $(document).ready(function(){
 								<br>
 								<button class='render-form-risposta' id-recensione='${res[i].id}'>Rispondi</button>
 								<br><br>
-								<div class='risposta-recensione-${res[i].id}'></div>
+								<div class='risposta-recensione-${res[i].id}' style='margin-left: 25px;'></div>
 								</div>
 								<br>
 							`).prependTo('#render-recensioni')
@@ -501,11 +507,9 @@ $(document).ready(function(){
 		
 		getUtente()
 		
-		console.log("dopo get" + idLogin)
 	})
 	
 	$('body').on('click', '#salva-ristorante', function(){
-		console.log("salva " + idLogin)
 		
 		const r = {
               nome: $('.nome-ristorante').val(),
@@ -544,8 +548,14 @@ $(document).ready(function(){
           contentType: 'application/json',
           dataType: 'json',
           success: function(data) {
-        	const url = "/index.html";    
-      		$(location).attr('href',url);
+        	  
+        	  if(idLogin == 1){
+          		const url = `/pannello_admin.html`  
+          		$(location).attr('href',url)
+          	} else {
+          		const url = `/pannello_ristorante.html`   
+          		$(location).attr('href',url)
+          	}
           },
 			error: function(){
 				alert("Inserimento non andato a buon fine");
@@ -649,8 +659,14 @@ $(document).ready(function(){
 			url: `ristoranti/${idRistorante}`,
 			type: 'DELETE',
 			success: function(){
-				const url = `/elencoristoranti.html`;    
-        		$(location).attr('href',url)
+				
+				if(idLogin == 1){
+            		const url = `/pannello_admin.html`  
+            		$(location).attr('href',url)
+            	} else {
+            		const url = `/pannello_ristorante.html`   
+            		$(location).attr('href',url)
+            	}
 			},
 			error: function(){
 				alert("Qualcosa è andato storto")
@@ -793,8 +809,15 @@ $(document).ready(function(){
             contentType: 'application/json',
             dataType: 'json',
             success: function(data) {
-            	const url = `/elencoristoranti.html`;    
-        		$(location).attr('href',url)
+            	
+            	if(idLogin == 1){
+            		const url = `/pannello_admin.html`  
+            		$(location).attr('href',url)
+            	} else {
+            		const url = `/pannello_ristorante.html`   
+            		$(location).attr('href',url)
+            	}
+            
             },
 			error: function(){
 				alert("Inserimento non andato a buon fine");
@@ -824,12 +847,10 @@ $(document).ready(function(){
             type: 'GET',
             success: function(res) {
             	idLogin = res.id
-				console.log('success ' + idLogin)
 				inutile()
             },
 			error: function(){
 				idLogin = -1
-				console.log('error')
 			}
 		})
 		

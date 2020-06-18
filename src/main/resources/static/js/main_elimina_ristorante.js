@@ -64,7 +64,7 @@ $(document).ready(function(){
 			url: `ristoranti/${idRistorante}`,
 			type: 'DELETE',
 			success: function(){
-				const url = `/pannello_ristorante.html`;    
+				const url = `/index.html`;    
         		$(location).attr('href',url)
 			},
 			error: function(){

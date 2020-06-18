@@ -16,6 +16,25 @@ $(document).ready(function(){
 	    }
 	};
 	
+	let idLogin = -1
+	
+	function getUtente(){
+		
+		$.ajax({
+			url: 'secured',
+            type: 'GET',
+            success: function(res) {
+            	idLogin = res.id
+				inutile()
+            },
+			error: function(){
+				idLogin = -1
+			}
+		})
+		
+	}
+	
+	getUtente()
 	
 	function renderModificaPiatto(){
 		var idRistorante = getUrlParameter('idRistorante');
@@ -87,8 +106,13 @@ $(document).ready(function(){
 			contentType: 'application/json',
 			dataType: 'json',
 			success: function(res){
-				const url = `/pannello_ristorante.html`;    
-        		$(location).attr('href',url)
+				if(idLogin == 1){
+            		const url = `/pannello_admin.html`  
+            		$(location).attr('href',url)
+            	} else {
+            		const url = `/pannello_ristorante.html`   
+            		$(location).attr('href',url)
+            	}
 			}
 		})
 		
