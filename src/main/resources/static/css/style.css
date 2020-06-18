@@ -126,10 +126,14 @@ body{
   padding: 30px;
   display: flex;
   justify-content: center;
+  
 }
+
+
 .ristoranti-img{
   background: #f5f2ee;
   border-radius:300px;
+  box-shadow: #4c4c4c 0px 10px 15px, #4c4c4c 0px -10px 15px;
 }
 
 .logo-img-cat {

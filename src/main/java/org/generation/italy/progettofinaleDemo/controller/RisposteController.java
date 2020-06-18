@@ -2,7 +2,6 @@ package org.generation.italy.progettofinaleDemo.controller;
 
 import java.util.Optional;
 
-import org.generation.italy.progettofinaleDemo.entities.Recensione;
 import org.generation.italy.progettofinaleDemo.entities.Risposta;
 import org.generation.italy.progettofinaleDemo.repositories.CrudRisposta;
 import org.springframework.beans.factory.annotation.Autowired;
