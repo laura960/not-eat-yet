@@ -36,7 +36,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 				.authorizeRequests()
-				.antMatchers("/", "/index.html", "/css/**", "/js/**", "/signup.html", "/signup", "/login", "/forbidden.html", "/fail.html", "/loggedout.html").permitAll() 
+				.antMatchers("/", "/index.html", "/css/**", "/js/**", "/img/**", "/signup.html", "/signup", "/login", "/forbidden.html", "/fail.html", "/loggedout.html").permitAll() 
 				.antMatchers(HttpMethod.POST, "/signup.html").permitAll()
 				.antMatchers(HttpMethod.GET, "/accountmanager/*", "/utente").permitAll()
 				.antMatchers(HttpMethod.GET, "/secured").hasAnyRole(Roles.ADMIN, Roles.RISTORANTE, Roles.USER)
