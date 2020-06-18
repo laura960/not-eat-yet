@@ -284,15 +284,16 @@ body{
 }
 
 .colonna-menu1{
-	width: 70%;
+	width: 63%;
 	padding-left: 5%;
 	padding-rigth: 2%;
 	text-align: left;
 }
 
 .colonna-menu2{
-	width: 30%;
+	width: 25%;
 	text-align: left;
+	padding-rigth: 5%;
 }
 
 
