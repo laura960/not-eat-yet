@@ -687,10 +687,10 @@ $(document).ready(function(){
 			} else {
 				
 				for(let j = 0; j < listaCategorie.length; j++){
-					
+					$(`#render-menu-${listaCategorie[j]}`).html('')
 					for(let i = 0; i < res.length; i++){
 						if(res[i].categoria == listaCategorie[j]){
-							$(`#render-menu-${res[i].categoria}`).html('')
+							$(`#render-menu-${listaCategorie[j]}`).html('')
 							$(`<br><p style='text-transform: capitalize'><strong><i>${listaCategorie[j]}</i></strong></p>`).appendTo(`#render-menu-${res[i].categoria}`)
 						}
 					}
