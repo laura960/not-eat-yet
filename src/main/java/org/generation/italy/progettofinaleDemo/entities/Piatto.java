@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name="piatti")
 public class Piatto {
-
+//ciao
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
